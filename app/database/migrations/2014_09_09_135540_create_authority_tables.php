@@ -84,8 +84,8 @@ class CreateAuthorityTables extends Migration {
 	private function seedUser()
 	{
 		User::create(array(
-            'email'        => 'admin@demo.com',
-            'password'     => '111111',
+            'email'        => 'admin@jd.com',
+            'password'     => 'admin123',
             'is_admin'     => 1,
             'activated_at' => Carbon::now(),
         ));
