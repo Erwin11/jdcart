@@ -49,7 +49,7 @@ return array(
 		'sqlite' => array(
 			'driver'   => 'sqlite',
 			'database' => __DIR__.'/../database/production.sqlite',
-			'prefix'   => '',
+			'prefix'   => 'jcd_',
 		),
 
 		'mysql' => array(
@@ -59,15 +59,16 @@ return array(
 			'username'  => 'root',
 			'password'  => 'root',
 			'charset'   => 'utf8',
-			'collation' => 'utf8_unicode_ci',
-			'prefix'    => '',
+			// 'collation' => 'utf8_unicode_ci',
+			'collation' => 'utf8_general_ci',
+			'prefix'    => 'jcd_',
 		),
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
 			'host'     => 'localhost',
-			'database' => 'forge',
-			'username' => 'forge',
+			'database' => 'database',
+			'username' => 'root',
 			'password' => '',
 			'charset'  => 'utf8',
 			'prefix'   => '',
