@@ -1,4 +1,5 @@
-# laravel-4.1-simple-blog
+#JDCart
+### clone from laravel-4.1-simple-blog
 
 - 这是一个 laravel-4.1 的 Demo，一个简单的博客实例。
   - 涵盖知识点：
@@ -67,8 +68,8 @@
 
 默认管理员账号密码：
 
-    admin@demo.com
-    111111
+    admin@jd.com
+    admin123
 
 > 账号激活等功能需要进行邮件发送，请在 `/app/config/mail.php` 文件中做好邮件服务器的相关配置。
 
