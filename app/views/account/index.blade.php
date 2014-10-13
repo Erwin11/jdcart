@@ -1,4 +1,4 @@
-@extends('l.account', array('active' => 'account'))
+@extends('layouts.account', array('active' => 'account'))
 
 @section('container')
 

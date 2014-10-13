@@ -1,10 +1,10 @@
-@extends('l.admin', array('active' => $resource))
+@extends('layouts.admin', array('active' => $resource))
 
 @section('title') @parent {{ $resourceName }}管理 @stop
 
 @section('container')
 
-    @include('w.notification')
+    @include('widgets.notification')
 
     <h3>
         {{ $resourceName }}管理
@@ -43,7 +43,7 @@
     </div>
 
     <div class="pull-right" style="">
-        {{ pagination($datas, 'p.slider-3') }}
+        {{ pagination($datas, 'pagination.slider-3') }}
     </div>
     
 <?php
@@ -58,7 +58,7 @@ $modalData['modal'] = array(
         Form::close(),
 );
 ?>
-    @include('w.modal', $modalData)
+    @include('widgets.modal', $modalData)
 
 @stop
 

@@ -1,4 +1,4 @@
-@extends('l.account', array('active' => 'changePassword'))
+@extends('layouts.account', array('active' => 'changePassword'))
 
 @section('title') @parent 修改密码 @stop
 
@@ -21,7 +21,7 @@
 
 @section('container')
 
-    @include('w.notification')
+    @include('widgets.notification')
     <form class="form" role="form" method="post">
         <!-- CSRF Token -->
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />

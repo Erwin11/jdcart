@@ -1,4 +1,4 @@
-@extends('l.admin', array('active' => $resource))
+@extends('layouts.admin', array('active' => $resource))
 
 @section('title') @parent 编辑{{ $resourceName }} @stop
 
@@ -16,7 +16,7 @@
 
 @section('container')
 
-    @include('w.notification')
+    @include('widgets.notification')
     <h3>
         编辑{{ $resourceName }}
         <div class="pull-right">

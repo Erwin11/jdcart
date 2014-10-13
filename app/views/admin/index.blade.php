@@ -1,4 +1,4 @@
-@extends('l.admin', array('active' => 'admin'))
+@extends('layouts.admin', array('active' => 'admin'))
 
 @section('container')
 

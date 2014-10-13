@@ -1,4 +1,4 @@
-@extends('l.blog', array('active' => 'home'))
+@extends('layouts.blog', array('active' => 'home'))
 
 @section('container')
 
@@ -29,13 +29,13 @@
                 @endforeach
 
                 <div>
-                    {{ pagination($articles, 'p.slider-3') }}
+                    {{ pagination($articles, 'pagination.slider-3') }}
                 </div>
 
             </div><!--/row-->
         </div><!--/span-->
 
-        @include('w.blogSidebar', array('activeCategory' => 'all'))
+        @include('widgets.blogSidebar', array('activeCategory' => 'all'))
         
     </div><!--/row-->
 

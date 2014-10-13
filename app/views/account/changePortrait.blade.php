@@ -1,4 +1,4 @@
-@extends('l.account', array('active' => 'changePortrait'))
+@extends('layouts.account', array('active' => 'changePortrait'))
 
 @section('title') @parent 修改密码 @stop
 
@@ -27,7 +27,7 @@
         <img class="img-thumbnail" width="128" height="128" src="{{ Auth::user()->portrait_medium }}" alt="头像（中）">
         <img class="img-thumbnail" width="64" height="64" src="{{ Auth::user()->portrait_small }}" alt="头像（小）">
         {{ Form::file('portrait') }}
-        @include('w.notification')
+        @include('widgets.notification')
         <button class="btn btn-lg btn-primary btn-block" type="submit">上传头像</button>
     {{ Form::close() }}
 

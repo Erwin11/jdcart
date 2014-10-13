@@ -1,4 +1,4 @@
-@extends('l.authority', array('active' => 'signup'))
+@extends('layouts.authority', array('active' => 'signup'))
 
 @section('title') 注册 @parent @stop
 

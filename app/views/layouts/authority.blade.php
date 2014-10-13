@@ -1,6 +1,6 @@
-@extends('l.base')
+@extends('layouts.base')
 
-@section('title') 用户中心 @parent @stop
+@section('title') Simple - Blog @parent @stop
 
 @section('beforeStyle')
     {{ style('bootstrap-3.0.3') }}
@@ -16,7 +16,7 @@ body
 
 @section('body')
 
-    @include('w.accountNavbar')
+    @include('widgets.blogNavbar')
 
     <div class="container panel" style="margin-top:5em; padding-bottom:1em;">
         @yield('container')

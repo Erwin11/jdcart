@@ -1,8 +1,8 @@
-@extends('l.account', array('active' => 'myComments'))
+@extends('layouts.account', array('active' => 'myComments'))
 
 @section('container')
 
-    @include('w.notification')
+    @include('widgets.notification')
 
     <h3>我评论过的文章</h3>
 
@@ -37,7 +37,7 @@
     </div>
 
     <div class="pull-right" style="">
-        {{ pagination($comments, 'p.slider-3') }}
+        {{ pagination($comments, 'pagination.slider-3') }}
     </div>
 
 <?php
@@ -52,7 +52,7 @@ $modalData['modal'] = array(
         Form::close(),
 );
 ?>
-    @include('w.modal', $modalData)
+    @include('widgets.modal', $modalData)
 
 
 @stop

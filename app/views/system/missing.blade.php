@@ -1,4 +1,4 @@
-@extends('l.system')
+@extends('layouts.system')
 @section('title')404 @stop
 
 @section('container')
@@ -9,5 +9,5 @@
         <li>您输入了一个错误的地址</li>
         <li>这是一个过时的链接</li>
     </ul>
-    @include('w.googleSearch')
+    @include('widgets.googleSearch')
 @stop

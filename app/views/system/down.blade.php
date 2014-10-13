@@ -1,4 +1,4 @@
-@extends('l.system')
+@extends('layouts.system')
 @section('title')503 @stop
 
 @section('container')

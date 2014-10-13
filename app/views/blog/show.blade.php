@@ -1,4 +1,4 @@
-@extends('l.blog', array('active' => 'home'))
+@extends('layouts.blog', array('active' => 'home'))
 
 @section('description'){{ $article->description }} @stop
 @section('keywords'){{ $article->keywords }} @stop
@@ -39,7 +39,7 @@
                         </li>
                         @endforeach
                     </ul>
-                    @include('w.notification')
+                    @include('widgets.notification')
                     @if(Auth::check())
                     <form class="form-horizontal" method="post" autocomplete="off">
                         <!-- CSRF Token -->
@@ -63,7 +63,7 @@
             </div><!--/row-->
         </div><!--/span-->
 
-        @include('w.blogSidebar', array('activeCategory' => $article->category->id))
+        @include('widgets.blogSidebar', array('activeCategory' => $article->category->id))
         
     </div><!--/row-->
 

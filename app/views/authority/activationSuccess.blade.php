@@ -1,4 +1,4 @@
-@extends('l.authority', array('active' => 'signin'))
+@extends('layouts.authority', array('active' => 'signin'))
 
 @section('title') 激活成功 @parent @stop
 
