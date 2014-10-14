@@ -119,6 +119,9 @@ class Admin_CategoryResource extends BaseResource
             // 更新资源
             $model = $this->model->find($id);
             $model->name       = e($data['name']);
+            $model->slug       = e($data['slug']);
+            $model->enname     = e($data['enname']);
+            $model->abbr       = e($data['abbr']);
             $model->sort_order = e($data['sort_order']);
             if ($model->save()) {
                 // 更新成功

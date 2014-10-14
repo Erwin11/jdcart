@@ -8,6 +8,19 @@ class BlogController extends BaseController
      */
     public function getIndex()
     {
+        $categories = Category::orderBy('sort_order')->get();
+        return View::make('blog.home')->with(compact('categories'));
+        /*$articles   = Article::orderBy('created_at', 'desc')->paginate(5);
+        $categories = Category::orderBy('sort_order')->get();
+        return View::make('blog.index')->with(compact('articles', 'categories'));*/
+    }
+
+    /**
+     * 博客列表页
+     * @return Respanse
+     */
+    public function getList()
+    {
         $articles   = Article::orderBy('created_at', 'desc')->paginate(5);
         $categories = Category::orderBy('sort_order')->get();
         return View::make('blog.index')->with(compact('articles', 'categories'));
@@ -19,6 +32,19 @@ class BlogController extends BaseController
      */
     public function getCategoryArticles($category_id)
     {
+        $articles   = Article::where('category_id', $category_id)->orderBy('created_at', 'desc')->paginate(5);
+        $categories = Category::orderBy('sort_order')->get();
+        return View::make('blog.categoryArticles')->with(compact('articles', 'categories', 'category_id'));
+    }
+
+
+    /**
+     * 分类文章列表-别名
+     * @return Respanse
+     */
+    public function categoryArticlesSlug($category_slug)
+    {
+        $category_id = Category::where('slug', $category_slug)->pluck('id');
         $articles   = Article::where('category_id', $category_id)->orderBy('created_at', 'desc')->paginate(5);
         $categories = Category::orderBy('sort_order')->get();
         return View::make('blog.categoryArticles')->with(compact('articles', 'categories', 'category_id'));

@@ -42,7 +42,21 @@
                     {{ $errors->first('name', '<span style="color:#c7254e;margin:0 1em;">:message</span>') }}
                     <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $data->name) }}" />
                 </div>
-
+                <div class="form-group">
+                    <label for="slug">别名</label>
+                    {{ $errors->first('slug', '<span style="color:#c7254e;margin:0 1em;">:message</span>') }}
+                    <input class="form-control" type="text" name="slug" id="slug" value="{{ Input::old('slug', $data->slug) }}" />
+                </div>
+                <div class="form-group">
+                    <label for="enname">英文</label>
+                    {{ $errors->first('enname', '<span style="color:#c7254e;margin:0 1em;">:message</span>') }}
+                    <input class="form-control" type="text" name="enname" id="enname" value="{{ Input::old('enname', $data->enname) }}" />
+                </div>
+                <div class="form-group">
+                    <label for="abbr">英文简写</label>
+                    {{ $errors->first('abbr', '<span style="color:#c7254e;margin:0 1em;">:message</span>') }}
+                    <input class="form-control" type="text" name="abbr" id="abbr" value="{{ Input::old('abbr', $data->abbr) }}" />
+                </div>
                 <div class="form-group">
                     <label for="sort_order">排序</label>
                     {{ $errors->first('sort_order', '<span style="color:#c7254e;margin:0 1em;">:message</span>') }}
