@@ -40,7 +40,7 @@
 @section('end')
   {{ script('jquery-1.10.2') }}
 <script>
-  console.log($('.content').height())
+  
 </script>
 @parent @stop
 <!-- 特殊首页，未继承layouts.blog -->
