@@ -11,9 +11,9 @@ html, body{height: 100%; overflow: hidden;}
 .nav li a{display: block; width: 250px; height: 250px; text-decoration: none; position: relative;}
 .nav li span{display: block;}
 .nav li .zh{font-size: 30px; line-height: 30px; padding-top: 95px;}
-.nav li .en{font-family: "Helvetica Neue"; line-height: 20px; margin-top: 5px;}
+.nav li .en{font-family: "Helvetica Neue",arial; line-height: 20px; margin-top: 5px;}
 .nav .icon-circle{display: block; width: 250px; height: 250px; border-radius: 125px; background-color: #FFF; color: #e4393c; -webkit-transition:all .3s;}
-.nav .icon-hover{position: absolute; top: 0; left: 0; background-color: #E4393C; font-size: 110px; font-family: "Helvetica Neue"; line-height: 250px; color: #FFF; visibility: hidden; -webkit-transform:scale(0); opacity: 0;}
+.nav .icon-hover{position: absolute; top: 0; left: 0; background-color: #E4393C; font-size: 110px; font-family: "Helvetica Neue",arial; line-height: 250px; color: #FFF; visibility: hidden; -webkit-transform:scale(0); opacity: 0;}
 .nav li a:hover .icon-circle{-webkit-transform:scale(0);}
 .nav li a:hover .icon-hover{visibility: visible; -webkit-transform:scale(1); opacity: 1;}
 

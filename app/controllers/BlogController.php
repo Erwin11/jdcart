@@ -60,7 +60,8 @@ class BlogController extends BaseController
         $article    = Article::where('slug', $slug)->first();
         is_null($article) AND App::abort(404);
         $categories = Category::orderBy('sort_order')->get();
-        return View::make('blog.show')->with(compact('article', 'categories'));
+        $category_id = $article->category_id;
+        return View::make('blog.show')->with(compact('article', 'categories', 'category_id'));
     }
 
     /**

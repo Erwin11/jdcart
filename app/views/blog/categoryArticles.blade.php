@@ -3,7 +3,7 @@
 @section('container')
 
     <div class="row row-offcanvas row-offcanvas-right">
-        <div class="col-xs-12 col-sm-9">
+        <div class="col-xs-12 col-sm-12">
             <div class="row">
 
                 @foreach($articles as $article)
@@ -35,7 +35,7 @@
             </div><!--/row-->
         </div><!--/span-->
 
-        @include('widgets.blogSidebar', array('activeCategory' => $category_id))
+        <!--/span@include('widgets.blogSidebar', array('activeCategory' => $category_id))-->
         
     </div><!--/row-->
 

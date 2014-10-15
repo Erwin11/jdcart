@@ -1,8 +1,8 @@
 <?php
-$is_active = function ($name='') use ($active)
+$is_active = function ($name='') use ($activeCategory)
 {
-    if ($active === $name)
-        return ' class="active"';
+    if ($activeCategory === $name)
+        return ' active';
     else
         return '';
 }
@@ -19,11 +19,16 @@ $is_active = function ($name='') use ($active)
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ route('home') }}">Demo</a>
+            <a class="navbar-brand" href="{{ route('home') }}">JDC规范平台</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li{{ $is_active('home') }}><a href="{{ route('home') }}">首页</a></li>
+                <li><a href="{{ route('home') }}">首页</a></li>
+                @for ($i = 0; $i < 3; $i++)
+                <li class="{{ $is_active($categories[$i]->id) }}">
+                     <a href="{{ route('categoryArticlesSlug', $categories[$i]->slug) }}">{{ $categories[$i]->name }}</a>
+                </li>
+                @endfor
             </ul>
             <ul class="nav navbar-nav navbar-right">
 @if(Auth::guest()){{--游客--}}
