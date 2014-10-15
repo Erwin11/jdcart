@@ -10,9 +10,6 @@ class BlogController extends BaseController
     {
         $categories = Category::orderBy('sort_order')->get();
         return View::make('blog.home')->with(compact('categories'));
-        /*$articles   = Article::orderBy('created_at', 'desc')->paginate(5);
-        $categories = Category::orderBy('sort_order')->get();
-        return View::make('blog.index')->with(compact('articles', 'categories'));*/
     }
 
     /**
