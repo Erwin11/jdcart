@@ -16,7 +16,7 @@ body
 
 @section('body')
 
-    @include('widgets.blogNavbar')
+    @include('widgets.blogNavbar', array('activeCategory' => 0))
 
     <div class="container panel" style="margin-top:5em; padding-bottom:1em;">
         @yield('container')

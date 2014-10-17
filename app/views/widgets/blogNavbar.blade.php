@@ -24,11 +24,13 @@ $is_active = function ($name='') use ($activeCategory)
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="{{ route('home') }}">首页</a></li>
-                @for ($i = 0; $i < 3; $i++)
-                <li class="{{ $is_active($categories[$i]->id) }}">
-                     <a href="{{ route('categoryArticlesSlug', $categories[$i]->slug) }}">{{ $categories[$i]->name }}</a>
-                </li>
-                @endfor
+                @if(isset($categories))
+                    @for ($i = 0; $i < 3; $i++)
+                    <li class="{{ $is_active($categories[$i]->id) }}">
+                         <a href="{{ route('categoryArticlesSlug', $categories[$i]->slug) }}">{{ $categories[$i]->name }}</a>
+                    </li>
+                    @endfor
+                @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
 @if(Auth::guest()){{--游客--}}
