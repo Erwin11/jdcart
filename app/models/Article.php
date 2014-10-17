@@ -48,6 +48,16 @@ class Article extends BaseModel
         return $this->hasMany('Comment', 'article_id');
     }
 
+    /**
+     * 文章的模块内容
+     * 一对多
+     * @return object Illuminate\Database\Eloquent\Collection
+     */
+    public function modules()
+    {
+        return $this->hasMany('Module', 'article_id');
+    }
+
 /*
 |--------------------------------------------------------------------------
 | 访问器

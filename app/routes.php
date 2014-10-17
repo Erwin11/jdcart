@@ -69,8 +69,11 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|admin'), function () {
               ->edit(  )
               ->update();
         $route->delete('{id}')->as('destroy')->uses('destroy');
-    });
 
+        #module data
+        $route->post('addtModule')->uses('postAddModule');
+        $route->get('creatModule1')->uses('getCreatModule');
+    });
 });
 
 

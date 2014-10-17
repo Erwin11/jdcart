@@ -4,6 +4,11 @@
 @section('keywords'){{ $article->keywords }} @stop
 @section('title'){{ $article->title }} - @parent @stop
 
+@section('beforeStyle')
+  @parent
+  {{ HTML::style('assets/css/article.css') }}
+@stop
+
 @section('container')
 
     <div class="row row-offcanvas row-offcanvas-right">
@@ -15,6 +20,14 @@
                     <h2>{{ $article->title }}</h2>
                     <hr />
                     <p>{{ $article->content_html }}</p>
+                    <div class="module-content">
+                    @foreach($article->modules as $module)
+                      <div class="module-item module-{{$module->id}}">
+                        <h4>{{$module->title}}</h4>
+                        <p>{{$module->content}}</p>
+                      </div>
+                        @endforeach
+                    </div>
                     <a name="comments"></a>
                     <p>
                         <i class="glyphicon glyphicon-calendar"></i><span> {{ $article->created_at }}（{{ $article->friendly_created_at }}）</span>

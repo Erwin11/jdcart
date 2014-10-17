@@ -10,6 +10,8 @@
   <meta name="keywords" content="@yield('keywords')" />
   {{-- 页面关键词 --}}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {{-- token --}}
+  <meta name="_token" content="{{ csrf_token() }}" />
   @section('beforeStyle')
     @show{{-- 页面内联样式之前 --}}
   <style>

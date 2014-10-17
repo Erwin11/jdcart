@@ -1,0 +1,33 @@
+/*reset*/
+ul, li{margin: 0; padding: 0; list-style: none;}
+
+
+/*bootstrap*/
+.nav-tabs>li.active>a{background-color: #f8f8f8 !important;}
+
+/*module*/
+#tab-module{min-height: 508px;}
+#tab-module .module-list{margin-right: -15px;}
+#tab-module .module-list li{float: left; width: 150px; height: 150px; background-color: #FFF; border: 1px solid #ccc; margin: 0 15px 15px 0; position: relative;}
+#tab-module .module-list li h4{font-size: 14px; text-align: center; line-height: 18px; padding: 0 10px; margin-top: 50px;}
+#tab-module .module-list li .opt{position: absolute; bottom: 8px; left: 0; padding: 0 10px; width: 150px;}
+#tab-module .module-list li .opt a{text-decoration: none; cursor: pointer;}
+#tab-module .module-list li .opt .glyphicon-edit{float: left;}
+#tab-module .module-list li .opt .glyphicon-trash{float: right;}
+#tab-module .module-list .module-add{font-size: 40px; text-align: center; line-height: 150px; color: #666; cursor: pointer;}
+#tab-module .module-list .module-add:after{content: '添加模块'; position: absolute; bottom: 10px; left: 0; font-size: 12px; line-height: 12px; text-align: center; width: 100%;}
+#tab-module .module-list .module-add:hover, #tab-module .module-list .module-add:hover:after{color: #2a6496;}
+
+.container{position: relative;}
+.form-module{position: absolute; left: 0; top: 98px; width: 100%; display: none;}
+.form-module.active{visibility: visible; display: block;}
+.form-module .form-con{margin: 0 20px; background-color: #f8f8f8; padding: 15px 25px; min-height: 570px;}
+.form-module .btn-upload{position: relative; left: 30%; top: -30px;}
+.form-module.type-txtimg .form-group{display: block;}
+.form-module.type-txt .form-txt{display: block;}
+.form-module.type-txt .form-img{display: none;}
+.form-module.type-img .form-txt{display: none;}
+.form-module.type-img .form-img{display: block;}
+
+.form-module .control-group{text-align: center;}
+.form-module .control-group .btn{margin: 0 10px;}

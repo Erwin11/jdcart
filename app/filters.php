@@ -41,7 +41,8 @@
 # CSRF保护过滤器，防止跨站点请求伪造攻击
 Route::filter('csrf', function()
 {
-    if (Session::token() != Input::get('_token'))
+    $token = Request::ajax() ? Request::header('X-CSRF-Token') : Input::get('_token');
+    if (Session::token() != $token)
         throw new Illuminate\Session\TokenMismatchException;
 });
 

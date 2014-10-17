@@ -137,6 +137,10 @@ class Admin_ArticleResource extends BaseResource
     public function edit($id)
     {
         $data = $this->model->find($id);
+        // $data->contentobj = json_decode($data->content);
+        // $objstr = json_encode(array("a"=>"随碟附送是的","b"=>2));
+        // $data->mtitle = json_decode($data->meta_title);
+
         $categoryLists = Category::lists('name', 'id');
         return View::make($this->resourceView.'.edit')->with(compact('data', 'categoryLists'));
     }
@@ -151,6 +155,24 @@ class Admin_ArticleResource extends BaseResource
     {
         // 获取所有表单数据.
         $data = Input::all();
+       
+        //filter data
+        // $dataFilter = array_filter(array_keys($data), function($key){
+        //     $sign = preg_match('/content/',$key);
+        //     return $sign;
+        // });
+        // $dataFilter = array_intersect_key($data, array_flip($dataFilter));
+        // //tostring
+        // $dstr = json_encode($dataFilter);
+        // $model = $this->model->find($id);
+        // $model->content = $dstr;
+        // $model->save();
+
+        // return $dataFilter['content'];
+
+        // $ttt = json_decode($dstr);
+        // return $ttt->content;
+
         // 创建验证规则
         $rules = array(
             'title'    => 'required|'.$this->unique('title', $id),
@@ -189,35 +211,18 @@ class Admin_ArticleResource extends BaseResource
         }
     }
 
-    /**
-     * 模块内容新增
-     * PUT/PATCH   /resource/addtModule
-     * @return Response
-     */
-    public function postAddModule(){
+    //test
+    public function getTestdata(){
         // $data = Input::get('data');
-        // 验证成功======
-        
-        // 创建文章评论
-        $module = new Module;
-        $module->title    = Input::get('module_title');
-        $module->type = Input::get('module_type');
-        $module->content    = Input::get('module_content');
-        //id
-        $module->article_id = Input::get('id');
-        $module->user_id    = Auth::user()->id;
-        if ($module->save()) {
-            //创建成功
-            $obj = array('status' => 'success');
-            return Response::json($obj);
-        } else {
-            // 创建失败
-            $obj = array('status' => 'error');
-            return Response::json($obj);
-        }
+        $obj = array('name' => 'Steve', 'state' => 'CA');
+        return Response::json($obj);
     }
 
-    public function getCreatModule(){
-        return 'bb';
+    public function postTestdata(){
+        $data = Input::all();
+        $obj = array('data' => $data);
+
+        return $obj;
+        //return Response::json($obj);
     }
 }
