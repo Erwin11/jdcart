@@ -52,6 +52,11 @@ $(function(){
                 var url = '/admin/articles/addtModule';
                 $.post(url, data, function(data){
                     console.log(data);
+                    if(data.status == 'success'){
+                        alert('ok');
+                    }else{
+                        alert('error');
+                    }
                 })
             });
         },

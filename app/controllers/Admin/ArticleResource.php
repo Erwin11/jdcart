@@ -191,7 +191,7 @@ class Admin_ArticleResource extends BaseResource
 
     /**
      * 模块内容新增
-     * PUT/PATCH   /resource/addtModule
+     * PUT/PATCH   /resource/addModule
      * @return Response
      */
     public function postAddModule(){
