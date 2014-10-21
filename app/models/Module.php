@@ -42,4 +42,18 @@ class Module extends BaseModel
     }
 
 
+/*
+|--------------------------------------------------------------------------
+| 访问器
+|--------------------------------------------------------------------------
+*/
+    /**
+     * 模块内容json
+     * @return string
+     */
+    public function getModuleAttribute($value)
+    {
+        return strip($value);
+    }
+
 }

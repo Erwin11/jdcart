@@ -198,11 +198,11 @@ class Admin_ArticleResource extends BaseResource
         // $data = Input::get('data');
         // 验证成功======
         
-        // 创建文章评论
+        // 创建模块内容
         $module = new Module;
-        $module->title    = Input::get('module_title');
-        $module->type = Input::get('module_type');
-        $module->content    = Input::get('module_content');
+        $module->title    =     Input::get('module_title');
+        $module->type     =     Input::get('module_type');
+        $module->content  =     Input::get('module_content');
         //id
         $module->article_id = Input::get('id');
         $module->user_id    = Auth::user()->id;
