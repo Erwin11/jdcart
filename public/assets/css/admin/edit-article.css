@@ -31,3 +31,8 @@ ul, li{margin: 0; padding: 0; list-style: none;}
 
 .form-module .control-group{text-align: center;}
 .form-module .control-group .btn{margin: 0 10px;}
+
+/*cover bootstrap*/
+.form-horizontal .control-label{padding-left: 10px;}
+.error-lable{display: none;}
+.has-error .control-label{display: inline;}
