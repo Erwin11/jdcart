@@ -1,5 +1,7 @@
 $(function(){
     var artModule = {
+        formNode: $('#J_formModule'),
+        baseurl: '/admin/module/',
         init: function(){
             var me = this;
             me.bindHandler();
@@ -21,14 +23,30 @@ $(function(){
             });
             //add
             $('#tab-module .module-add').on('click',function(e){
-                //show
+                //clean
                 $('#J_formModule form')[0].reset(); //重置form
-                $('#J_moduleType').change();
-                $('#J_formModule').addClass('active');
+                $('#module_type').change();
                 $('#J_formModule .form-group').removeClass('has-error');
+                //show
+                $('#J_formModule').addClass('active');
             });
             //edit
-            
+            $('#tab-module .module-list .glyphicon-edit').on('click', function(e){
+                //data
+                var id = $(this).parents('li').attr('data-id');
+                var url = me.baseurl+'editModule';
+                $.ajax({
+                    url: url,
+                    data: {id:id},
+                    success: function(data){
+                        if(data.status == 'success'){
+                            me.renderForm(data.data);
+                            //show
+                            $('#J_formModule').addClass('active');    
+                        }
+                    }
+                });
+            });
             //del
             
             //swith-type
@@ -50,7 +68,7 @@ $(function(){
                 //show
                 e.preventDefault();
                 var data = $('#J_formModule form').serialize();
-                var url = '/admin/articles/addModule';
+                var url = me.baseurl+'addModule';
                 $.post(url, data, function(data){
                     console.log(data);
                     if(data.status == 'success'){
@@ -61,12 +79,18 @@ $(function(){
                     }else{
                         alert('error');
                     }
-                })
+                });
             });
         },
-        renderForm: function(){
+        renderForm: function(data){
+            console.log(data);
             var me = this;
-
+            var item, node;
+            for(item in data){
+                node = $('#module_'+item);
+                node.val(data[item]);
+            }
+            // me.formNode.find('')
         },
         addErrorMsg: function(msgObj){
             var me = this;

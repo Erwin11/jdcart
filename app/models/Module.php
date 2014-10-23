@@ -16,6 +16,13 @@ class Module extends BaseModel
      */
     protected $softDelete = true;
 
+    /**
+     * json转换隐藏属性
+     * 
+     * @var object
+     */
+    protected $hidden = array('article_id', 'user_id', 'created_at', 'updated_at');
+
 /*
 |--------------------------------------------------------------------------
 | 模型对象关系

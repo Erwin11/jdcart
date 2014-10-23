@@ -74,6 +74,20 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|admin'), function () {
         $route->post('addModule')->uses('postAddModule');
         $route->get('creatModule1')->uses('getCreatModule');
     });
+
+    # 文章管理 - 模块内容
+    RouteGroup::make('module')->as('module')->controller('Admin_ArticleModuleController')->go(function ($route) {
+
+        # 添加
+        $route->post('addModule')->uses('postAddModule');
+        #编辑
+        $route->get('editModule')->uses('getEditModule');
+        $route->put('editModule')->uses('putEditModule');
+
+    })/*->dd()*/;
+
+
+    
 });
 
 

@@ -84,7 +84,7 @@
       <div class="tab-pane" id="tab-module" style="margin:0 1em;">
         <ul class="module-list">
           @foreach($data->modules as $module)
-          <li>
+          <li data-id="{{$module->id}}">
             <h4>{{$module->title}}</h4>
             <div class="opt">
               <a class="glyphicon glyphicon-edit" title="编辑">edit</a>
@@ -154,15 +154,16 @@
     <div class="form-con">
       <form class="form-horizontal" action="">
         <!-- hidden input -->
-        <input type="hidden" name="id" value="{{$data->id}}" />
+        <input type="hidden" name="article_id" value="{{$data->id}}" />
+        <input type="hidden" name="module_id" value="" />
         <!-- from content -->
         <div class="form-group">
           <label for="module_title">模块标题</label>
-          <input class="form-control" type="text" name="module_title" id="module_title" value="{{ Input::old('meta_title', $data->meta_title) }}" />
+          <input class="form-control" type="text" name="module_title" id="module_title" value="" />
         </div>
         <div class="form-group">
           <label for="module_type">模块类型</label>
-          <select id="J_moduleType" class="form-control" name="module_type">
+          <select class="form-control" name="module_type" id="module_type">
             <option value="txtimg">左文右图</option>
             <option value="txt">纯文字</option>
             <option value="img">纯图片</option>
@@ -171,7 +172,7 @@
         <div class="form-info">
           <div class="form-group form-txt">
             <label for="module_content">模块内容</label>
-            <textarea id="module_content" class="form-control" data-provide="markdown" name="module_content" rows="10">{{ Input::old('module_content', $data->meta_title) }}</textarea>
+            <textarea id="module_content" class="form-control" data-provide="markdown" name="module_content" rows="10"></textarea>
           </div>
           <div class="form-group form-img">
             <label for="module_image">模块图片</label>
