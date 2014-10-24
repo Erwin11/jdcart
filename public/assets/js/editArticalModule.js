@@ -1,7 +1,11 @@
 $(function(){
     var artModule = {
         formNode: $('#J_formModule'),
-        baseurl: '/admin/module/',
+        baseurl: '/admin/modules/',
+        submitObj: {
+            add: {url: 'addModule', type: 'POST'}, 
+            edit: {url: 'editModule', type: 'PUT'}
+        },
         init: function(){
             var me = this;
             me.bindHandler();
@@ -17,18 +21,19 @@ $(function(){
                         $('.control-group-tab').css('visibility', 'hidden');
                     }else{
                         $('.control-group-tab').css('visibility', 'visible');
-                        $('#J_formModule').removeClass('active');
+                        me.formNode.removeClass('active');
                     }
                 }, 0);
             });
             //add
             $('#tab-module .module-add').on('click',function(e){
                 //clean
-                $('#J_formModule form')[0].reset(); //重置form
+                me.formNode.find('form')[0].reset(); //重置form
                 $('#module_type').change();
-                $('#J_formModule .form-group').removeClass('has-error');
+                me.formNode.find('.form-group').removeClass('has-error');
                 //show
-                $('#J_formModule').addClass('active');
+                me.formNode.attr('data-action','add');
+                me.formNode.addClass('active');
             });
             //edit
             $('#tab-module .module-list .glyphicon-edit').on('click', function(e){
@@ -42,13 +47,34 @@ $(function(){
                         if(data.status == 'success'){
                             me.renderForm(data.data);
                             //show
-                            $('#J_formModule').addClass('active');    
+                            me.formNode.attr('data-action','edit');
+                            me.formNode.addClass('active');
                         }
                     }
                 });
             });
             //del
-            
+            $('#tab-module .module-list .glyphicon-trash').on('click', function(e){
+                //data
+                var itemNode = $(this).parents('li');
+                var id = itemNode.attr('data-id');
+                var url = me.baseurl+'deleteModule';
+                $.ajax({
+                    url: url,
+                    data: {id:id},
+                    success: function(data){
+                        if(data.status == 'success'){
+                            itemNode.remove();
+                        }else{
+                            alert(data.msg);
+                        }
+                    }
+                });
+            });
+
+
+
+
             //swith-type
             $('#J_moduleType').change(function(){
                 var type = $(this).val();
@@ -68,29 +94,40 @@ $(function(){
                 //show
                 e.preventDefault();
                 var data = $('#J_formModule form').serialize();
-                var url = me.baseurl+'addModule';
-                $.post(url, data, function(data){
-                    console.log(data);
-                    if(data.status == 'success'){
-                        alert('ok');
-                    }else if(data.status == 'verify'){
-                        me.addErrorMsg(data.msg);
-                        alert('verify error');
-                    }else{
-                        alert('error');
+                //action
+                var action = me.formNode.attr('data-action');
+                var url = me.baseurl+me.submitObj[action].url;
+                $.ajax({
+                    url: url,
+                    data: data,
+                    type : me.submitObj[action].type,
+                    success: function(data){
+                        if(data.status == 'success'){
+                            me.renderModuleItem(data.data);
+                            me.formNode.removeClass('active');
+                        }else if(data.status == 'verify'){
+                            me.addErrorMsg(data.msg);
+                            alert('verify error');
+                        }else{
+                            alert('error');
+                        }
                     }
-                });
+                })
             });
         },
+        renderModuleItem: function(data){
+            var me = this;
+            var id = data.id;
+            var node = $('#tab-module li[data-id='+id+']');
+            node.find('h4').text(data.title);
+        },
         renderForm: function(data){
-            console.log(data);
             var me = this;
             var item, node;
             for(item in data){
                 node = $('#module_'+item);
                 node.val(data[item]);
             }
-            // me.formNode.find('')
         },
         addErrorMsg: function(msgObj){
             var me = this;

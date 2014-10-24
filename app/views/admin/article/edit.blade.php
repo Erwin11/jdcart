@@ -155,7 +155,7 @@
       <form class="form-horizontal" action="">
         <!-- hidden input -->
         <input type="hidden" name="article_id" value="{{$data->id}}" />
-        <input type="hidden" name="module_id" value="" />
+        <input type="hidden" name="module_id" id="module_id" value="" />
         <!-- from content -->
         <div class="form-group">
           <label for="module_title">模块标题</label>
