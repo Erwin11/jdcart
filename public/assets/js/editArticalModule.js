@@ -9,8 +9,9 @@ $(function(){
         init: function(){
             var me = this;
             me.bindHandler();
-            //init
+            //init test
             $('.nav-tabs li').eq(1).find('a').click();
+            $('.module-list li').eq(4).find('.glyphicon-edit').click();
         },
         bindHandler: function(){
             var me = this;
@@ -21,7 +22,7 @@ $(function(){
                         $('.control-group-tab').css('visibility', 'hidden');
                     }else{
                         $('.control-group-tab').css('visibility', 'visible');
-                        me.formNode.removeClass('active');
+                        // me.formNode.removeClass('active');
                     }
                 }, 0);
             });
@@ -33,7 +34,7 @@ $(function(){
                 me.formNode.find('.form-group').removeClass('has-error');
                 //show
                 me.formNode.attr('data-action','add');
-                me.formNode.addClass('active');
+                // me.formNode.addClass('active');
             });
             //edit
             $('#tab-module .module-list .glyphicon-edit').on('click', function(e){
@@ -48,7 +49,7 @@ $(function(){
                             me.renderForm(data.data);
                             //show
                             me.formNode.attr('data-action','edit');
-                            me.formNode.addClass('active');
+                            // me.formNode.addClass('active');
                         }
                     }
                 });
@@ -71,12 +72,8 @@ $(function(){
                     }
                 });
             });
-
-
-
-
             //swith-type
-            $('#J_moduleType').change(function(){
+            $('#module_type').change(function(){
                 var type = $(this).val();
                 var cls = $('#J_formModule').attr('class');
                 cls = cls.replace(/ type-\w*/g,'');
@@ -84,13 +81,8 @@ $(function(){
                 $('#J_formModule').attr('class',cls);
             });
 
-            //cancel
-            $('#J_formModule .btn-default').on('click', function(e){
-                //show
-                $('#J_formModule').removeClass('active');
-            });
             //submit
-            $('#J_formModule .btn-success').on('click', function(e){
+            $('#J_submit').on('click', function(e){
                 //show
                 e.preventDefault();
                 var data = $('#J_formModule form').serialize();
@@ -111,8 +103,83 @@ $(function(){
                         }else{
                             alert('error');
                         }
+                        //close modal
+                        $('#J_moduleContentModal').modal('hide');
                     }
                 })
+            });
+            //upload - image
+            var uploadButton = $('<button/>')
+                .addClass('btn btn-primary')
+                .prop('disabled', true)
+                .text('Processing...')
+                .on('click', function () {
+                    var $this = $(this),
+                        data = $this.data();
+                    $this
+                        .off('click')
+                        .text('Abort')
+                        .on('click', function () {
+                            $this.remove();
+                            data.abort();
+                        });
+                    data.submit().always(function () {
+                        $this.remove();
+                    });
+                    return false;
+                });
+            //upload - image
+            $('#upload_image').fileupload({
+                url: me.baseurl+'uploadPic',
+                dataType: 'json',
+                autoUpload: false,
+                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+                maxFileSize: 5000000, // 5 MB
+                previewMaxWidth: 100,
+                previewMaxHeight: 100,
+                previewCrop: true,
+                done: function(e, data){
+                    var result = data.result;
+                    if(result.status == 'success'){
+                        var url = result.data.url;
+                        $('#module_image').val(url);
+                    }else{
+                        alert(result.msg);
+                    }
+                }
+            }).on('fileuploadadd', function (e, data) {
+                data.context = $('<div/>');
+                $('#J_files').html(data.context);
+                data.context.attr('class','file-item');
+                $.each(data.files, function (index, file) {
+                    var node = $('<p/>')
+                            .append($('<span/>').text(file.name));
+                    if (!index) {
+                        node
+                            .append('<br>')
+                            .append(uploadButton.clone(true).data(data));
+                    }
+                    node.appendTo(data.context);
+                });
+            }).on('fileuploadprocessalways', function (e, data) {
+                var index = data.index,
+                    file = data.files[index],
+                    node = $(data.context.children()[index]);
+                if (file.preview) {
+                    node
+                        .prepend('<br>')
+                        .prepend(file.preview);
+                }
+                if (file.error) {
+                    node
+                        .append('<br>')
+                        .append($('<span class="text-danger"/>').text(file.error));
+                }
+                if (index + 1 === data.files.length) {
+                    data.context.find('button')
+                        .text('Upload')
+                        .prop('disabled', !!data.files.error);
+                }
             });
         },
         renderModuleItem: function(data){
@@ -127,6 +194,11 @@ $(function(){
             for(item in data){
                 node = $('#module_'+item);
                 node.val(data[item]);
+            }
+            $('#module_type').change();
+            //image
+            if(data.image){
+                me.renderUploadImage(data.image)
             }
         },
         addErrorMsg: function(msgObj){
@@ -148,6 +220,11 @@ $(function(){
             }
             errNode.text(msg);
             parent.addClass('has-error');
+        },
+        renderUploadImage: function(url){
+            var me = this;
+            var node = $('<div class="file-item"><img src="'+url+'" ></div>');
+            $('#J_files').html(node);
         }
     };
     //init

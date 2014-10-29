@@ -122,6 +122,7 @@ class Admin_ArticleModuleResource extends BaseResource
             $model->title    =     Input::get('module_title');
             $model->type     =     Input::get('module_type');
             $model->content  =     Input::get('module_content');
+            $model->image    =     Input::get('module_image');
             //id
             $model->article_id = Input::get('article_id');
             $model->user_id    = Auth::user()->id;
@@ -155,6 +156,51 @@ class Admin_ArticleModuleResource extends BaseResource
             $responseObj = array('status' => 'success', 'msg' => '删除成功。');
         else
             $responseObj = array('status' => 'error', 'msg' => '删除失败。');
+        return Response::json($responseObj);
+    }
+
+    /**
+     * 模块内容 - 上传图片
+     * @return json
+     * 
+     */
+    function postUploadPic(){
+        $data    = Input::all();
+        // 创建验证规则
+        $rules = array(
+            'upload_image' => 'required|mimes:jpeg,gif,png|max:5000000',
+        );
+        // 自定义验证消息
+        $messages = array(
+            'upload_image.required' => '请选择需要上传的图片。',
+            'upload_image.mimes'    => '请上传 :values 格式的图片。',
+            'upload_image.max'      => '图片的大小请控制在 5M 以内。',
+        );
+        // 开始验证
+        $validator = Validator::make($data, $rules, $messages);
+        if ($validator->passes()) {
+            // 验证成功
+            $image    = Input::file('upload_image');
+            $ext      = $image->guessClientExtension();  // 根据 mime 类型取得真实拓展名
+            $fullname = $image->getClientOriginalName(); // 客户端文件名，包括客户端拓展名
+            $hashname = date('H.i.s').'-'.md5($fullname).'.'.$ext; // 哈希处理过的文件名，包括真实拓展名
+            // 存储图片
+            $pathStr = 'uploadfiles/images/'.date('Ymd');
+            $path = public_path($pathStr);
+            if (!File::exists($path)) {
+                File::makeDirectory($path, $mode = 0777, true, true);
+            }
+            $imagePath = $path.'/'.$hashname;
+            $imageOriginal = Image::make($image->getRealPath());
+            $imageOriginal->save($imagePath);
+            // 返回成功信息
+            $dataUrl = $pathStr.'/'.$hashname;
+            $data = array('url' => $dataUrl);
+            $responseObj = array('status' => 'success', 'data' => $data);
+        } else {
+            // 验证失败
+            $responseObj = array('status' => 'error', 'msg' => $validator->messages()->first());
+        }
         return Response::json($responseObj);
     }
 }

@@ -3,7 +3,7 @@
 @section('title') Simple - Blog @parent @stop
 
 @section('beforeStyle')
-    {{ style('bootstrap-3.0.3') }}
+    {{ style('bootstrap-3.2.0') }}
 @parent @stop
 
 @section('style')
@@ -25,5 +25,5 @@ body
 @stop
 
 @section('end')
-    {{ script('jquery-1.10.2', 'bootstrap-3.0.3') }}
+    {{ script('jquery-1.10.2', 'bootstrap-3.2.0') }}
 @parent @stop

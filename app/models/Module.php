@@ -55,12 +55,13 @@ class Module extends BaseModel
 |--------------------------------------------------------------------------
 */
     /**
-     * 模块内容json
-     * @return string
+     * 模块内容 - 上传图片
+     * @return string 图片的URI
      */
-    public function getModuleAttribute($value)
+    public function getImageAttribute($value)
     {
-        return strip($value);
+        if ($value)
+            return asset($value);
     }
 
 }

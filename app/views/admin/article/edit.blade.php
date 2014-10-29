@@ -5,6 +5,7 @@
 @section('beforeStyle')
   @parent
   {{ style('bootstrap-markdown') }}
+  {{ HTML::style('assets/plugin/jQueryFileUpload/css/jquery.fileupload.css') }}
   {{ HTML::style('assets/css/admin/edit-article.css') }}
 @stop
 
@@ -87,7 +88,7 @@
           <li data-id="{{$module->id}}">
             <h4>{{$module->title}}</h4>
             <div class="opt">
-              <a class="glyphicon glyphicon-edit" title="编辑">edit</a>
+              <a class="glyphicon glyphicon-edit" title="编辑" data-toggle="modal" data-target="#J_moduleContentModal">edit</a>
               <a class="glyphicon glyphicon glyphicon-trash" title="删除">delete</a>
             </div>
             @endforeach
@@ -96,9 +97,6 @@
             <div class="glyphicon glyphicon-plus"></div>
           </li>
         </ul>
-
-
-        
       </div>
 
       <!-- Meta Data tab -->
@@ -149,77 +147,74 @@
     </div>
   </form>
 
-  <!-- Form module edit area -->
-  <div id="J_formModule" class="form-module">
-    <div class="form-con">
-      <form class="form-horizontal" action="">
-        <!-- hidden input -->
-        <input type="hidden" name="article_id" value="{{$data->id}}" />
-        <input type="hidden" name="module_id" id="module_id" value="" />
-        <!-- from content -->
-        <div class="form-group">
-          <label for="module_title">模块标题</label>
-          <input class="form-control" type="text" name="module_title" id="module_title" value="" />
-        </div>
-        <div class="form-group">
-          <label for="module_type">模块类型</label>
-          <select class="form-control" name="module_type" id="module_type">
-            <option value="txtimg">左文右图</option>
-            <option value="txt">纯文字</option>
-            <option value="img">纯图片</option>
-          </select>
-        </div>
-        <div class="form-info">
-          <div class="form-group form-txt">
-            <label for="module_content">模块内容</label>
-            <textarea id="module_content" class="form-control" data-provide="markdown" name="module_content" rows="10"></textarea>
-          </div>
-          <div class="form-group form-img">
-            <label for="module_image">模块图片</label>
-            {{ Form::file('module_image', array('class' => 'file_image')) }}
-            <button class="btn btn-primary btn-upload btn-sm" type="submit">上传图片</button>
-          </div>
-        </div>
-        <div class="form-group" style="display:none;">
-          <label for="module_donwload">模块下载文件</label>
-          <input class="form-control" type="text" name="module_donwload" id="module_donwload" value="{{ Input::old('meta_title', $data->meta_title) }}" />
-        </div>
 
-        <div class="control-group">
-          <div class="controls">
-            <a class="btn btn-default">取消</a>
-            <a class="btn btn-success">提 交</a>
+<!-- 模块内容 Moda - moduleContent edit area -->
+<div class="modal fade" id="J_moduleContentModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">编辑模块内容</h4>
+      </div>
+      <div class="modal-body">
+        <div id="J_formModule" class="form-module">
+          <form class="form-horizontal" action="">
+            <!-- hidden input -->
+            <input type="hidden" name="article_id" value="{{$data->id}}" />
+            <input type="hidden" name="module_id" id="module_id" value="" />
+            <input type="hidden" name="module_image" id="module_image" value="" />
+            <input type="hidden" name="module_download" id="module_download" value="" />
+            <!-- from content -->
+            <div class="form-group">
+              <label for="module_title">模块标题</label>
+              <input class="form-control" type="text" name="module_title" id="module_title" value="" />
+            </div>
+            <div class="form-group">
+              <label for="module_type">模块类型</label>
+              <select class="form-control" name="module_type" id="module_type">
+                <option value="txtimg">左文右图</option>
+                <option value="txt">纯文字</option>
+                <option value="img">纯图片</option>
+              </select>
+            </div>
+            <div class="form-group form-txt">
+              <label for="module_content">模块内容</label>
+              <textarea id="module_content" class="form-control" data-provide="markdown" name="module_content" rows="10"></textarea>
+            </div>
+          </form>
+          <div class="form-group form-img clearfix">
+            <div class="add-files">
+              <label for="upload_image">模块图片</label>
+              <span class="btn btn-success fileinput-button">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>Add files...</span>
+                {{ Form::file('upload_image', array('class' => 'file_image file', 'id' => 'upload_image')) }}
+              </span>  
+            </div>
+            <div id="J_files" class="files-list">
+            </div>
+          </div>
+          <div class="form-group" style="display:none;">
+            <label for="upload_donwload">模块下载文件</label>
+            <input class="form-control" type="text" name="upload_donwload" id="upload_donwload" value="{{ Input::old('meta_title', $data->meta_title) }}" />
           </div>
         </div>
-      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="J_cancel" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" id="J_submit" class="btn btn-primary">提交</button>
+      </div>
     </div>
   </div>
+</div>
 @stop
 
 @section('end')
   @parent
   {{ script('markdown', 'to-markdown', 'bootstrap-markdown') }}
+  {{ HTML::script('assets/plugin/jQueryFileUpload/dist/fileUpload.js') }}
 
   {{ HTML::script('assets/js/base.js') }}
   {{ HTML::script('assets/js/editArticalModule.js') }}
-  <!-- test -->
-  <div id="J_test" style="display:none;">
-    <div class="txt">这是测试文字</div>
-    <a class="btn btn-default">测试</a>
-  <script>
-  $(function(){
-    $('#J_test .btn').on('click', function(e){
-      e.preventDefault();
-      var data = $('.form-horizontal').serialize();
-      // data = {b1:333,b2:222};
-      $.post('/admin/articles/testdata', data, function(data){
-        console.log(data);
-      });
-    });
-  });
-  </script>
-  </div>
-
-
 
 @stop

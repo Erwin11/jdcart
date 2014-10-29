@@ -85,6 +85,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|admin'), function () {
         $route->put('editModule')->uses('putEditModule');
         #删除
         $route->get('deleteModule')->as('destroy')->uses('getDeleteModule');
+        #上传 - 图片
+        $route->post('uploadPic')->uses('postUploadPic');
 
     })/*->dd()*/;
 

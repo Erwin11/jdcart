@@ -25,6 +25,9 @@
                       <div class="module-item module-{{$module->id}}">
                         <h4>{{$module->title}}</h4>
                         <p>{{$module->content}}</p>
+                        @if (isset($module->image))
+                            <p><img src="{{$module->image}}" alt=""></p>
+                        @endif
                       </div>
                         @endforeach
                     </div>
