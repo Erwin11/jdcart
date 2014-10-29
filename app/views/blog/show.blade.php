@@ -24,7 +24,7 @@
                     @foreach($article->modules as $module)
                       <div class="module-item module-{{$module->id}}">
                         <h4>{{$module->title}}</h4>
-                        <p>{{$module->content}}</p>
+                        <p>{{ $module->content_html }}</p>
                         @if (isset($module->image))
                             <p><img src="{{$module->image}}" alt=""></p>
                         @endif

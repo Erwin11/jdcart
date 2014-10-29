@@ -181,6 +181,23 @@ $(function(){
                         .prop('disabled', !!data.files.error);
                 }
             });
+            //upload-download files
+            $('#upload_donwload').fileupload({
+                url: me.baseurl+'uploadFile',
+                dataType: 'json',
+                autoUpload: true,
+                acceptFileTypes: /(\.|\/)(zip|rar)$/i,
+                maxFileSize: 50000000, // 50 MB
+                done: function(e, data){
+                    var result = data.result;
+                    if(result.status == 'success'){
+                        var url = result.data.url;
+                        $('#module_download').val(url);
+                    }else{
+                        alert(result.msg);
+                    }
+                }
+            })
         },
         renderModuleItem: function(data){
             var me = this;
@@ -199,6 +216,10 @@ $(function(){
             //image
             if(data.image){
                 me.renderUploadImage(data.image)
+            }
+            //download
+            if(data.download){
+                me.renderUploadDownload(data.download);
             }
         },
         addErrorMsg: function(msgObj){
@@ -225,6 +246,17 @@ $(function(){
             var me = this;
             var node = $('<div class="file-item"><img src="'+url+'" ></div>');
             $('#J_files').html(node);
+        },
+        renderUploadDownload: function(url){
+            var me = this;
+            var node = $('<a class="download-link" href="#">下载文件</a>');
+            var conNode = $('#J_uploadDownload');
+            var linkNode = conNode.find('.download-link');
+            if(linkNode.length == 0){
+                conNode.append(node);
+                linkNode = node;
+            }
+            linkNode.attr('href', url);
         }
     };
     //init

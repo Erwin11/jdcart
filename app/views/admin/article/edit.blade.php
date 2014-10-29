@@ -185,18 +185,23 @@
           <div class="form-group form-img clearfix">
             <div class="add-files">
               <label for="upload_image">模块图片</label>
-              <span class="btn btn-success fileinput-button">
+              <span class="btn btn-default fileinput-button">
                 <i class="glyphicon glyphicon-plus"></i>
-                <span>Add files...</span>
+                <span>上传图片</span>
                 {{ Form::file('upload_image', array('class' => 'file_image file', 'id' => 'upload_image')) }}
               </span>  
             </div>
-            <div id="J_files" class="files-list">
-            </div>
+            <div id="J_files" class="files-list"></div>
           </div>
-          <div class="form-group" style="display:none;">
+          <div class="form-group form-download">
             <label for="upload_donwload">模块下载文件</label>
-            <input class="form-control" type="text" name="upload_donwload" id="upload_donwload" value="{{ Input::old('meta_title', $data->meta_title) }}" />
+            <div id="J_uploadDownload" class="upload-download">
+              <span class="btn btn-default fileinput-button">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>上传文件</span>
+                {{ Form::file('upload_donwload', array('class' => 'file_download file', 'id' => 'upload_donwload')) }}
+              </span>
+            </div>
           </div>
         </div>
       </div>

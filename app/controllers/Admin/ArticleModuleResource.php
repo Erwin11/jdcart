@@ -91,7 +91,8 @@ class Admin_ArticleModuleResource extends BaseResource
      */
     public function getEditModule(){
         $id = Input::get('id');
-        $data = $this->model->find($id)->toArray();
+        $data = $this->model->find($id);
+        $data = $data->toArray();
         $responseObj = array('status' => 'success', 'data'=> $data);
         return Response::json($responseObj);
     }
@@ -123,6 +124,7 @@ class Admin_ArticleModuleResource extends BaseResource
             $model->type     =     Input::get('module_type');
             $model->content  =     Input::get('module_content');
             $model->image    =     Input::get('module_image');
+            $model->download =     Input::get('module_download');
             //id
             $model->article_id = Input::get('article_id');
             $model->user_id    = Auth::user()->id;
@@ -198,6 +200,56 @@ class Admin_ArticleModuleResource extends BaseResource
             $data = array('url' => $dataUrl);
             $responseObj = array('status' => 'success', 'data' => $data);
         } else {
+            // 验证失败
+            $responseObj = array('status' => 'error', 'msg' => $validator->messages()->first());
+        }
+        return Response::json($responseObj);
+    }
+
+    /**
+     * 模块内容 - 上传图片
+     * @return json
+     * 
+     */
+    function postUploadFile(){
+        // $uploadFile     = Input::file('upload_donwload');
+        // $destinationPath = 'uploadfiles/files/';
+        // $filename = $uploadFile->getClientOriginalName();
+        // Input::file('upload_donwload')->move($destinationPath, $filename);
+        
+        // return 'aa'.$filename;
+        
+        $data = Input::all();
+        // 创建验证规则
+        $rules = array(
+            'upload_donwload' => 'required|mimes:zip,rar|max:50000000',
+        );
+        // 自定义验证消息
+        $messages = array(
+            'upload_donwload.required' => '请选择需要上传的图片。',
+            'upload_donwload.mimes'    => '请上传 :values 格式的图片。',
+            'upload_donwload.max'      => '图片的大小请控制在 5M 以内。',
+        );
+        // 开始验证
+        $validator = Validator::make($data, $rules, $messages);
+        if ($validator->passes()) {
+            // 验证成功
+            $uploadFile     = Input::file('upload_donwload');
+            $ext      = $uploadFile->guessClientExtension();  // 根据 mime 类型取得真实拓展名
+            $fullname = $uploadFile->getClientOriginalName(); // 客户端文件名，包括客户端拓展名
+            $filename = date('H.i.s').'-'.$fullname; // 处理文件名
+            //存储文件
+            $pathStr = 'uploadfiles/files/'.date('Ymd');
+            $path = public_path($pathStr);
+            if (!File::exists($path)) {
+                File::makeDirectory($path, $mode = 0777, true, true);
+            }
+            Input::file('upload_donwload')->move($path, $filename);
+            // 返回成功信息
+            $dataUrl = $pathStr.'/'.$filename;
+            $data = array('url' => $dataUrl);
+            $responseObj = array('status' => 'success', 'data' => $data);
+        }else{
             // 验证失败
             $responseObj = array('status' => 'error', 'msg' => $validator->messages()->first());
         }

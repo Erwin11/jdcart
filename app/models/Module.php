@@ -1,4 +1,7 @@
 <?php
+
+use \Michelf\MarkdownExtra;
+
 /**
  * 文章模块内容
  */
@@ -62,6 +65,36 @@ class Module extends BaseModel
     {
         if ($value)
             return asset($value);
+    }
+
+    /**
+     * 模块内容 - 上传文件
+     * @return string 文件的URI
+     */
+    public function getDownloadAttribute($value)
+    {
+        if ($value)
+            return asset($value);
+    }
+
+    /**
+     * 模块内容（HTML 格式）
+     * @return string
+     */
+    public function getContentHtmlAttribute()
+    {
+        return MarkdownExtra::defaultTransform($this->content);
+        
+    }
+
+    /**
+     * 模块内容（Markdown 格式）
+     * @return string
+     */
+    public function getContentMarkdownAttribute()
+    {
+        return $this->content;
+            
     }
 
 }
