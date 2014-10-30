@@ -59,7 +59,7 @@ class BlogController extends BaseController
         is_null($article) AND App::abort(404);
         $categories = Category::orderBy('sort_order')->get();
         $category_id = $article->category_id;
-        $articles   = Article::where('category_id', $category_id)->orderBy('created_at', 'desc')->paginate(5);
+        $articles   = Article::where('category_id', $category_id)->orderBy('updated_at', 'desc')->paginate(5);
         return View::make('blog.show')->with(compact('article', 'articles', 'categories', 'category_id'));
     }
 

@@ -212,13 +212,6 @@ class Admin_ArticleModuleResource extends BaseResource
      * 
      */
     function postUploadFile(){
-        // $uploadFile     = Input::file('upload_donwload');
-        // $destinationPath = 'uploadfiles/files/';
-        // $filename = $uploadFile->getClientOriginalName();
-        // Input::file('upload_donwload')->move($destinationPath, $filename);
-        
-        // return 'aa'.$filename;
-        
         $data = Input::all();
         // 创建验证规则
         $rules = array(
