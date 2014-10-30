@@ -10,34 +10,66 @@
 @stop
 
 @section('container')
-
-    <div class="row row-offcanvas row-offcanvas-right">
-        <div class="col-xs-12 col-sm-12">
+    
+    <div id="J_blogShow" class="row row-offcanvas row-offcanvas-right">
+        <span class="left-bg"></span>
         
-            <div class="row">
+        @include('widgets.blogSidebar', array('activeCategory' => $article->id))
 
+        <div class="col-xs-8 col-sm-10 main-content">
+            <div class="row">
+                <div class="col-6 col-sm-6 col-lg-12 panel">
+                    <div class="module-content">
+                    @foreach($article->modules as $module)
+                      <div class="module-item module-{{$module->id}} module-{{$module->type}}">
+                        <div class="module-title clearfix">
+                            <h4>{{$module->title}}</h4>
+                            @if (isset($module->download))
+                                <a class="download-link" href="{{$module->download}}"><i></i>下载文件</a>
+                            @endif
+                        </div>
+                        @if ($module->type == 'txtimg')
+                            <!-- 左文右图 -->
+                            <div class="module-txt">{{ $module->content_html }}</div>
+                            <div class="module-pic"><img src="{{$module->image}}" alt=""></div>
+                        @elseif ($module->type == 'img')
+                            <!-- 整图 -->
+                            @if (isset($module->image))
+                                <div class="module-pic"><img src="{{$module->image}}" alt=""></div>
+                            @endif
+                        @else
+                            <!-- 整文   -->
+                            <div class="module-txt">{{ $module->content_html }}</div>
+                        @endif
+                        
+
+                        
+                        
+
+
+                        
+                      </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+    
+
+
+            <!-- test -->
+            <div class="row" style="display:none;">
                 <div class="col-6 col-sm-6 col-lg-12 panel">
                     <h2>{{ $article->title }}</h2>
                     <hr />
                     <p>{{ $article->content_html }}</p>
-                    <div class="module-content">
-                    @foreach($article->modules as $module)
-                      <div class="module-item module-{{$module->id}}">
-                        <h4>{{$module->title}}</h4>
-                        <p>{{ $module->content_html }}</p>
-                        @if (isset($module->image))
-                            <p><img src="{{$module->image}}" alt=""></p>
-                        @endif
-                      </div>
-                        @endforeach
-                    </div>
+                    
                     <a name="comments"></a>
                     <p>
                         <i class="glyphicon glyphicon-calendar"></i><span> {{ $article->created_at }}（{{ $article->friendly_created_at }}）</span>
                     </p>
                 </div><!--/span-->
 
-                <div class="col-6 col-sm-6 col-lg-12 panel">
+                <div class="col-6 col-sm-6 col-lg-12 panel" style="display:none;">
                     <h4>评论 - {{ $article->comments_count }}</h4>
                     <ul class="media-list">
                         <?php $article->load('comments.user') ?>
@@ -78,9 +110,8 @@
 
             </div><!--/row-->
         </div><!--/span-->
-
-        <!--/span@include('widgets.blogSidebar', array('activeCategory' => $category_id))-->
         
     </div><!--/row-->
+    
 
 @stop

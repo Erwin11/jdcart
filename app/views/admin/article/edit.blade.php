@@ -93,7 +93,7 @@
             </div>
             @endforeach
           </li>
-          <li class="module-add">
+          <li class="module-add" data-toggle="modal" data-target="#J_moduleContentModal">
             <div class="glyphicon glyphicon-plus"></div>
           </li>
         </ul>

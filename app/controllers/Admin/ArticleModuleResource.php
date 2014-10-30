@@ -207,7 +207,7 @@ class Admin_ArticleModuleResource extends BaseResource
     }
 
     /**
-     * 模块内容 - 上传图片
+     * 模块内容 - 上传文件
      * @return json
      * 
      */

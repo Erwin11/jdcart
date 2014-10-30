@@ -90,8 +90,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|admin'), function () {
         $route->post('uploadFile')->uses('postUploadFile');
 
     })/*->dd()*/;
-
-
     
 });
 

@@ -137,7 +137,7 @@ class Admin_ArticleResource extends BaseResource
     public function edit($id)
     {
         $data = $this->model->find($id);
-        $categoryLists = Category::lists('name', 'id');
+        $categoryLists = Category::orderBy('sort_order')->take(3)->get()->lists('name', 'id');
         return View::make($this->resourceView.'.edit')->with(compact('data', 'categoryLists'));
     }
 

@@ -4,21 +4,17 @@
 
 @section('beforeStyle')
     {{ style('bootstrap-3.2.0') }}
+    {{ HTML::style('assets/css/blog.css') }}
 @parent @stop
 
 @section('style')
-body
-{
-    padding-bottom: 0;
-    background-color: #f3f3ff;
-}
 @parent @stop
 
 @section('body')
 
     @include('widgets.blogNavbar', array('activeCategory' => $category_id))
 
-    <div class="container" style="margin-top:5em; padding-bottom:1em;">
+    <div class="container">
         @yield('container')
     </div>
 
@@ -26,4 +22,5 @@ body
 
 @section('end')
     {{ script('jquery-1.10.2', 'bootstrap-3.2.0') }}
+    {{ HTML::script('assets/js/base.js') }}
 @parent @stop

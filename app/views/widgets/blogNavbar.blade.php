@@ -9,21 +9,21 @@ $is_active = function ($name='') use ($activeCategory)
 ?>
 
 <!-- Fixed navbar -->
-<div class="navbar navbar-default navbar-fixed-top" role="navigation"
-    style="background-color:#fff;border-color:#fff;">
+<div class="navbar navbar-default navbar-fixed-top1" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">切换菜单栏</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ route('home') }}">JDC规范平台</a>
+ -->        <a class="navbar-brand" href="{{ route('home') }}">
+                <img src="{{asset('assets/img/logo-red.png')}}" alt="">
+            </a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ route('home') }}">首页</a></li>
                 @if(isset($categories))
                     @for ($i = 0; $i < 3; $i++)
                     <li class="{{ $is_active($categories[$i]->id) }}">

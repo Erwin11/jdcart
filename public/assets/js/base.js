@@ -5,3 +5,41 @@
 $.ajaxSetup({
     headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
 });
+
+
+
+//mainObj
+
+$(function(){
+
+var base = {
+  init: function(){
+    var me = this;
+    me.bindHandler();
+    me.switchPage();
+  },
+  bindHandler: function(){
+    var me = this;
+    $(window).load(function(e){
+      me.switchPage();
+    });
+  },
+  switchPage: function(){
+    var mainH = $(document).height();
+    //blog-show
+    var blogShow = $('#J_blogShow');
+    if(blogShow.length>0){
+      var sh = blogShow.height();
+      blogShow.find('.left-bg').css('height',sh);
+    }
+  }
+}
+
+//init
+base.init();
+
+
+
+
+
+});

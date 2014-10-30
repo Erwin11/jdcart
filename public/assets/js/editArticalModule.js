@@ -11,7 +11,7 @@ $(function(){
             me.bindHandler();
             //init test
             $('.nav-tabs li').eq(1).find('a').click();
-            $('.module-list li').eq(4).find('.glyphicon-edit').click();
+            // $('.module-list li').eq(0).find('.glyphicon-edit').click();
         },
         bindHandler: function(){
             var me = this;
