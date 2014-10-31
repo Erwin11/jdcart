@@ -61,20 +61,20 @@ class Module extends BaseModel
      * 模块内容 - 上传图片
      * @return string 图片的URI
      */
-    public function getImageAttribute($value)
+    public function getImageUrlAttribute()
     {
-        if ($value)
-            return asset($value);
+        if ($this->image)
+            return asset($this->image);
     }
 
     /**
      * 模块内容 - 上传文件
      * @return string 文件的URI
      */
-    public function getDownloadAttribute($value)
+    public function getDownloadUrlAttribute()
     {
-        if ($value)
-            return asset($value);
+        if ($this->download)
+            return asset($this->download);
     }
 
     /**
@@ -84,7 +84,6 @@ class Module extends BaseModel
     public function getContentHtmlAttribute()
     {
         return MarkdownExtra::defaultTransform($this->content);
-        
     }
 
     /**
@@ -94,7 +93,6 @@ class Module extends BaseModel
     public function getContentMarkdownAttribute()
     {
         return $this->content;
-            
     }
 
 }

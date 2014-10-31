@@ -2,6 +2,7 @@ $(function(){
     var artModule = {
         formNode: $('#J_formModule'),
         baseurl: '/admin/modules/',
+        hosturl: 'http://'+window.location.host+'/',
         submitObj: {
             add: {url: 'addModule', type: 'POST'}, 
             edit: {url: 'editModule', type: 'PUT'}
@@ -19,10 +20,9 @@ $(function(){
             $('.nav-tabs li a').on('click', function(e){
                 setTimeout(function(){
                     if($('.nav-tabs li').eq(1).hasClass('active')){
-                        $('.control-group-tab').css('visibility', 'hidden');
+                        // $('.control-group-tab').hide();
                     }else{
-                        $('.control-group-tab').css('visibility', 'visible');
-                        // me.formNode.removeClass('active');
+                        // $('.control-group-tab').show();
                     }
                 }, 0);
             });
@@ -32,9 +32,11 @@ $(function(){
                 me.formNode.find('form')[0].reset(); //重置form
                 $('#module_type').change();
                 me.formNode.find('.form-group').removeClass('has-error');
+                $('#J_files').html('');
+                $('#J_uploadDownload .download-link').remove();
                 //show
                 me.formNode.attr('data-action','add');
-                // me.formNode.addClass('active');
+                $('#J_moduleContentModal .modal-title').text('添加模块');
             });
             //edit
             $('#tab-module .module-list .glyphicon-edit').on('click', function(e){
@@ -49,7 +51,7 @@ $(function(){
                             me.renderForm(data.data);
                             //show
                             me.formNode.attr('data-action','edit');
-                            // me.formNode.addClass('active');
+                            $('#J_moduleContentModal .modal-title').text('编辑模块');
                         }
                     }
                 });
@@ -215,11 +217,11 @@ $(function(){
             $('#module_type').change();
             //image
             if(data.image){
-                me.renderUploadImage(data.image)
+                me.renderUploadImage(me.hosturl+data.image)
             }
             //download
             if(data.download){
-                me.renderUploadDownload(data.download);
+                me.renderUploadDownload(me.hosturl+data.download);
             }
         },
         addErrorMsg: function(msgObj){

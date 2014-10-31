@@ -63,8 +63,11 @@ class Admin_ArticleModuleResource extends BaseResource
             // 添加模块内容
             $model = $this->model;
             $model->title    =     Input::get('module_title');
+            $model->title_en =     Input::get('module_title_en');
             $model->type     =     Input::get('module_type');
             $model->content  =     Input::get('module_content');
+            $model->image    =     Input::get('module_image');
+            $model->download =     Input::get('module_download');
             //id
             $model->article_id = Input::get('article_id');
             $model->user_id    = Auth::user()->id;
@@ -121,6 +124,7 @@ class Admin_ArticleModuleResource extends BaseResource
             $id = Input::get('module_id');
             $model = $this->model->find($id);
             $model->title    =     Input::get('module_title');
+            $model->title_en =     Input::get('module_title_en');
             $model->type     =     Input::get('module_type');
             $model->content  =     Input::get('module_content');
             $model->image    =     Input::get('module_image');

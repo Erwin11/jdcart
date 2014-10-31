@@ -27,10 +27,10 @@ class AddSlugEnnameToCategoriesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('users', function($table){
+		Schema::table('article_categories', function($table){
 		    $table->dropColumn('slug');
-		    $table->string('enname');
-		    $table->string('abbr');
+		    $table->dropColumn('enname');
+		    $table->dropColumn('abbr');
 		});
 	}
 

@@ -82,8 +82,8 @@
       </div>
 
       <!-- Module tab -->
-      <div class="tab-pane" id="tab-module" style="margin:0 1em;">
-        <ul class="module-list">
+      <div class="tab-pane" id="tab-module">
+        <ul class="module-list clearfix">
           @foreach($data->modules as $module)
           <li data-id="{{$module->id}}">
             <h4>{{$module->title}}</h4>
@@ -154,7 +154,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title">编辑模块内容</h4>
+        <h4 class="modal-title">模块</h4>
       </div>
       <div class="modal-body">
         <div id="J_formModule" class="form-module">
@@ -168,6 +168,10 @@
             <div class="form-group">
               <label for="module_title">模块标题</label>
               <input class="form-control" type="text" name="module_title" id="module_title" value="" />
+            </div>
+            <div class="form-group">
+              <label for="module_title">模块标题 - 英文</label>
+              <input class="form-control" type="text" name="module_title_en" id="module_title_en" value="" />
             </div>
             <div class="form-group">
               <label for="module_type">模块类型</label>

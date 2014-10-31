@@ -23,7 +23,7 @@
                     @foreach($article->modules as $module)
                       <div class="module-item module-{{$module->id}} module-{{$module->type}}">
                         <div class="module-title clearfix">
-                            <h4>{{$module->title}}</h4>
+                            <h4>{{$module->title}}<span class="title-en">{{$module->title_en}}</span></h4>
                             @if (isset($module->download))
                                 <a class="download-link" href="{{$module->download}}"><i></i>下载文件</a>
                             @endif
@@ -31,11 +31,11 @@
                         @if ($module->type == 'txtimg')
                             <!-- 左文右图 -->
                             <div class="module-txt">{{ $module->content_html }}</div>
-                            <div class="module-pic"><img src="{{$module->image}}" alt=""></div>
+                            <div class="module-pic"><img src="{{$module->image_url}}" alt=""></div>
                         @elseif ($module->type == 'img')
                             <!-- 整图 -->
                             @if (isset($module->image))
-                                <div class="module-pic"><img src="{{$module->image}}" alt=""></div>
+                                <div class="module-pic"><img src="{{$module->image_url}}" alt=""></div>
                             @endif
                         @else
                             <!-- 整文   -->
