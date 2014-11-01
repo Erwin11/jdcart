@@ -17,6 +17,7 @@
         @include('widgets.blogSidebar', array('activeCategory' => $article->id))
 
         <div class="col-xs-8 col-sm-10 main-content">
+            @if (count($article->modules)>0)
             <div class="row">
                 <div class="col-6 col-sm-6 col-lg-12 panel">
                     <div class="module-content">
@@ -25,7 +26,10 @@
                         <div class="module-title clearfix">
                             <h4>{{$module->title}}<span class="title-en">{{$module->title_en}}</span></h4>
                             @if (isset($module->download))
-                                <a class="download-link" href="{{$module->download}}"><i></i>下载文件</a>
+                                <div class="download-con">
+                                    <a class="download-link" href="{{$module->download_url}}"><i></i>下载文件</a>
+                                    <span>{{$module->download_array->size}}MB（.{{$module->download_array->ext}}）</span>                                    
+                                </div>
                             @endif
                         </div>
                         @if ($module->type == 'txtimg')
@@ -46,6 +50,7 @@
                     </div>
                 </div>
             </div>
+            @endif
     
             
             @if (count($article->modules)==0)

@@ -69,10 +69,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|admin'), function () {
               ->edit(  )
               ->update();
         $route->delete('{id}')->as('destroy')->uses('destroy');
-
-        #module data
-        $route->post('addModule')->uses('postAddModule');
-        $route->get('creatModule1')->uses('getCreatModule');
     });
 
     # 文章管理 - 模块内容

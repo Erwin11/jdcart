@@ -37,21 +37,14 @@ $is_active = function ($name='') use ($activeCategory)
                 <li{{ $is_active('signin') }}><a href="{{ route('signin') }}">登录</a></li>
                 <li{{ $is_active('signup') }}><a href="{{ route('signup') }}">注册</a></li>
 @elseif(! Auth::user()->is_admin){{--普通登录用户--}}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        [ {{ Auth::user()->email }} ]
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ route('account.index') }}">用户中心</a></li>
-                        <li class="divider"></li>
-                        <li><a href="{{ route('logout') }}">退出</a></li>
-                    </ul>
-                </li>
+                <li><a href="{{ route('account.index') }}">{{ Auth::user()->email }}</a></li>
+                <li><a href="{{ route('logout') }}">退出</a></li>
 @elseif(Auth::user()->is_admin){{--管理员--}}
-                <li class="dropdown">
+                <li><a href="{{ route('admin') }}">{{ Auth::user()->email }}</a></li>
+                <li><a href="{{ route('logout') }}">退出</a></li>
+                <li class="dropdown" style="display:none;">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        [ {{ Auth::user()->email }} ]
+                        {{ Auth::user()->email }}
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">

@@ -193,8 +193,10 @@ $(function(){
                 done: function(e, data){
                     var result = data.result;
                     if(result.status == 'success'){
-                        var url = result.data.url;
-                        $('#module_download').val(url);
+                        var str = JSON.stringify(result.data);
+                        //
+                        $('#module_download').val(str);
+                        me.renderUploadDownload(result.data);
                     }else{
                         alert(result.msg);
                     }
@@ -221,7 +223,8 @@ $(function(){
             }
             //download
             if(data.download){
-                me.renderUploadDownload(me.hosturl+data.download);
+                var obj = $.parseJSON(data.download);
+                me.renderUploadDownload(obj);
             }
         },
         addErrorMsg: function(msgObj){
@@ -249,16 +252,21 @@ $(function(){
             var node = $('<div class="file-item"><img src="'+url+'" ></div>');
             $('#J_files').html(node);
         },
-        renderUploadDownload: function(url){
+        renderUploadDownload: function(data){
             var me = this;
-            var node = $('<a class="download-link" href="#">下载文件</a>');
+            var node = $('<div class="download-con">'+
+                            '<a class="download-link" href="#">下载文件</a>'+
+                            '<span>1.27MB（.rar）</span>'+
+                        '</div>');
             var conNode = $('#J_uploadDownload');
-            var linkNode = conNode.find('.download-link');
+            var linkNode = conNode.find('.download-con');
             if(linkNode.length == 0){
                 conNode.append(node);
                 linkNode = node;
             }
-            linkNode.attr('href', url);
+            var info = data.size+'MB'+'（.'+ data.ext +'）';
+            linkNode.find('.download-link').attr('href', data.url);
+            linkNode.find('span').text(info);
         }
     };
     //init

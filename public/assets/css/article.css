@@ -8,7 +8,8 @@
 .module-content .module-title{padding-bottom: 15px;}
 .module-content .module-title h4{font-size: 24px; float: left;}
 .module-content .module-title .title-en{font-size: 14px; color: #AEABA9; padding-left: 10px;}
-.module-content .module-title .download-link{float: left; margin: 13px 0 0 30px; color: #e53d40;}
+.module-content .module-title .download-con{float: left; margin: 13px 0 0 30px; color: #AEABA9;}
+.module-content .module-title .download-link{color: #e53d40; margin-right: 5px;}
 .module-content .module-title .download-link i{display: inline-block; width: 16px; height: 17px; background-position: -20px 0; position: relative; top: 2px; margin-right: 3px;}
 .module-content .module-item .module-txt{padding: 0 20px 20px 0px; font-size: 16px; color: #666; line-height: 25px;}
 .module-content .module-item .module-pic img{width: 100%;}

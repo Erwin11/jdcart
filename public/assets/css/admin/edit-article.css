@@ -45,7 +45,8 @@ ul, li{margin: 0; padding: 0; list-style: none;}
 
 /*upload-files*/
 .form-download label{margin-bottom: 15px;}
-.form-download .download-link{margin-left: 30px;}
+.form-download .download-con{display: inline-block; margin-left: 30px;}
+.form-download .download-con span{color: #AEABA9; padding-left: 10px;}
 
 
 

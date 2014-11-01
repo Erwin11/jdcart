@@ -73,8 +73,18 @@ class Module extends BaseModel
      */
     public function getDownloadUrlAttribute()
     {
+        if ($this->download_array)
+            return asset($this->download_array->url);
+    }
+
+    /**
+     * 模块内容 - 上传文件（json 格式）
+     * @return json
+     */
+    public function getDownloadArrayAttribute()
+    {
         if ($this->download)
-            return asset($this->download);
+            return json_decode($this->download);
     }
 
     /**

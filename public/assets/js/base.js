@@ -25,12 +25,17 @@ var base = {
     });
   },
   switchPage: function(){
+    var mainW = $(document).width();
     var mainH = $(document).height();
     //blog-show
     var blogShow = $('#J_blogShow');
     if(blogShow.length>0){
       var sh = blogShow.height();
-      blogShow.find('.left-bg').css('height',sh);
+      blogShow.find('.left-bg').css('height',mainH);
+      //sw
+      var sw = blogShow.width();
+      var offsetW = parseInt((mainW - sw)/2) + $('#sidebar').outerWidth();
+      blogShow.find('.left-bg').css('width',offsetW);
     }
   }
 }

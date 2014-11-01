@@ -232,6 +232,8 @@ class Admin_ArticleModuleResource extends BaseResource
         if ($validator->passes()) {
             // 验证成功
             $uploadFile     = Input::file('upload_donwload');
+            $size     = $uploadFile->getClientSize();         // 文件大小(bytes)
+            $size     = round($size/(1024*1024)*100)/100;     // MB
             $ext      = $uploadFile->guessClientExtension();  // 根据 mime 类型取得真实拓展名
             $fullname = $uploadFile->getClientOriginalName(); // 客户端文件名，包括客户端拓展名
             $filename = date('H.i.s').'-'.$fullname; // 处理文件名
@@ -244,7 +246,7 @@ class Admin_ArticleModuleResource extends BaseResource
             Input::file('upload_donwload')->move($path, $filename);
             // 返回成功信息
             $dataUrl = $pathStr.'/'.$filename;
-            $data = array('url' => $dataUrl);
+            $data = array('url' => $dataUrl, 'ext' => $ext, 'size' => $size);
             $responseObj = array('status' => 'success', 'data' => $data);
         }else{
             // 验证失败
