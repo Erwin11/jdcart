@@ -58,6 +58,19 @@
                     <input class="form-control" type="text" name="abbr" id="abbr" value="{{ Input::old('abbr', $data->abbr) }}" />
                 </div>
                 <div class="form-group">
+                  <label for="parent">父级</label>
+                  {{ $errors->first('parent', '
+                  <span style="color:#c7254e;margin:0 1em;">:message</span>
+                  ') }}
+                  {{ Form::select('parent_id', array('0' => '无')+$parents, $data->parent_id, array('class' => 'form-control')) }}
+
+                    <select class="form-control" name="parent_id" id="parent">
+                        <option value="0">无</option>
+                        @include('admin.category.subcates', array('items' => $catesData, 'data' => $data))
+                    </select>
+
+                </div>
+                <div class="form-group">
                     <label for="sort_order">排序</label>
                     {{ $errors->first('sort_order', '<span style="color:#c7254e;margin:0 1em;">:message</span>') }}
                     <input class="form-control" type="text" name="sort_order" id="sort_order" value="{{ Input::old('sort_order', $data->sort_order) }}" />

@@ -16,8 +16,6 @@
 
 
 /*txtimg*/
-.module-content .module-txtimg{}
 .module-content .module-txtimg .module-txt{width: 42%; float: left;}
 .module-content .module-txtimg .module-pic{width: 58%; float: left;}
 /*img*/
-.module-content .module-img{}

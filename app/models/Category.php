@@ -31,6 +31,34 @@ class Category extends BaseModel
         return $this->hasMany('Article', 'category_id');
     }
 
+    /**
+     * 多级分类
+     * 一对多
+     * @return object Illuminate\Database\Eloquent\Collection
+     */
+    public function multiCates()
+    {
+        return $this->hasMany('Category', 'parent_id');
+    }
 
+
+/*
+|--------------------------------------------------------------------------
+| 访问器
+|--------------------------------------------------------------------------
+*/
+    /**
+     * 多级菜单 - option 前缀&nbsp;
+     * @return string
+     */
+    public function getOptionPrefixAttribute()
+    {   
+        $depth = $this->depth;
+        $str = '';
+        for ($i=0; $i <$depth ; $i++) { 
+            $str .= '&nbsp&nbsp';
+        }
+        return $str;
+    }
 
 }

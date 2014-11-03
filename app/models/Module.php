@@ -68,16 +68,6 @@ class Module extends BaseModel
     }
 
     /**
-     * 模块内容 - 上传文件
-     * @return string 文件的URI
-     */
-    public function getDownloadUrlAttribute()
-    {
-        if ($this->download_array)
-            return asset($this->download_array->url);
-    }
-
-    /**
      * 模块内容 - 上传文件（json 格式）
      * @return json
      */
@@ -85,6 +75,16 @@ class Module extends BaseModel
     {
         if ($this->download)
             return json_decode($this->download);
+    }
+
+    /**
+     * 模块内容 - 上传文件
+     * @return string 文件的URI
+     */
+    public function getDownloadUrlAttribute()
+    {
+        if ($this->download_array)
+            return asset($this->download_array->url);
     }
 
     /**

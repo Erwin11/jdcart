@@ -59,6 +59,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|admin'), function () {
               ->edit(  )
               ->update();
         $route->delete('{id}')->as('destroy')->uses('destroy');
+        //test
+        $route->get('aacate/{id}')->uses('testCate');
     });
 
     # 文章管理

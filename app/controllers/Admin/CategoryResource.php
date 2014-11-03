@@ -96,6 +96,26 @@ class Admin_CategoryResource extends BaseResource
     }
 
     /**
+     * 资源编辑页面
+     * GET         /resource/{id}/edit
+     * @param  int  $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        $data = $this->model->find($id);
+        //parents
+        $parent_id  = $this->model->parent_id;
+        $parents = $this->model->orderBy('sort_order')->lists('name', 'id');
+        //cates
+        $depth = $data->depth - 1;
+        $cates = $this->model->where('parent_id', 0)->orderBy('sort_order')->get();
+        $catesData = $this->getCates($cates, $depth);
+
+        return View::make($this->resourceView.'.edit')->with(compact('data', 'parents', 'catesData'));
+    }
+
+    /**
      * 资源编辑动作
      * PUT/PATCH   /resource/{id}
      * @param  int  $id
@@ -123,6 +143,11 @@ class Admin_CategoryResource extends BaseResource
             $model->enname     = e($data['enname']);
             $model->abbr       = e($data['abbr']);
             $model->sort_order = e($data['sort_order']);
+            $model->parent_id  = e($data['parent_id']);
+            //depth
+            $depth             = $this->model->where('id', $model->parent_id)->first()->depth;
+            $model->depth      = $depth + 1;
+            //
             if ($model->save()) {
                 // 更新成功
                 return Redirect::back()
@@ -139,5 +164,48 @@ class Admin_CategoryResource extends BaseResource
         }
     }
 
+    public function testCate($id){
+        // $data = $this->model->find($id);
+        $parent_id = 0;
+        $cates = $this->model->where('parent_id', $parent_id)->orderBy('sort_order')->get();
+        
+        $data = $this->getCates($cates, 2);
 
+        return $data;
+        // $id = 4;
+        /*$ancestors = Category::where('id', '=', $id)->get();
+
+        while ($ancestors->last()->parent_id !== 0)
+        {
+          $parent = Category::where('id', '=', $ancestors->last()->parent_id)->get();
+          $subs = Category::where('parent_id', $parent->last()->parent_id)->get();
+          $parent->last()->subs = json_decode($subs);
+          $ancestors = $ancestors->merge($parent);
+        }
+
+        return $ancestors;*/
+    }
+
+
+
+    /*========================================= utils ===========================================*/
+    /**
+     * 工具方法 - 递归获得子集目录
+     * @param  array   $arr     父级数组
+     * @param  number  $depth   层级深度
+     * @return array
+     */
+    //utils 获得子级类目
+    private function getCates($arr, $depth = null){
+        foreach ($arr as $item) {
+            $subsArr = $this->model->where('parent_id', $item->id)->get();
+            
+            if(count($subsArr)){
+                if($depth != null && $item->depth<$depth){
+                    $item->subs = $this->getCates($subsArr, $depth);
+                }
+            }
+        }
+        return $arr;
+    }
 }
