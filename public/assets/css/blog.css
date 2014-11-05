@@ -44,10 +44,32 @@ textarea{color:#5f5f5f;}
   
 }
 
+/*subnav*/
+.subnav{height: 215px; background-color: #FAF6F3; padding-top: 30px; text-align: center;}
+.subnav ul{margin: 0 auto; display: inline-block; *display:inline; *zoom:1;}
+.subnav li{float: left; width: 190px; text-align: center; margin: 0 25px;}
+.subnav li a{color: #686261; display: block;}
+.subnav li a:hover, .subnav li.active a{color: #E63736;}
+.subnav li .icon_con{margin-bottom: 10px; height: 135px; overflow: hidden; display: block; position: relative;}
+.subnav li .icon_con:after{content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 12px; background: url(../img/cateShadow.png) no-repeat; background-size: 100%; opacity: 0.7;}
+.subnav li .icon{position: absolute; bottom: -20px; left: 0; right: 0; -webkit-transition:all .3s; opacity: 0.7;}
+.subnav li.active .icon_con:after, .subnav li a:hover .icon_con:after{opacity: 1;}
+.subnav li.active .icon, .subnav li a:hover .icon{bottom: 0;}
+.subnav li.active .icon, .subnav li a:hover .icon{opacity: 1;}
+
+/*icons*/
+.icon{background: url(../img/cateSp.png) no-repeat; display: block; margin: 0 auto;}
+.icon_iphone{width: 115px; height: 135px; overflow-y: hidden;}
+.icon_ipad{ width: 188px; height: 87px; background-position: -125px 0;}
+.icon_android{ width: 107px; height: 90px; background-position: -325px 0;}
+.icon_designfiles{ width: 102px; height: 95px; background-position: -445px 0;}
+
+
+
 /*content*/
 .panel{background-color: transparent; box-shadow: none;}
 
-.left-bg{position: absolute; left: 0; top: 80px; background-color: #2A2323; width: 50%; height: 100%; z-index: 0;}
+.left-bg{position: absolute; left: 0; top: 295px; background-color: #2A2323; width: 50%; height: 100%; z-index: 0;}
 .main-content{background-color: #F2F0EC;}
 
 

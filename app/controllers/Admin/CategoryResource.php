@@ -199,7 +199,7 @@ class Admin_CategoryResource extends BaseResource
      * @return array
      */
     //utils 获得子级类目
-    private function getCates($arr, $depth = null){
+    public function getCates($arr, $depth = null){
         if($depth && $depth<0){
             return array();
         }

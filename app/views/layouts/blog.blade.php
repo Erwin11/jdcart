@@ -12,7 +12,7 @@
 
 @section('body')
 
-    @include('widgets.blogNavbar', array('activeCategory' => $category_id))
+    @include('widgets.blogNavbar', array('activeCategory' => $cate_parentid))
 
     <div class="container">
         @yield('container')

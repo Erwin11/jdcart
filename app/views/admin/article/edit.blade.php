@@ -52,7 +52,10 @@
           {{ $errors->first('category', '
           <span style="color:#c7254e;margin:0 1em;">:message</span>
           ') }}
-          {{ Form::select('category', $categoryLists, $data->category->id, array('class' => 'form-control')) }}
+          <select class="form-control" name="category" id="category">
+              <option value="0">无</option>
+              @include('admin.article.subcates', array('items' => $categoryLists, 'data' => $data))
+          </select>
         </div>
 
         <div class="form-group">

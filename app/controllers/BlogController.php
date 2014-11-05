@@ -59,8 +59,12 @@ class BlogController extends BaseController
         is_null($article) AND App::abort(404);
         $categories = Category::where('parent_id', 0)->orderBy('sort_order')->get();
         $category_id = $article->category_id;
+        //subs
+        $cateItem = Category::find($category_id);
+        $cate_parentid = $cateItem->parent_id;
+        $cateSubs = Category::where('parent_id', $cateItem->parent_id)->orderBy('sort_order')->get();
         $articles   = Article::where('category_id', $category_id)->orderBy('updated_at', 'desc')->paginate(5);
-        return View::make('blog.show')->with(compact('article', 'articles', 'categories', 'category_id'));
+        return View::make('blog.show')->with(compact('article', 'articles', 'categories', 'category_id', 'cateSubs', 'cate_parentid'));
     }
 
     /**
