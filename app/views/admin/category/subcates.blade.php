@@ -1,7 +1,7 @@
 <?php
 $is_active = function ($itemid='') use ($data)
     {
-        if ($data->parent_id === $itemid)
+        if ( isset($data) && $data->parent_id === $itemid)
             return 'selected';
         else
             return '';

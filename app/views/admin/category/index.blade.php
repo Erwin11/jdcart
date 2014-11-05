@@ -19,17 +19,17 @@
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>排序</th>
                     <th>名称</th>
+                    <th>排序</th>
                     <th>创建时间</th>
                     <th style="width:7em;text-align:center;">操作</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($datas as $data)
+                @foreach ($catesData as $data)
                 <tr>
-                    <td>{{ $data->sort_order }}</td>
                     <td>{{ $data->name }}</td>
+                    <td>{{ $data->sort_order }}</td>
                     <td>{{ $data->created_at }}（{{ $data->friendly_created_at }}）</td>
                     <td>
                         <a href="{{ route($resource.'.edit', $data->id) }}" class="btn btn-xs">编辑</a>
@@ -37,6 +37,20 @@
                              onclick="modal('{{ route($resource.'.destroy', $data->id) }}')">删除</a>
                     </td>
                 </tr>
+                @if($data->subs)
+                    @foreach ($data->subs as $data)
+                    <tr>
+                        <td>{{ $data->option_td }}{{ $data->name }}</td>
+                        <td>{{ $data->option_td }}{{ $data->sort_order }}</td>
+                        <td>{{ $data->created_at }}（{{ $data->friendly_created_at }}）</td>
+                        <td>
+                            <a href="{{ route($resource.'.edit', $data->id) }}" class="btn btn-xs">编辑</a>
+                            <a href="javascript:void(0)" class="btn btn-xs btn-danger"
+                                 onclick="modal('{{ route($resource.'.destroy', $data->id) }}')">删除</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                @endif
                 @endforeach
             </tbody>
         </table>

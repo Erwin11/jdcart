@@ -42,6 +42,11 @@ class Admin_CategoryResource extends BaseResource
         'sort_order.required' => '请填写分类排序。',
         'sort_order.integer'  => '请填写一个整数。',
     );
+    /**
+     * 最深层级
+     * @var number
+     */
+    protected $maxDepth = 999;
 
     /**
      * 资源列表页面
@@ -51,7 +56,24 @@ class Admin_CategoryResource extends BaseResource
     public function index()
     {
         $datas = $this->model->orderBy('sort_order')->paginate(15);
-        return View::make($this->resourceView.'.index')->with(compact('datas'));
+        //whole cates
+        $cates = $this->model->where('parent_id', 0)->orderBy('sort_order')->get();
+        $catesData = $this->getCates($cates, $this->maxDepth);
+
+        return View::make($this->resourceView.'.index')->with(compact('datas', 'catesData'));
+    }
+
+    /**
+     * 资源创建页面
+     * GET         /resource/create
+     * @return Response
+     */
+    public function create()
+    {
+        //whole cates
+        $cates = $this->model->where('parent_id', 0)->orderBy('sort_order')->get();
+        $catesData = $this->getCates($cates, $this->maxDepth);
+        return View::make($this->resourceView.'.create')->with(compact('catesData'));
     }
 
     /**
@@ -79,6 +101,14 @@ class Admin_CategoryResource extends BaseResource
             $model = $this->model;
             $model->name       = e($data['name']);
             $model->sort_order = e($data['sort_order']);
+            $model->slug       = e($data['slug']);
+            $model->enname     = e($data['enname']);
+            $model->abbr       = e($data['abbr']);
+            $model->sort_order = e($data['sort_order']);
+            $model->parent_id  = e($data['parent_id']);
+            //depth
+            $depth             = $this->model->where('id', $model->parent_id)->first()->depth;
+            $model->depth      = $depth + 1;
             if ($model->save()) {
                 // 添加成功
                 return Redirect::back()
@@ -104,15 +134,12 @@ class Admin_CategoryResource extends BaseResource
     public function edit($id)
     {
         $data = $this->model->find($id);
-        //parents
-        $parent_id  = $this->model->parent_id;
-        $parents = $this->model->orderBy('sort_order')->lists('name', 'id');
         //cates
         $depth = $data->depth - 1;
         $cates = $this->model->where('parent_id', 0)->orderBy('sort_order')->get();
         $catesData = $this->getCates($cates, $depth);
 
-        return View::make($this->resourceView.'.edit')->with(compact('data', 'parents', 'catesData'));
+        return View::make($this->resourceView.'.edit')->with(compact('data', 'catesData'));
     }
 
     /**
@@ -164,30 +191,6 @@ class Admin_CategoryResource extends BaseResource
         }
     }
 
-    public function testCate($id){
-        // $data = $this->model->find($id);
-        $parent_id = 0;
-        $cates = $this->model->where('parent_id', $parent_id)->orderBy('sort_order')->get();
-        
-        $data = $this->getCates($cates, 2);
-
-        return $data;
-        // $id = 4;
-        /*$ancestors = Category::where('id', '=', $id)->get();
-
-        while ($ancestors->last()->parent_id !== 0)
-        {
-          $parent = Category::where('id', '=', $ancestors->last()->parent_id)->get();
-          $subs = Category::where('parent_id', $parent->last()->parent_id)->get();
-          $parent->last()->subs = json_decode($subs);
-          $ancestors = $ancestors->merge($parent);
-        }
-
-        return $ancestors;*/
-    }
-
-
-
     /*========================================= utils ===========================================*/
     /**
      * 工具方法 - 递归获得子集目录
@@ -197,12 +200,15 @@ class Admin_CategoryResource extends BaseResource
      */
     //utils 获得子级类目
     private function getCates($arr, $depth = null){
+        if($depth && $depth<0){
+            return array();
+        }
         foreach ($arr as $item) {
             $subsArr = $this->model->where('parent_id', $item->id)->get();
-            
             if(count($subsArr)){
-                if($depth != null && $item->depth<$depth){
+                if(($depth != null && $item->depth<$depth)){
                     $item->subs = $this->getCates($subsArr, $depth);
+                    // $item->subs = json_decode($this->getCates($subsArr, $depth));  //for test
                 }
             }
         }

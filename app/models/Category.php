@@ -61,4 +61,18 @@ class Category extends BaseModel
         return $str;
     }
 
+    /**
+     * 多级菜单 - option 前缀&nbsp;
+     * @return string
+     */
+    public function getOptionTdAttribute()
+    {   
+        $depth = $this->depth;
+        $str = '';
+        for ($i=0; $i <$depth ; $i++) { 
+            $str .= '&nbsp;&nbsp;|—';
+        }
+        return $str;
+    }
+
 }

@@ -8,7 +8,7 @@ class BlogController extends BaseController
      */
     public function getIndex()
     {
-        $categories = Category::orderBy('sort_order')->get();
+        $categories = Category::where('parent_id', 0)->orderBy('sort_order')->get();
         return View::make('blog.home')->with(compact('categories'));
     }
 
@@ -19,7 +19,7 @@ class BlogController extends BaseController
     public function getList()
     {
         $articles   = Article::orderBy('created_at', 'desc')->paginate(5);
-        $categories = Category::orderBy('sort_order')->get();
+        $categories = Category::where('parent_id', 0)->orderBy('sort_order')->get();
         return View::make('blog.index')->with(compact('articles', 'categories'));
     }
 
@@ -30,7 +30,7 @@ class BlogController extends BaseController
     public function getCategoryArticles($category_id)
     {
         $articles   = Article::where('category_id', $category_id)->orderBy('created_at', 'desc')->paginate(5);
-        $categories = Category::orderBy('sort_order')->get();
+        $categories = Category::where('parent_id', 0)->orderBy('sort_order')->get();
         return View::make('blog.categoryArticles')->with(compact('articles', 'categories', 'category_id'));
     }
 
@@ -43,7 +43,7 @@ class BlogController extends BaseController
     {
         $category_id = Category::where('slug', $category_slug)->pluck('id');
         $articles   = Article::where('category_id', $category_id)->orderBy('created_at', 'desc')->paginate(5);
-        $categories = Category::orderBy('sort_order')->get();
+        $categories = Category::where('parent_id', 0)->orderBy('sort_order')->get();
         return View::make('blog.categoryArticles')->with(compact('articles', 'categories', 'category_id'));
     }
 
@@ -57,7 +57,7 @@ class BlogController extends BaseController
         
         $article    = Article::where('slug', $slug)->first();
         is_null($article) AND App::abort(404);
-        $categories = Category::orderBy('sort_order')->get();
+        $categories = Category::where('parent_id', 0)->orderBy('sort_order')->get();
         $category_id = $article->category_id;
         $articles   = Article::where('category_id', $category_id)->orderBy('updated_at', 'desc')->paginate(5);
         return View::make('blog.show')->with(compact('article', 'articles', 'categories', 'category_id'));
