@@ -31,12 +31,19 @@ class BlogController extends BaseController
     {
         $articles   = Article::where('category_id', $category_id)->orderBy('created_at', 'desc')->paginate(5);
         $categories = Category::where('parent_id', 0)->orderBy('sort_order')->get();
+        //firstArticle
+        $cateItem = Category::find($category_id);
+        $cateSubs = Category::where('parent_id', $cateItem->id)->orderBy('sort_order')->first();
+        if($cateSubs){
+            $firstArticle = Article::where('category_id', $cateSubs->id)->orderBy('updated_at','desc')->first();
+            return Redirect::to($firstArticle->slug);
+        }
         return View::make('blog.categoryArticles')->with(compact('articles', 'categories', 'category_id'));
     }
 
 
     /**
-     * 分类文章列表-别名
+     * 分类文章列表-别名 - 一级类目
      * @return Respanse
      */
     public function categoryArticlesSlug($category_slug)
@@ -44,7 +51,26 @@ class BlogController extends BaseController
         $category_id = Category::where('slug', $category_slug)->pluck('id');
         $articles   = Article::where('category_id', $category_id)->orderBy('created_at', 'desc')->paginate(5);
         $categories = Category::where('parent_id', 0)->orderBy('sort_order')->get();
+        //firstArticle
+        $cateItem = Category::find($category_id);
+        $cateSubs = Category::where('parent_id', $cateItem->id)->orderBy('sort_order')->first();
+        if($cateSubs){
+            $firstArticle = Article::where('category_id', $cateSubs->id)->orderBy('updated_at','desc')->first();
+            return Redirect::to($firstArticle->slug);
+        }
         return View::make('blog.categoryArticles')->with(compact('articles', 'categories', 'category_id'));
+    }
+
+    /**
+     * 分类文章列表-别名 - 子级级类目
+     * @return Respanse
+     */
+    public function getSubCategoryArticles($id){
+        //firstArticle
+        $cateItem = Category::find($id);
+        $firstArticle = Article::where('category_id', $cateItem->id)->orderBy('updated_at','desc')->first();
+            
+        return Redirect::to($firstArticle->slug);
     }
 
     /**

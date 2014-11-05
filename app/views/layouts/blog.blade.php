@@ -11,9 +11,11 @@
 @parent @stop
 
 @section('body')
-
-    @include('widgets.blogNavbar', array('activeCategory' => $cate_parentid))
-
+    @if(isset($cate_parentid))
+        @include('widgets.blogNavbar', array('activeCategory' => $cate_parentid))
+    @else
+        @include('widgets.blogNavbar', array('activeCategory' => $category_id))
+    @endif
     <div class="container">
         @yield('container')
     </div>

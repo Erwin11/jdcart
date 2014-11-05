@@ -127,6 +127,7 @@ RouteGroup::make()->controller('BlogController')->go(function ($route) {
     # 分类文章列表
     $route->get( 'category/{slug}')->as('categoryArticlesSlug')->uses('categoryArticlesSlug');
     $route->get( 'cat/{id}')->as('categoryArticles')->uses('getCategoryArticles');
+    $route->get( 'catsub/{id}')->as('categorySubArticles')->uses('getSubCategoryArticles');
     # 展示博客文章
     $route->get( '{slug}'       )->as('blog.show'       )->uses('getBlogShow'        );
     # 提交文章评论

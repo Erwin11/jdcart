@@ -31,7 +31,11 @@ var base = {
     var blogShow = $('#J_blogShow');
     if(blogShow.length>0){
       var sh = blogShow.height();
-      blogShow.find('.left-bg').css('height',mainH);
+      var top = blogShow.find('.left-bg').css('top');
+      top = top.replace('px','');
+      top = parseInt(top);
+      // top = 80;
+      blogShow.find('.left-bg').css('height',mainH-top);
       //sw
       var sw = blogShow.width();
       var offsetW = parseInt((mainW - sw)/2) + $('#sidebar').outerWidth();
