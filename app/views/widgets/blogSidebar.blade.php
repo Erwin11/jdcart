@@ -14,7 +14,7 @@ $is_active = function ($name='') use ($activeCategory)
         <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">== ==</button>
     </p>
     <div class="list-group">
-        <!-- <span class="list-group-item"><h4>文章分类</h4></span> -->
+        <span class="list-group-item"><h4>{{$cateItem->name}}</h4></span>
         @foreach($articles as $article)
         <a class="list-group-item{{ $is_active($article->id) }}" href="{{ route('blog.show', $article->slug) }}">{{ $article->title }}</a>
         @endforeach

@@ -10,7 +10,7 @@
 @stop
 
 @section('container')
-    @include('widgets.blogSubNavbar', array('activeCategory' => $category_id, 'cateSubs' => $cateSubs))
+    
     <div id="J_blogShow" class="row row-offcanvas row-offcanvas-right">
         <span class="left-bg"></span>
         

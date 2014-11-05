@@ -90,7 +90,7 @@ class BlogController extends BaseController
         $cate_parentid = $cateItem->parent_id;
         $cateSubs = Category::where('parent_id', $cateItem->parent_id)->orderBy('sort_order')->get();
         $articles   = Article::where('category_id', $category_id)->orderBy('updated_at', 'desc')->paginate(5);
-        return View::make('blog.show')->with(compact('article', 'articles', 'categories', 'category_id', 'cateSubs', 'cate_parentid'));
+        return View::make('blog.show')->with(compact('article', 'articles', 'categories', 'category_id','cateItem', 'cateSubs', 'cate_parentid'));
     }
 
     /**
