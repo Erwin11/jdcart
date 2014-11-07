@@ -40,8 +40,8 @@
                 @if($data->subs)
                     @foreach ($data->subs as $data)
                     <tr>
-                        <td>{{ $data->option_td }}{{ $data->name }}</td>
-                        <td>{{ $data->option_td }}{{ $data->sort_order }}</td>
+                        <td>{{ $data->catePrefix($data->option_td) }}{{ $data->name }}</td>
+                        <td>{{ $data->catePrefix($data->option_td) }}{{ $data->sort_order }}</td>
                         <td>{{ $data->created_at }}（{{ $data->friendly_created_at }}）</td>
                         <td>
                             <a href="{{ route($resource.'.edit', $data->id) }}" class="btn btn-xs">编辑</a>

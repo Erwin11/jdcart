@@ -17,7 +17,11 @@
     @else
         @include('widgets.blogNavbar', array('activeCategory' => $category_id))
     @endif
-    @include('widgets.blogSubNavbar', array('activeCategory' => $category_id, 'cateSubs' => $cateSubs))
+    @if(isset($cateSubs))
+        @include('widgets.blogSubNavbar', array('activeCategory' => $category_id, 'cateSubs' => $cateSubs))
+    @else
+        暂无数据
+    @endif
     <div class="container">
         @yield('container')
     </div>

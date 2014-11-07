@@ -13,6 +13,7 @@ class Admin_ArticleResource extends BaseResource
      * @var string|Illuminate\Database\Eloquent\Model
      */
     protected $model = 'Article';
+    protected $modelCategory = 'Category';
 
     /**
      * 资源标识
@@ -46,12 +47,6 @@ class Admin_ArticleResource extends BaseResource
     );
 
     /**
-     * 最深层级
-     * @var number
-     */
-    protected $maxDepth = 999;
-
-    /**
      * 资源列表页面
      * GET         /resource
      * @return Response
@@ -81,11 +76,10 @@ class Admin_ArticleResource extends BaseResource
      */
     public function create()
     {
-        // $categoryLists = Category::lists('name', 'id');
         //cates
-        $depth = $this->maxDepth;
-        $cates = Category::where('parent_id', 0)->orderBy('sort_order')->get();
-        $categoryLists = $this->getCates($cates, $depth);
+        $categoryModel = App::make($this->modelCategory);
+        $depth = $categoryModel->maxDepth;
+        $categoryLists = $categoryModel->getCatesMuti($depth);
         return View::make($this->resourceView.'.create')->with(compact('categoryLists'));
     }
 
@@ -148,9 +142,9 @@ class Admin_ArticleResource extends BaseResource
     {
         $data = $this->model->find($id);
         //cates
-        $depth = $this->maxDepth;
-        $cates = Category::where('parent_id', 0)->orderBy('sort_order')->get();
-        $categoryLists = $this->getCates($cates, $depth);
+        $categoryModel = App::make($this->modelCategory);
+        $depth = $categoryModel->maxDepth;
+        $categoryLists = $categoryModel->getCatesMuti($depth);
 
         return View::make($this->resourceView.'.edit')->with(compact('data', 'categoryLists'));
     }
@@ -201,29 +195,5 @@ class Admin_ArticleResource extends BaseResource
             // 验证失败
             return Redirect::back()->withInput()->withErrors($validator);
         }
-    }
-
-    /*========================================= utils ===========================================*/
-    /**
-     * 工具方法 - 递归获得子集目录
-     * @param  array   $arr     父级数组
-     * @param  number  $depth   层级深度
-     * @return array
-     */
-    //utils 获得子级类目
-    public function getCates($arr, $depth = null){
-        if($depth && $depth<0){
-            return array();
-        }
-        foreach ($arr as $item) {
-            $subsArr = Category::where('parent_id', $item->id)->get();
-            if(count($subsArr)){
-                if(($depth != null && $item->depth<$depth)){
-                    $item->subs = $this->getCates($subsArr, $depth);
-                    // $item->subs = json_decode($this->getCates($subsArr, $depth));  //for test
-                }
-            }
-        }
-        return $arr;
     }
 }

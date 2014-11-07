@@ -1,22 +1,22 @@
 <?php
-$is_active = function ($itemid='') use ($data)
+$is_active = function ($itemid='') use ($dataid)
     {
-        if ( isset($data) && $data->parent_id === $itemid)
+        if ( isset($dataid) && $dataid === $itemid)
             return 'selected';
         else
             return '';
     }
 ?>
-
+{{$dataid}}
 @foreach($items as $item)
     @if (isset($item->subs))
         <option class="sub-{{$item->depth}}" value="{{$item->id}}" {{ $is_active($item->id) }}>
-            {{$item->option_prefix}} {{$item->name}}
+            {{$item->catePrefix()}} {{$item->name}}
         </option>
-        @include('admin.category.subcates', array('items' => $item->subs))
+        @include('widgets.adminSubcates', array('items' => $item->subs))
     @else
         <option class="sub-{{$item->depth}}" value="{{$item->id}}" {{ $is_active($item->id) }}>
-            {{$item->option_prefix}} {{$item->name}}
+            {{$item->catePrefix()}} {{$item->name}}
         </option>
     @endif
 @endforeach
