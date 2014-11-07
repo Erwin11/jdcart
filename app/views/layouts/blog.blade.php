@@ -20,7 +20,7 @@
     @if(isset($cateSubs))
         @include('widgets.blogSubNavbar', array('activeCategory' => $category_id, 'cateSubs' => $cateSubs))
     @else
-        暂无数据
+        <div style="text-align:center; padding: 20px;">暂无数据</div>
     @endif
     <div class="container">
         @yield('container')

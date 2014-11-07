@@ -1,7 +1,7 @@
 @extends('layouts.blog', array('active' => 'home'))
 
 @section('container')
-<div class="row row-offcanvas row-offcanvas-right">
+<div class="row row-offcanvas row-offcanvas-right" style="display:none;">
   <div class="col-xs-12 col-sm-12">
     <div class="row">
       @foreach($articles as $article)
