@@ -16,7 +16,16 @@ $is_active = function ($name='') use ($activeCategory)
     <div class="list-group">
         <span class="list-group-item"><h4>{{$cateItem->name}}</h4></span>
         @foreach($articles as $article)
-        <a class="list-group-item{{ $is_active($article->id) }}" href="{{ route('blog.show', $article->slug) }}">{{ $article->title }}</a>
+        <div class="slide-list-item{{ $is_active($article->id) }}">
+            <a class="list-group-item{{ $is_active($article->id) }}" href="{{ route('blog.show', $article->slug) }}">{{ $article->title }}</a>
+            @if($article->module_extend && count($article->modules)>0)
+            <ul class="module-list">
+                @foreach ($article->modules as $module)
+                <li><a href="#module{{$module->id}}">{{ $module->title }}</a></li>
+                @endforeach
+            </ul>
+            @endif
+        </div>
         @endforeach
     </div>
 </div><!--/span-->

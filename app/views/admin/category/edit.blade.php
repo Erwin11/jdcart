@@ -43,6 +43,16 @@
                     <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $data->name) }}" />
                 </div>
                 <div class="form-group">
+                  <label for="parent">父级</label>
+                  {{ $errors->first('parent', '
+                  <span style="color:#c7254e;margin:0 1em;">:message</span>
+                  ') }}
+                    <select class="form-control" name="parent_id" id="parent">
+                        <option value="0">无</option>
+                        @include('widgets.optionSubcates', array('items' => $catesData, 'dataid' => $data->parent_id))
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="slug">别名</label>
                     {{ $errors->first('slug', '<span style="color:#c7254e;margin:0 1em;">:message</span>') }}
                     <input class="form-control" type="text" name="slug" id="slug" value="{{ Input::old('slug', $data->slug) }}" />
@@ -58,23 +68,11 @@
                     <input class="form-control" type="text" name="abbr" id="abbr" value="{{ Input::old('abbr', $data->abbr) }}" />
                 </div>
                 <div class="form-group">
-                  <label for="parent">父级</label>
-                  {{ $errors->first('parent', '
-                  <span style="color:#c7254e;margin:0 1em;">:message</span>
-                  ') }}
-                    <select class="form-control" name="parent_id" id="parent">
-                        <option value="0">无</option>
-                        @include('widgets.optionSubcates', array('items' => $catesData, 'dataid' => $data->parent_id))
-                    </select>
-                </div>
-                <div class="form-group">
                     <label for="sort_order">排序</label>
                     {{ $errors->first('sort_order', '<span style="color:#c7254e;margin:0 1em;">:message</span>') }}
                     <input class="form-control" type="text" name="sort_order" id="sort_order" value="{{ Input::old('sort_order', $data->sort_order) }}" />
                 </div>
-
             </div>
-
         </div>
 
         <!-- Form actions -->

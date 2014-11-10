@@ -132,6 +132,7 @@ class Admin_ArticleResource extends BaseResource
             $model->title            = e($data['title']);
             $model->slug             = e($data['slug']);
             $model->content          = e($data['content']);
+            $model->module_extend    = e($data['module_extend']);
             $model->meta_title       = e($data['meta_title']);
             $model->meta_description = e($data['meta_description']);
             $model->meta_keywords    = e($data['meta_keywords']);
@@ -197,6 +198,7 @@ class Admin_ArticleResource extends BaseResource
             $model->title            = e($data['title']);
             $model->slug             = e($data['slug']);
             $model->content          = e($data['content']);
+            $model->module_extend    = e($data['module_extend']);
             $model->meta_title       = e($data['meta_title']);
             $model->meta_description = e($data['meta_description']);
             $model->meta_keywords    = e($data['meta_keywords']);

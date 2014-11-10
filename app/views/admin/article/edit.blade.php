@@ -46,7 +46,6 @@
 
       <!-- General tab -->
       <div class="tab-pane active" id="tab-general" style="margin:0 1em;">
-
         <div class="form-group">
           <label for="category">分类</label>
           {{ $errors->first('category', '
@@ -57,7 +56,6 @@
               @include('widgets.optionSubcates', array('items' => $categoryLists, 'dataid' => $data->category_id))
           </select>
         </div>
-
         <div class="form-group">
           <label for="title">标题</label>
           {{ $errors->first('title', '
@@ -86,6 +84,15 @@
 
       <!-- Module tab -->
       <div class="tab-pane" id="tab-module">
+        <div class="form-group" style="margin: 0 0 15px;">
+          <span class="radio-inline" style="padding-left: 0; cursor: default; font-weight: 700;">模块列表展开：</span>
+          <label class="radio-inline">
+            {{ Form::radio('module_extend', 1, $data->module_extend==1, array('class' => 'module_extend')) }}是
+          </label>
+          <label class="radio-inline">
+            {{ Form::radio('module_extend', 0, $data->module_extend==0, array('class' => 'module_extend')) }}否
+          </label>
+        </div>
         <ul class="module-list clearfix">
           @foreach($data->modules as $module)
           <li data-id="{{$module->id}}">
@@ -104,7 +111,6 @@
 
       <!-- Meta Data tab -->
       <div class="tab-pane" id="tab-meta-data" style="margin:0 1em;">
-
         <div class="form-group">
           <label for="meta_title">Meta Title</label>
           <input class="form-control" type="text" name="meta_title" id="meta_title" value="{{ Input::old('meta_title', $data->meta_title) }}" /></div>

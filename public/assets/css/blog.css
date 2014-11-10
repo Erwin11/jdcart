@@ -73,10 +73,14 @@ textarea{color:#5f5f5f;}
 .main-content{background-color: #F2F0EC;}
 .sidebar-offcanvas span.list-group-item:hover{color: #FFF;}
 .sidebar-offcanvas .list-group-item h4{font-size: 24px;}
+.module-list{margin-left: 30px; line-height: 22px; display: none;}
+.module-list a{color: #BDBDBD;}
+.module-list a:hover{color: #ff4548;}
+.slide-list-item.active .module-list{display: block;}
 
 /*list-item*/
 .sidebar-offcanvas .list-group{margin-top: 50px;}
-.sidebar-offcanvas .list-group-item{background-color: transparent; border: none; color: #FEFEFE; font-size: 18px;}
+.sidebar-offcanvas .list-group-item{background-color: transparent; border: none; color: #BDBDBD; font-size: 18px;}
 .sidebar-offcanvas .list-group-item:hover,
 .sidebar-offcanvas .list-group-item.active,
 .sidebar-offcanvas .list-group-item.active:hover{background-color: transparent; color: #ff4548;}

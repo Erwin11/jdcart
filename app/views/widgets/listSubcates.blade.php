@@ -14,8 +14,5 @@ $is_active = function ($itemid='') use ($dataid)
         @include('widgets.listSubcates', array('items' => $item->subs))
     @else
         <li><a href='{{$route}}?category={{$item->id}}'>{{$item->catePrefix()}} {{$item->name}}</a></li>
-        <!-- <option class="sub-{{$item->depth}}" value="{{$item->id}}" {{ $is_active($item->id) }}>
-            {{$item->catePrefix()}} {{$item->name}}
-        </option> -->
     @endif
 @endforeach
