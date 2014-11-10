@@ -13,7 +13,7 @@ $is_active = function ($itemid='') use ($dataid)
         <option class="sub-{{$item->depth}}" value="{{$item->id}}" {{ $is_active($item->id) }}>
             {{$item->catePrefix()}} {{$item->name}}
         </option>
-        @include('widgets.adminSubcates', array('items' => $item->subs))
+        @include('widgets.optionSubcates', array('items' => $item->subs))
     @else
         <option class="sub-{{$item->depth}}" value="{{$item->id}}" {{ $is_active($item->id) }}>
             {{$item->catePrefix()}} {{$item->name}}

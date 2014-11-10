@@ -62,11 +62,30 @@ class Admin_ArticleResource extends BaseResource
                 $title = Input::get('like');
                 break;
         }
+        //  筛选
+        $category = Input::get('category');
+        $category_name = '';
+        if($category != 0){
+            $category_name = Category::find($category)->name;
+        }
         // 构造查询语句
         $query = $this->model->orderBy($orderColumn, $direction);
         isset($title) AND $query->where('title', 'like', "%{$title}%");
+        if(isset($category) && $category != 0){
+            //subs
+            $subs = Category::where('parent_id',$category)->lists('id');
+            isset($subs) ? $subs[] = $category : $subs = array($category);
+            $query->whereIn('category_id', $subs);
+        }
         $datas = $query->paginate(15);
-        return View::make($this->resourceView.'.index')->with(compact('datas'));
+        //cates
+        $categoryModel = App::make($this->modelCategory);
+        $depth = $categoryModel->maxDepth;
+        $categoryLists = $categoryModel->getCatesMuti($depth);
+        //route
+        $route = route($this->resource.'.index');
+
+        return View::make($this->resourceView.'.index')->with(compact('datas', 'category_name', 'categoryLists', 'route'));
     }
 
     /**

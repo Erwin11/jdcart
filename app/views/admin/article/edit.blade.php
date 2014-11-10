@@ -54,7 +54,7 @@
           ') }}
           <select class="form-control" name="category" id="category">
               <option value="0">无</option>
-              @include('widgets.adminSubcates', array('items' => $categoryLists, 'dataid' => $data->category_id))
+              @include('widgets.optionSubcates', array('items' => $categoryLists, 'dataid' => $data->category_id))
           </select>
         </div>
 

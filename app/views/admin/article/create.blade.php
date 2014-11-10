@@ -47,7 +47,7 @@
                     {{ $errors->first('category', '<span style="color:#c7254e;margin:0 1em;">:message</span>') }}
                     <select class="form-control" name="category" id="category">
                       <option value="0">无</option>
-                      @include('widgets.adminSubcates', array('items' => $categoryLists, 'dataid' => null))
+                      @include('widgets.optionSubcates', array('items' => $categoryLists, 'dataid' => null))
                   </select>
                 </div>
 

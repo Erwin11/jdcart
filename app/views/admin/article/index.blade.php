@@ -38,10 +38,27 @@
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>标题 {{ order_by('title') }}</th>
-                    <th>评论数 {{ order_by('comments_count') }}</th>
-                    <th>更新时间 {{ order_by('updated_at', 'desc') }}</th>
-                    <th style="width:7em;text-align:center;">操作</th>
+                    <th width="40%">标题 {{ order_by('title') }}</th>
+                    <th width="20%">
+                        <span>分类：</span>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                            @if($category_name)
+                                {{$category_name}}
+                            @else
+                                所有分类文章
+                            @endif
+                            
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu" role="menu">
+                              <li><a href="?category=0">所有分类文章</a></li>
+                              @include('widgets.listSubcates', array('items' => $categoryLists, 'dataid' => null, 'route' => $route ))
+                            </ul>
+                        </div><!-- /btn-group -->
+                    </th>
+                    <th width="10%" data="{{ route($resource.'.index')}}">评论数 {{ order_by('comments_count') }}</th>
+                    <th width="22%">更新时间 {{ order_by('updated_at', 'desc') }}</th>
+                    <th width="8%" style="width:7em;text-align:center;">操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,6 +70,7 @@
                         </a>
                         {{ $data->title }}
                     </td>
+                    <td>{{ $data->category->name }}</td>
                     <td>{{ $data->comments_count }}</td>
                     <td>{{ $data->created_at }}（{{ $data->friendly_updated_at }}）</td>
                     <td>

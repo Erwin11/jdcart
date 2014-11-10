@@ -99,6 +99,4 @@ class Article extends BaseModel
                 return new HTML_To_Markdown($this->content);
         }
     }
-
-
 }

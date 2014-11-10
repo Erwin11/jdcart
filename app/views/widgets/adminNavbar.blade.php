@@ -18,7 +18,7 @@ $is_active = function ($name = '') use ($active) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ route('admin') }}">Blog - Admin</a>
+            <a class="navbar-brand" href="{{ route('admin') }}">JDC - 规范平台</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">

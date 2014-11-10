@@ -64,7 +64,7 @@
                   ') }}
                     <select class="form-control" name="parent_id" id="parent">
                         <option value="0">无</option>
-                        @include('widgets.adminSubcates', array('items' => $catesData, 'dataid' => $data->parent_id))
+                        @include('widgets.optionSubcates', array('items' => $catesData, 'dataid' => $data->parent_id))
                     </select>
                 </div>
                 <div class="form-group">
