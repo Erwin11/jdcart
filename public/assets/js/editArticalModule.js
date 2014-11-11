@@ -207,7 +207,23 @@ $(function(){
             var me = this;
             var id = data.id;
             var node = $('#tab-module li[data-id='+id+']');
+            if(node.length == 0){
+                node = me.addModuleItem(data);
+            }
             node.find('h4').text(data.title);
+            //add
+        },
+        addModuleItem: function(data){
+            var me = this;
+            var node = $('<li data-id="'+data.id+'">'+
+                            '<h4>'+data.title+'</h4>'+
+                            '<div class="opt">'+
+                              '<a class="glyphicon glyphicon-edit" title="编辑" data-toggle="modal" data-target="#J_moduleContentModal">edit</a>'+
+                              '<a class="glyphicon glyphicon glyphicon-trash" title="删除">delete</a>'+
+                            '</div>'+
+                        '</li>');
+            node.insertBefore('.module-add');
+            return node;
         },
         renderForm: function(data){
             var me = this;
@@ -265,7 +281,7 @@ $(function(){
                 linkNode = node;
             }
             var info = data.size+'MB'+'（.'+ data.ext +'）';
-            linkNode.find('.download-link').attr('href', data.url);
+            linkNode.find('.download-link').attr('href', me.hosturl+data.url);
             linkNode.find('span').text(info);
         }
     };

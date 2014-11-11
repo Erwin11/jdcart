@@ -73,7 +73,7 @@ class Admin_ArticleModuleResource extends BaseResource
             $model->user_id    = Auth::user()->id;
             if ($model->save()) {
                 //创建成功
-                $data = array('id' => $id, 'title' => $model->title);
+                $data = array('id' => $model->id, 'title' => $model->title);
                 $responseObj = array('status' => 'success', 'data' => $data);
             }else{
                 // 创建失败

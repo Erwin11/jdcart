@@ -25,7 +25,7 @@
                       <div id="module{{$module->id}}" class="module-item module-{{$module->id}} module-{{$module->type}}">
                         <div class="module-title clearfix">
                             <h4>{{$module->title}}<span class="title-en">{{$module->title_en}}</span></h4>
-                            @if (isset($module->download))
+                            @if (isset($module->download_array))
                                 <div class="download-con">
                                     <a class="download-link" href="{{$module->download_url}}"><i></i>下载文件</a>
                                     <span>{{$module->download_array->size}}MB（.{{$module->download_array->ext}}）</span>                                    
