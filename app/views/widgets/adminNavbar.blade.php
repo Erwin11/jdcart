@@ -18,7 +18,7 @@ $is_active = function ($name = '') use ($active) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ route('admin') }}">JDC - 规范平台</a>
+            <a class="navbar-brand" href="{{ route('admin') }}">JDC规范平台 - 后台</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -33,7 +33,7 @@ $is_active = function ($name = '') use ($active) {
                         [ {{ Auth::user()->email }} ] <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ route('home') }}">回到博客</a></li>
+                        <li><a href="{{ route('home') }}">JDC规范平台</a></li>
                         <li><a href="{{ route('account.index') }}">用户中心</a></li>
                         <li class="divider"></li>
                         <li><a href="{{ route('logout') }}">退出</a></li>
