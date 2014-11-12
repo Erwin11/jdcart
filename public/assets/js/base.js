@@ -34,13 +34,14 @@ var base = {
       var top = blogShow.find('.left-bg').css('top');
       top = top.replace('px','');
       top = parseInt(top);
-      // top = 80;
       blogShow.find('.left-bg').css('height',mainH-top);
       //sw
       var sw = blogShow.width();
       var offsetW = parseInt((mainW - sw)/2) + $('#sidebar').outerWidth();
       blogShow.find('.left-bg').css('width',offsetW);
-      
+      //sidebar-sw
+      var sidebarW = $('#sidebar').width();
+      $('#sidebar .list-group').css('width',sidebarW);
       //sticky nav
       $('.list-group').stickyNavbar({
           type: 'vertical',
