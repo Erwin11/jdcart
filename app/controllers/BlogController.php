@@ -56,7 +56,7 @@ class BlogController extends BaseController
         $cateSubs = Category::where('parent_id', $cateItem->id)->orderBy('sort_order')->first();
         if($cateSubs){
             $firstArticle = Article::where('category_id', $cateSubs->id)->orderBy('updated_at','desc')->first();
-            return Redirect::to($firstArticle->slug);
+            return Redirect::route('blog.show', array('id' => $firstArticle->id));
         }
         return View::make('blog.categoryArticles')->with(compact('articles', 'categories', 'category_id'));
     }
@@ -69,19 +69,20 @@ class BlogController extends BaseController
         //firstArticle
         $cateItem = Category::find($id);
         $firstArticle = Article::where('category_id', $cateItem->id)->orderBy('updated_at','desc')->first();
-            
-        return Redirect::to($firstArticle->slug);
+        return Redirect::route('blog.show', array('id' => $firstArticle->id));
     }
 
     /**
      * 博客文章展示页面
      * @param  string $slug 文章缩略名
+     * @param  stirng $id   文章id
      * @return response
      */
-    public function getBlogShow($slug)
+    public function getBlogShow($id)
     {
         
-        $article    = Article::where('slug', $slug)->first();
+        // $article    = Article::where('slug', $slug)->first();
+        $article    = Article::find($id);
         is_null($article) AND App::abort(404);
         $categories = Category::where('parent_id', 0)->orderBy('sort_order')->get();
         $category_id = $article->category_id;

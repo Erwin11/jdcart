@@ -59,8 +59,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|admin'), function () {
               ->edit(  )
               ->update();
         $route->delete('{id}')->as('destroy')->uses('destroy');
-        //test
-        $route->get('aacate/{id}')->uses('testCate');
     });
 
     # 文章管理
@@ -129,7 +127,7 @@ RouteGroup::make()->controller('BlogController')->go(function ($route) {
     $route->get( 'cat/{id}')->as('categoryArticles')->uses('getCategoryArticles');
     $route->get( 'catsub/{id}')->as('categorySubArticles')->uses('getSubCategoryArticles');
     # 展示博客文章
-    $route->get( '{slug}'       )->as('blog.show'       )->uses('getBlogShow'        );
+    $route->get( 'article/{id}'       )->as('blog.show'       )->uses('getBlogShow'        );
     # 提交文章评论
     $route->post('{slug}'       )                        ->uses('postBlogComment'    )->before('auth');
 

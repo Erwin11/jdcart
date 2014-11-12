@@ -10,14 +10,11 @@ $is_active = function ($name='') use ($activeCategory)
 ?>
 
 <div class="col-xs-4 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
-    <p class="visible-xs" style="margin:-1.3em -1em 0 -5.2em;">
-        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">== ==</button>
-    </p>
     <div class="list-group">
         <span class="list-group-item"><h4>{{$cateItem->name}}</h4></span>
         @foreach($articles as $article)
         <div class="slide-list-item{{ $is_active($article->id) }}">
-            <a class="list-group-item{{ $is_active($article->id) }}" href="{{ route('blog.show', $article->slug) }}">{{ $article->title }}</a>
+            <a class="list-group-item{{ $is_active($article->id) }}" href="{{ route('blog.show', $article->id) }}">{{ $article->title }}</a>
             @if($article->module_extend && count($article->modules)>0)
             <ul class="module-list">
                 @foreach ($article->modules as $module)
