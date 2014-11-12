@@ -74,7 +74,7 @@ textarea{color:#5f5f5f;}
 .left-bg{position: absolute; left: 0; top: 295px; background-color: #2A2323; width: 50%; height: 100%; z-index: 0;}
 .main-content{background-color: #F2F0EC;}
 .sidebar-offcanvas span.list-group-item:hover{color: #FFF;}
-.sidebar-offcanvas .list-group-item h4{font-size: 24px;}
+.sidebar-offcanvas .list-group-item h4{font-size: 24px; color: #FFF;}
 .module-list{margin-left: 30px; line-height: 22px; display: none;}
 .module-list a{color: #BDBDBD;}
 .module-list a:hover, .module-list .active{color: #ff4548;}
