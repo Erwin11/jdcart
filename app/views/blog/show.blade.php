@@ -22,7 +22,7 @@
                 <div class="col-6 col-sm-6 col-lg-12 panel">
                     <div class="module-content">
                     @foreach($article->modules as $module)
-                      <div id="module{{$module->id}}" class="module-item module-{{$module->id}} module-{{$module->type}}">
+                      <div id="module{{$module->id}}" class="module-item module-{{$module->id}} module-{{$module->type}} scrollto clearfix">
                         <div class="module-title clearfix">
                             <h4>{{$module->title}}<span class="title-en">{{$module->title_en}}</span></h4>
                             @if (isset($module->download_array))
@@ -113,4 +113,9 @@
         </div><!--/row-->    
     
 
+@stop
+
+@section('end')
+    @parent
+    {{ HTML::script('assets/plugin/stickynavbar/jquery.stickyNavbar.min.js') }}
 @stop

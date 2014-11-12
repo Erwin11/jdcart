@@ -40,6 +40,13 @@ var base = {
       var sw = blogShow.width();
       var offsetW = parseInt((mainW - sw)/2) + $('#sidebar').outerWidth();
       blogShow.find('.left-bg').css('width',offsetW);
+      
+      //sticky nav
+      $('.list-group').stickyNavbar({
+          type: 'vertical',
+          selector : '.module-list a',
+          verticalSelfPos: $('.list-group').offset().top
+       });
     }
   }
 }
