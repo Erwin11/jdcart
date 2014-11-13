@@ -33,7 +33,7 @@ $(function(){
                 $('#module_type').change();
                 me.formNode.find('.form-group').removeClass('has-error');
                 $('#J_files').html('');
-                $('#J_uploadDownload .download-link').remove();
+                $('#J_uploadDownload .download-con').remove();
                 //show
                 me.formNode.attr('data-action','add');
                 $('#J_moduleContentModal .modal-title').text('添加模块');
@@ -82,7 +82,10 @@ $(function(){
                 cls += ' type-'+type
                 $('#J_formModule').attr('class',cls);
             });
-
+            $('#J_uploadDownload').on('click', '.download-del', function(e){
+                $('#module_download').val('');
+                $('#J_uploadDownload .download-con').remove();
+            });
             //submit
             $('#J_submit').on('click', function(e){
                 //show
@@ -273,6 +276,7 @@ $(function(){
             var node = $('<div class="download-con">'+
                             '<a class="download-link" href="#">下载文件</a>'+
                             '<span>1.27MB（.rar）</span>'+
+                            '<a href="javascript:void(0);" class="btn btn-xs btn-danger download-del">删除</a>'+
                         '</div>');
             var conNode = $('#J_uploadDownload');
             var linkNode = conNode.find('.download-con');
