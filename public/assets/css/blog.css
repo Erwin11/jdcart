@@ -82,7 +82,7 @@ textarea{color:#5f5f5f;}
 .slide-list-item.active .module-list{display: block;}
 
 /*list-item*/
-.sidebar-offcanvas .list-group{margin-top: 20px; position: relative; top: 0;}
+.sidebar-offcanvas .list-group{padding-top: 20px; position: relative; top: 0;}
 .sidebar-offcanvas .list-group-con{float: right; margin-right: 10px;}
 .sidebar-offcanvas .list-group-item{background-color: transparent; border: none; color: #BDBDBD; font-size: 18px; position: relative;}
 .sidebar-offcanvas .list-group-item:hover,

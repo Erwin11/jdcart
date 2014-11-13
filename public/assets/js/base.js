@@ -26,7 +26,7 @@ var base = {
   },
   switchPage: function(){
     var mainW = $(document).width();
-    var mainH = $(document).height();
+    var mainH = Math.max($(window).height(), $('body').height())
     //blog-show
     var blogShow = $('#J_blogShow');
     if(blogShow.length>0){
@@ -35,6 +35,7 @@ var base = {
       top = top.replace('px','');
       top = parseInt(top);
       blogShow.find('.left-bg').css('height',mainH-top);
+      console.log(mainH,mainH-top, $(window).height());
       //sw
       var sw = blogShow.width();
       var offsetW = parseInt((mainW - sw)/2) + $('#sidebar').outerWidth();
