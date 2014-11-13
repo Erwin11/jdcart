@@ -198,7 +198,7 @@ class Admin_ArticleModuleResource extends BaseResource
             }
             $imagePath = $path.'/'.$hashname;
             $imageOriginal = Image::make($image->getRealPath());
-            $imageOriginal->save($imagePath);
+            $imageOriginal->save($imagePath, 95);
             // 返回成功信息
             $dataUrl = $pathStr.'/'.$hashname;
             $data = array('url' => $dataUrl);
@@ -234,7 +234,7 @@ class Admin_ArticleModuleResource extends BaseResource
             $uploadFile     = Input::file('upload_donwload');
             $size     = $uploadFile->getClientSize();         // 文件大小(bytes)
             $size     = round($size/(1024*1024)*100)/100;     // MB
-            $ext      = $uploadFile->guessClientExtension();  // 根据 mime 类型取得真实拓展名
+            $ext      = $uploadFile->getClientOriginalExtension();  // 根据 mime 类型取得真实拓展名
             $fullname = $uploadFile->getClientOriginalName(); // 客户端文件名，包括客户端拓展名
             $filename = date('H.i.s').'-'.$fullname; // 处理文件名
             //存储文件

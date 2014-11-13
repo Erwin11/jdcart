@@ -54,7 +54,7 @@ class Admin_ArticleResource extends BaseResource
     public function index()
     {
         // 获取排序条件
-        $orderColumn = Input::get('sort_up', Input::get('sort_down', 'updated_at'));
+        $orderColumn = Input::get('sort_up', Input::get('sort_down', 'created_at'));
         $direction   = Input::get('sort_up') ? 'asc' : 'desc' ;
         // 获取搜索条件
         switch (Input::get('target')) {
