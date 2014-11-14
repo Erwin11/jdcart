@@ -59,7 +59,6 @@ class Admin_ArticleModuleResource extends BaseResource
         $responseObj = array();
         if ($validator->passes()) {
             // 验证成功
-            $id = Input::get('module_id');
             // 添加模块内容
             $model = $this->model;
             $model->title    =     Input::get('module_title');

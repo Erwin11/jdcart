@@ -69,7 +69,7 @@ class Admin_ArticleResource extends BaseResource
             $category_name = Category::find($category)->name;
         }
         // 构造查询语句
-        $query = $this->model->orderBy($orderColumn, $direction);
+        $query = $this->model->orderBy($orderColumn, $direction)->whereNotNull('title');
         isset($title) AND $query->where('title', 'like', "%{$title}%");
         if(isset($category) && $category != 0){
             //subs
@@ -99,7 +99,16 @@ class Admin_ArticleResource extends BaseResource
         $categoryModel = App::make($this->modelCategory);
         $depth = $categoryModel->maxDepth;
         $categoryLists = $categoryModel->getCatesMuti($depth);
-        return View::make($this->resourceView.'.create')->with(compact('categoryLists'));
+        //create empty article
+        $model = $this->model;
+        $model->user_id = Auth::user()->id;
+        $model->category_id = 1;
+        $model->module_extend = 0;
+        $model->save();
+        //id
+        $data_emptyID = $model->id;
+        $data_preID = $this->model->orderBy('id', 'DESC')->first()->id+1;
+        return View::make($this->resourceView.'.create')->with(compact('categoryLists', 'data_preID', 'data_emptyID'));
     }
 
     /**
@@ -112,11 +121,8 @@ class Admin_ArticleResource extends BaseResource
         // 获取所有表单数据.
         $data   = Input::all();
         // 创建验证规则
-        $unique = $this->unique();
         $rules  = array(
-            'title'    => 'required|'.$unique,
-            'slug'     => 'required|'.$unique,
-            'content'  => 'required',
+            'title'    => 'required',
             'category' => 'exists:article_categories,id',
         );
         // 自定义验证消息
@@ -126,7 +132,8 @@ class Admin_ArticleResource extends BaseResource
         if ($validator->passes()) {
             // 验证成功
             // 添加资源
-            $model = $this->model;
+            $id = e($data['id']);
+            $model = $this->model->find($id);
             $model->user_id          = Auth::user()->id;
             $model->category_id      = $data['category'];
             $model->title            = e($data['title']);
@@ -138,8 +145,8 @@ class Admin_ArticleResource extends BaseResource
             $model->meta_keywords    = e($data['meta_keywords']);
             if ($model->save()) {
                 // 添加成功
-                return Redirect::back()
-                    ->with('success', '<strong>'.$this->resourceName.'添加成功：</strong>您可以继续添加新'.$this->resourceName.'，或返回'.$this->resourceName.'列表。');
+                return Redirect::action('Admin_ArticleResource@edit', array($id))
+                    ->with('success', '<strong>'.$this->resourceName.'添加成功：</strong>您可以编辑'.$this->resourceName.'，或返回'.$this->resourceName.'列表。');
             } else {
                 // 添加失败
                 return Redirect::back()
@@ -181,9 +188,9 @@ class Admin_ArticleResource extends BaseResource
         $data = Input::all();
         // 创建验证规则
         $rules = array(
-            'title'    => 'required|'.$this->unique('title', $id),
-            'slug'     => 'required|'.$this->unique('slug', $id),
-            'content'  => 'required',
+            'title'    => 'required',
+            //'slug'     => 'required|'.$this->unique('slug', $id),
+            //'content'  => 'required',
             'category' => 'exists:article_categories,id',
         );
         // 自定义验证消息

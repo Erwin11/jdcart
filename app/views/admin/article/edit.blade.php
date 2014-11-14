@@ -52,7 +52,6 @@
           <span style="color:#c7254e;margin:0 1em;">:message</span>
           ') }}
           <select class="form-control" name="category" id="category">
-              <option value="0">无</option>
               @include('widgets.optionSubcates', array('items' => $categoryLists, 'dataid' => $data->category_id))
           </select>
         </div>
@@ -63,7 +62,7 @@
           ') }}
           <input class="form-control" type="text" name="title" id="title" value="{{ Input::old('title', $data->title) }}" /></div>
 
-        <div class="form-group">
+        <div class="form-group" style="display:none;">
           <label for="slug">Slug</label>
           {{ $errors->first('slug', '
           <span style="color:#c7254e;margin:0 1em;">:message</span>
@@ -73,7 +72,7 @@
             <input class="form-control" type="text" name="slug" id="slug" value="{{ Input::old('slug', $data->slug) }}"></div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="display:none;">
           <label for="content">内容</label>
           {{ $errors->first('content', '
           <span style="color:#c7254e;margin:0 1em;">:message</span>
