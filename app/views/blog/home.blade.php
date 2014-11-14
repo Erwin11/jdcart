@@ -31,8 +31,8 @@
       </div>
     </div>
     <div class="footer">
-      <p class="zh">各位亲爱的平台组的小伙伴们<br>此平台规范适用于平台组的各个项目中，请大家严格按照规范输出，<br>遵循规范中的基本准则以保证小组内项目的一致性，共同维护更新。</p>
-      <p class="en">Dear platform group of friends<br>Each item of this platform specification is applicable to the platform group, please strictly according to standard output,<br>Follow the basic standards in order to assure consistency within the group project, jointly maintain and update.</p>
+      <p class="zh">各位亲爱的上海设计中心的小伙伴们<br>此平台规范适用于上海设计中心的各个项目中，请大家严格按照规范输出，<br>遵循规范中的基本准则以保证小组内项目的一致性，共同维护更新。</p>
+      <p class="en">Copyright © 2014 JDC. All rights reserved</p>
     </div>
   </div>
 @stop
