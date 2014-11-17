@@ -112,6 +112,8 @@ $(function(){
                 .on('click', function () {
                     var $this = $(this),
                         data = $this.data();
+                    //loading
+                    $this.parent().find('.file-pic').addClass('loading');
                     $this
                         .off('click')
                         .text('Abort')
@@ -142,6 +144,7 @@ $(function(){
                         //
                        $('#J_files').find('.file-item .file-pic')
                             .addClass('active')
+                            .removeClass('loading')
                             .attr('href', me.hosturl+url);
                     }else{
                         alert(result.msg);
@@ -190,8 +193,12 @@ $(function(){
                 autoUpload: true,
                 acceptFileTypes: /(\.|\/)(zip|rar)$/i,
                 maxFileSize: 50000000, // 50 MB
+                start: function(e){
+                    $('#J_uploadDownload').addClass('loading');
+                },
                 done: function(e, data){
                     var result = data.result;
+                    $('#J_uploadDownload').removeClass('loading');
                     if(result.status == 'success'){
                         var str = JSON.stringify(result.data);
                         //

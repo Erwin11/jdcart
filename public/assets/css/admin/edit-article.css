@@ -42,10 +42,15 @@ ul, li{margin: 0; padding: 0; list-style: none;}
 .form-img .files-list{display: inline-block; margin-left: 30px;}
 .form-img .files-list .file-item{float: left; text-align: center;}
 .form-img .files-list .file-item img{width: 100px; height: 100px;}
-.form-img .files-list .file-pic{cursor: default;}
+.form-img .files-list .file-pic{cursor: default; position: relative; display: block;}
+.form-img .files-list .file-pic:after{content: ''; position: absolute; left: 0; top: 0; background: url(../../img/admin/loading.gif) no-repeat center center; width: 100px; height: 100px; background-color: rgba(255,255,255,.6); display: none;}
+.form-img .files-list .file-pic.loading:after{display: block;}
 .form-img .files-list .file-pic.active{cursor: pointer;}
 
 /*upload-files*/
+.upload-download{position: relative;}
+.upload-download:after{content: ''; position: absolute; left: 110px; top: 8px; width: 16px; height: 16px; background: url(../../img/admin/loading.gif) no-repeat; opacity: 0; -webkit-transition:all .3s;}
+.upload-download.loading:after{opacity: 1;}
 .form-download label{margin-bottom: 15px;}
 .form-download .download-con{display: inline-block; margin-left: 30px;}
 .form-download .download-con span{color: #AEABA9; padding-left: 10px;}
