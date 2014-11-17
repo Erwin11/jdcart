@@ -40,8 +40,10 @@ ul, li{margin: 0; padding: 0; list-style: none;}
 .form-img .add-files{float: left;}
 .form-img .add-files .fileinput-button{display: block; margin-top: 20px;}
 .form-img .files-list{display: inline-block; margin-left: 30px;}
-.form-img .files-list .file-item{float: left; text-align: center; min-height: 130px;}
-.form-img .files-list .file-item img{height: 100px;}
+.form-img .files-list .file-item{float: left; text-align: center;}
+.form-img .files-list .file-item img{width: 100px; height: 100px;}
+.form-img .files-list .file-pic{cursor: default;}
+.form-img .files-list .file-pic.active{cursor: pointer;}
 
 /*upload-files*/
 .form-download label{margin-bottom: 15px;}

@@ -1,5 +1,5 @@
 /*reset*/
-body {font:"Microsoft YaHei","SimSun",arial,helvetica,clean,sans-serif; background-color: #FAF6F3;}
+body {font-family:"Microsoft YaHei","SimSun",arial,helvetica,clean,sans-serif; background-color: #FAF6F3;}
 body,dl,dt,dd,ul,ol,li,pre,code,form,fieldset,legend,input,textarea,blockquote,th,td,img{margin:0;}
 ul,li {padding:0; list-style:none;}
 table{border-collapse:collapse;border-spacing:0;}

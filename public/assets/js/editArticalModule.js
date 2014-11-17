@@ -16,16 +16,6 @@ $(function(){
         },
         bindHandler: function(){
             var me = this;
-            //nav
-            $('.nav-tabs li a').on('click', function(e){
-                setTimeout(function(){
-                    if($('.nav-tabs li').eq(1).hasClass('active')){
-                        // $('.control-group-tab').hide();
-                    }else{
-                        // $('.control-group-tab').show();
-                    }
-                }, 0);
-            });
             //add
             $('#tab-module .module-add').on('click',function(e){
                 //clean
@@ -102,14 +92,15 @@ $(function(){
                         if(data.status == 'success'){
                             me.renderModuleItem(data.data);
                             me.formNode.removeClass('active');
+                            //close modal
+                            $('#J_moduleContentModal').modal('hide');
                         }else if(data.status == 'verify'){
                             me.addErrorMsg(data.msg);
-                            alert('verify error');
+                            // alert('verify error');
                         }else{
-                            alert('error');
+                            alert('error,提交出错');
                         }
-                        //close modal
-                        $('#J_moduleContentModal').modal('hide');
+                        
                     }
                 })
             });
@@ -148,6 +139,10 @@ $(function(){
                     if(result.status == 'success'){
                         var url = result.data.url;
                         $('#module_image').val(url);
+                        //
+                       $('#J_files').find('.file-item .file-pic')
+                            .addClass('active')
+                            .attr('href', me.hosturl+url);
                     }else{
                         alert(result.msg);
                     }
@@ -157,11 +152,11 @@ $(function(){
                 $('#J_files').html(data.context);
                 data.context.attr('class','file-item');
                 $.each(data.files, function (index, file) {
-                    var node = $('<p/>')
-                            .append($('<span/>').text(file.name));
+                    var node = $('<p/>');
+                            // .append($('<span/>').text(file.name));
                     if (!index) {
                         node
-                            .append('<br>')
+                            // .append('<br>')
                             .append(uploadButton.clone(true).data(data));
                     }
                     node.appendTo(data.context);
@@ -173,7 +168,9 @@ $(function(){
                 if (file.preview) {
                     node
                         .prepend('<br>')
-                        .prepend(file.preview);
+                        .prepend('<a class="file-pic" href="javascript:void(0);" target="_blank"></a>');
+                        // .prepend('<a href="javascript":void(0);>'+file.preview+'</a>');
+                    node.find('.file-pic').append(file.preview);
                 }
                 if (file.error) {
                     node
@@ -238,7 +235,7 @@ $(function(){
             $('#module_type').change();
             //image
             if(data.image){
-                me.renderUploadImage(me.hosturl+data.image)
+                me.renderUploadImage(me.hosturl+data.image);
             }
             //download
             if(data.download){
@@ -248,7 +245,7 @@ $(function(){
         },
         addErrorMsg: function(msgObj){
             var me = this;
-            var prefix = 'module_';
+            var prefix = '';
             var item, txt, node;
             for(item in msgObj){
                 txt = msgObj[item][0];
@@ -268,7 +265,9 @@ $(function(){
         },
         renderUploadImage: function(url){
             var me = this;
-            var node = $('<div class="file-item"><img src="'+url+'" ></div>');
+            var node = $('<div class="file-item">'+
+                            '<a href="'+url+'" target="_blank" title="查看大图"><img src="'+url+'" ></a>'+
+                        '</div>');
             $('#J_files').html(node);
         },
         renderUploadDownload: function(data){
