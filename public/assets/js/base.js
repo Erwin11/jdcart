@@ -35,7 +35,7 @@ var base = {
       top = top.replace('px','');
       top = parseInt(top);
       blogShow.find('.left-bg').css('height',mainH-top);
-      console.log(mainH,mainH-top, $(window).height());
+      // console.log(mainH,mainH-top, $(window).height());
       //sw
       var sw = blogShow.width();
       var offsetW = parseInt((mainW - sw)/2) + $('#sidebar').outerWidth();

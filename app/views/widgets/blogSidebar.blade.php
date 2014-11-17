@@ -20,7 +20,7 @@ $is_active = function ($name='') use ($activeCategory)
             @foreach($articles as $article)
             <div class="slide-list-item{{ $is_active($article->id) }}">
                 <a class="list-group-item{{ $is_active($article->id) }}" href="{{ route('blog.show', $article->id) }}">{{ $article->title }}</a>
-                @if($article->module_extend && count($article->modules)>0)
+                @if($is_active($article->id) && $article->module_extend && count($article->modules)>0)
                 <ul class="module-list">
                     @foreach ($article->modules as $module)
                     <li><a href="#module{{$module->id}}">{{ $module->title }}</a></li>
