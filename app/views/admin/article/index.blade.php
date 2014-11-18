@@ -38,7 +38,7 @@
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
-                    <th width="40%">标题 {{ order_by('title') }}</th>
+                    <th width="45%">标题 {{ order_by('title') }}</th>
                     <th width="20%">
                         <span>分类：</span>
                         <div class="btn-group">
@@ -55,8 +55,8 @@
                             </ul>
                         </div><!-- /btn-group -->
                     </th>
-                    <th width="10%">评论数 {{ order_by('comments_count') }}</th>
-                    <th width="22%">创建时间 {{ order_by('created_at', 'desc') }}</th>
+                    <!-- <th width="10%">评论数 {{ order_by('comments_count') }}</th> -->
+                    <th width="25%">创建时间 {{ order_by('created_at', 'desc') }}</th>
                     <th width="8%" style="width:7em;text-align:center;">操作</th>
                 </tr>
             </thead>
@@ -70,7 +70,7 @@
                         {{ $data->title }}
                     </td>
                     <td>{{ $data->category->name }}</td>
-                    <td>{{ $data->comments_count }}</td>
+                    <!-- <td>{{ $data->comments_count }}</td> -->
                     <td>{{ $data->created_at }}（{{ $data->friendly_created_at }}）</td>
                     <td>
                         <a href="{{ route($resource.'.edit', $data->id) }}" class="btn btn-xs">编辑</a>
