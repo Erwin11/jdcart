@@ -35,9 +35,9 @@ $is_active = function ($name = '') use ($active) {
                     </a>
                     <ul class="dropdown-menu">
                         @if(Auth::user()->is_admin)
-                        <li><a href="{{ route('admin') }}">进入后台</a></li>
+                        <li><a href="{{ route('admin') }}">JDC规范平台 - 后台</a></li>
                         @endif
-                        <li><a href="{{ route('home') }}">回到博客</a></li>
+                        <li><a href="{{ route('home') }}">JDC规范平台</a></li>
                         <li class="divider"></li>
                         <li><a href="{{ route('logout') }}">退出</a></li>
                     </ul>

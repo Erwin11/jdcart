@@ -55,7 +55,7 @@ class Admin_UserResource extends BaseResource
     public function index()
     {
         // 获取排序条件
-        $orderColumn = Input::get('sort_up', Input::get('sort_down', 'created_at'));
+        $orderColumn = Input::get('sort_up', Input::get('sort_down', 'signin_at'));
         $direction   = Input::get('sort_up') ? 'asc' : 'desc' ;
         // 获取搜索条件
         switch (Input::get('status')) {
@@ -148,6 +148,7 @@ class Admin_UserResource extends BaseResource
             // 更新资源
             $model = $this->model->find($id);
             $model->email    = Input::get('email');
+            $model->password = Input::get('password');
             $model->is_admin = (int)Input::get('is_admin', 0);
             if ($model->save()) {
                 // 更新成功
