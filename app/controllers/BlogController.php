@@ -66,10 +66,17 @@ class BlogController extends BaseController
      * @return Respanse
      */
     public function getSubCategoryArticles($id){
+        $category_id = $id;
+        $categories = Category::where('parent_id', 0)->orderBy('sort_order')->get();
         //firstArticle
         $cateItem = Category::find($id);
-        $firstArticle = Article::where('category_id', $cateItem->id)->orderBy('created_at','asc')->first();
-        return Redirect::route('blog.show', array('id' => $firstArticle->id));
+        $articles = Article::where('category_id', $cateItem->id)->orderBy('created_at','asc');
+        if($articles->first()){
+            $firstArticle = $articles->first();
+            return Redirect::route('blog.show', array('id' => $firstArticle->id));    
+        }
+        $cateSubs = Category::where('parent_id', $cateItem->parent_id)->orderBy('sort_order')->get();
+        return View::make('blog.categoryArticles')->with(compact('articles', 'categories', 'category_id', 'cateSubs'));  
     }
 
     /**

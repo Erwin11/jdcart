@@ -2,7 +2,7 @@
 
 @section('description'){{ $article->description }} @stop
 @section('keywords'){{ $article->keywords }} @stop
-@section('title'){{ $article->title }} - @parent @stop
+@section('title'){{ $article->title }} @parent @stop
 
 @section('beforeStyle')
   @parent

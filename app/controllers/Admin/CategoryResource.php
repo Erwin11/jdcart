@@ -102,8 +102,12 @@ class Admin_CategoryResource extends BaseResource
             $model->sort_order = e($data['sort_order']);
             $model->parent_id  = e($data['parent_id']);
             //depth
-            $depth             = $this->model->where('id', $model->parent_id)->first()->depth;
-            $model->depth      = $depth + 1;
+            if($model->parent_id == 0){//无父级
+                $depth = 0;
+            }else{
+                $depth = $this->model->where('id', $model->parent_id)->first()->depth;    
+            }            
+            $model->depth = $depth + 1;
             if ($model->save()) {
                 // 添加成功
                 return Redirect::back()
@@ -165,8 +169,12 @@ class Admin_CategoryResource extends BaseResource
             $model->sort_order = e($data['sort_order']);
             $model->parent_id  = e($data['parent_id']);
             //depth
-            $depth             = $this->model->where('id', $model->parent_id)->first()->depth;
-            $model->depth      = $depth + 1;
+            if($model->parent_id == 0){//无父级
+                $depth = 0;
+            }else{
+                $depth = $this->model->where('id', $model->parent_id)->first()->depth;    
+            }
+            $model->depth  = $depth + 1;
             //
             if ($model->save()) {
                 // 更新成功

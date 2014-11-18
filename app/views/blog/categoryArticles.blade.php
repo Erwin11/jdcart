@@ -1,6 +1,9 @@
 @extends('layouts.blog', array('active' => 'home'))
 
 @section('container')
+@if(count($articles)<=1)
+  <div style="text-align:center; margin:10px 0;">暂无数据</div>
+@endif
 <div class="row row-offcanvas row-offcanvas-right" style="display:none;">
   <div class="col-xs-12 col-sm-12">
     <div class="row">
@@ -32,10 +35,11 @@
       <!--/span-->
       @endforeach
 
-      @if($articles->getTotal()>$articles->getPerPage())
+      @if(count($articles)>1 && $articles->getTotal()>$articles->getPerPage())
       <div>{{ pagination($articles, 'pagination.slider-3') }}</div>
       @endif
     </div>
+
     <!--/row--> </div>
   <!--/span-->
 

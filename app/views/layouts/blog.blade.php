@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title') Simple - Blog @parent @stop
+@section('title') @parent @stop
 
 @section('beforeStyle')
     {{ style('bootstrap-3.2.0') }}
