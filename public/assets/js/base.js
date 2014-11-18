@@ -17,6 +17,7 @@ var base = {
     var me = this;
     me.bindHandler();
     me.switchPage();
+    setTimeout(me.switchPage, 500);
   },
   bindHandler: function(){
     var me = this;
