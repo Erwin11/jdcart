@@ -30,6 +30,7 @@ var base = {
     var me = base;
     var mainW = $(document).width();
     var mainH = Math.max($(window).height(), $('body').height());
+    var winH = $(window).height();
     //blog-show
     var blogShow = $('#J_blogShow');
     if(blogShow.length>0){
@@ -42,6 +43,7 @@ var base = {
       var sw = blogShow.width();
       var offsetW = parseInt((mainW - sw)/2) + $('#sidebar').outerWidth();
       blogShow.find('.left-bg').css('width',offsetW);
+      blogShow.find('.list-group').css('height', winH);
       //sidebar-sw
       if(me.isInit){
         return;
