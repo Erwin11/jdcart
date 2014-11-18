@@ -13,6 +13,7 @@ $.ajaxSetup({
 $(function(){
 
 var base = {
+  isInit: false,
   init: function(){
     var me = this;
     me.bindHandler();
@@ -26,8 +27,9 @@ var base = {
     });
   },
   switchPage: function(){
+    var me = base;
     var mainW = $(document).width();
-    var mainH = Math.max($(window).height(), $('body').height())
+    var mainH = Math.max($(window).height(), $('body').height());
     //blog-show
     var blogShow = $('#J_blogShow');
     if(blogShow.length>0){
@@ -36,21 +38,25 @@ var base = {
       top = top.replace('px','');
       top = parseInt(top);
       blogShow.find('.left-bg').css('height',mainH-top);
-      // console.log(mainH,mainH-top, $(window).height());
       //sw
       var sw = blogShow.width();
       var offsetW = parseInt((mainW - sw)/2) + $('#sidebar').outerWidth();
       blogShow.find('.left-bg').css('width',offsetW);
       //sidebar-sw
+      if(me.isInit){
+        return;
+      }
       var sidebarW = $('#sidebar').width();
       $('#sidebar .list-group').css('width',sidebarW);
+      var listTop = $('.list-group').offset().top;
       //sticky nav
       $('.list-group').stickyNavbar({
           type: 'vertical',
           selector : '.module-list a',
-          verticalSelfPos: $('.list-group').offset().top
+          verticalSelfPos: listTop
        });
     }
+    me.isInit = true;
   }
 }
 

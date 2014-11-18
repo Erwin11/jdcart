@@ -12,6 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {{-- token --}}
   <meta name="_token" content="{{ csrf_token() }}" />
+  <link rel="shortcut icon" href="{{ asset('assets/img/icon.png') }}">
   @section('beforeStyle')
     @show{{-- 页面内联样式之前 --}}
   <style>
