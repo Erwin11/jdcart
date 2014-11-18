@@ -38,7 +38,7 @@ ul, li{margin: 0; padding: 0; list-style: none;}
 /*upload-image*/
 .form-img, .form-download{margin-left:-15px; margin-right: -15px;}
 .form-img .add-files{float: left;}
-.form-img .add-files .fileinput-button{display: block; margin-top: 20px;}
+.form-img .add-files .fileinput-button{display: block; margin-top: 10px;}
 .form-img .files-list{display: inline-block; margin-left: 30px;}
 .form-img .files-list .file-item{float: left; text-align: center;}
 .form-img .files-list .file-item img{width: 100px; height: 100px;}
