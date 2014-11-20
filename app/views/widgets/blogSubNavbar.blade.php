@@ -1,7 +1,7 @@
 <?php
 $is_active = function ($name='') use ($activeCategory)
 {
-    if ($activeCategory === $name)
+    if ($activeCategory == $name)
         return ' active';
     else
         return '';
