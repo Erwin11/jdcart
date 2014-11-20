@@ -35,7 +35,7 @@
     </li>
   </ul>
 
-  <form class="form-horizontal" method="post" action="{{ route($resource.'.update', $data->id) }}" autocomplete="off" style="background:#f8f8f8;padding:1em;border:1px solid #ddd;border-top:0;">
+  <form id="J_articleForm" class="form-horizontal" method="post" action="{{ route($resource.'.update', $data->id) }}" autocomplete="off" style="background:#f8f8f8;padding:1em;border:1px solid #ddd;border-top:0;">
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
     <input type="hidden" name="_method" value="PUT" />
@@ -82,7 +82,7 @@
       </div>
 
       <!-- Module tab -->
-      <div class="tab-pane" id="tab-module">
+      <div class="tab-pane clearfix" id="tab-module">
         <div class="form-group" style="margin: 0 0 15px;">
           <span class="radio-inline" style="padding-left: 0; cursor: default; font-weight: 700;">模块列表展开：</span>
           <label class="radio-inline">
@@ -92,7 +92,7 @@
             {{ Form::radio('module_extend', 0, $data->module_extend==0, array('class' => 'module_extend')) }}否
           </label>
         </div>
-        <ul class="module-list clearfix">
+        <ul class="module-list module-sortable">
           @foreach($data->modules as $module)
           <li data-id="{{$module->id}}">
             <h4>{{$module->title}}</h4>
@@ -102,6 +102,8 @@
             </div>
             @endforeach
           </li>
+        </ul>
+        <ul class="module-list module-nodrop">
           <li class="module-add" data-toggle="modal" data-target="#J_moduleContentModal">
             <div class="glyphicon glyphicon-plus"></div>
           </li>
@@ -230,6 +232,7 @@
   @parent
   {{ script('markdown', 'to-markdown', 'bootstrap-markdown') }}
   {{ HTML::script('assets/plugin/jQueryFileUpload/dist/fileUpload.js') }}
+  {{ HTML::script('assets/plugin/jQuerySortable/jquery-sortable-min.js') }}
 
   {{ HTML::script('assets/js/base.js') }}
   {{ HTML::script('assets/js/editArticalModule.js') }}

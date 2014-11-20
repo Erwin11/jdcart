@@ -55,7 +55,7 @@ class Article extends BaseModel
      */
     public function modules()
     {
-        return $this->hasMany('Module', 'article_id');
+        return $this->hasMany('Module', 'article_id')->orderBy('sort_order');
     }
 
 /*

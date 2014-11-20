@@ -165,6 +165,22 @@ class Admin_ArticleModuleResource extends BaseResource
     }
 
     /**
+     * 模块内容 - 排序
+     * @return json
+     * 
+     */
+    function postSortModule(){
+        $data = Input::get('data');
+        $idArr = array();
+        $sortArr = array();
+        foreach ($data as $item) {
+          $id = $item['id'];
+          $sort = $item['sort'];
+          $this->model->where('id', $id)->update(array('sort_order' => $sort));
+        }
+    }
+
+    /**
      * 模块内容 - 上传图片
      * @return json
      * 

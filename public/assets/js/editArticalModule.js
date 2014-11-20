@@ -104,6 +104,9 @@ $(function(){
                     }
                 })
             });
+            $('#J_articleForm').on('submit', function(e){
+                me.sendSortData();
+            });
             //upload - image
             var uploadButton = $('<button/>')
                 .addClass('btn btn-primary')
@@ -208,7 +211,47 @@ $(function(){
                         alert(result.msg);
                     }
                 }
-            })
+            });
+            //sortable
+            $("ul.module-sortable").sortable({
+                group: 'module-list',
+                nested: false,
+                vertical: false,
+                exclude: '.module-add'
+
+            });
+            $('ul.module-nodrop').sortable({
+                group: 'module-list',
+                drop: false,
+                drag: false
+            });
+        },
+        sendSortData: function(){
+            var me = this;
+            //data
+            var data = [];
+            var arr = $('.module-sortable li');
+            var item, obj;
+            for(var i=0, len=arr.length; i<len; i++){
+                item = $(arr[i]);
+                obj = {id: item.attr('data-id'), sort: i};
+                data.push(obj);
+            }
+            //send-data
+            var url = me.baseurl+'sortModule';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {data: data},
+                success: function(data){
+                    return;
+                    if(data.status == 'success'){
+
+                    }else{
+                        alert(data.msg);
+                    }
+                }
+            });
         },
         renderModuleItem: function(data){
             var me = this;

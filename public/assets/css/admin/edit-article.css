@@ -6,16 +6,16 @@ ul, li{margin: 0; padding: 0; list-style: none;}
 .nav-tabs>li.active>a{background-color: #f8f8f8 !important;}
 
 /*module*/
-#tab-module .module-list{margin-right: -15px;}
-#tab-module .module-list li{float: left; width: 150px; height: 150px; background-color: #FFF; border: 1px solid #ccc; margin: 0 15px 15px 0; position: relative;}
-#tab-module .module-list li h4{font-size: 14px; text-align: center; line-height: 18px; padding: 0 10px; margin-top: 50px;}
-#tab-module .module-list li .opt{position: absolute; bottom: 8px; left: 0; padding: 0 10px; width: 150px;}
-#tab-module .module-list li .opt a{text-decoration: none; cursor: pointer;}
-#tab-module .module-list li .opt .glyphicon-edit{float: left;}
-#tab-module .module-list li .opt .glyphicon-trash{float: right;}
-#tab-module .module-list .module-add{font-size: 40px; text-align: center; line-height: 150px; color: #666; cursor: pointer;}
-#tab-module .module-list .module-add:after{content: '添加模块'; position: absolute; bottom: 10px; left: 0; font-size: 12px; line-height: 12px; text-align: center; width: 100%;}
-#tab-module .module-list .module-add:hover, #tab-module .module-list .module-add:hover:after{color: #2a6496;}
+.module-list{margin-right: -15px;}
+.module-list li{float: left; width: 150px; height: 150px; background-color: #FFF; border: 1px solid #ccc; margin: 0 15px 15px 0; position: relative;}
+.module-list li h4{font-size: 14px; text-align: center; line-height: 18px; padding: 0 10px; margin-top: 50px;}
+.module-list li .opt{position: absolute; bottom: 8px; left: 0; padding: 0 10px; width: 150px;}
+.module-list li .opt a{text-decoration: none; cursor: pointer;}
+.module-list li .opt .glyphicon-edit{float: left;}
+.module-list li .opt .glyphicon-trash{float: right;}
+.module-list .module-add{font-size: 40px; text-align: center; line-height: 150px; color: #666; cursor: pointer;}
+.module-list .module-add:after{content: '添加模块'; position: absolute; bottom: 10px; left: 0; font-size: 12px; line-height: 12px; text-align: center; width: 100%;}
+.module-list .module-add:hover, .module-list .module-add:hover:after{color: #2a6496;}
 
 .container{position: relative;}
 .form-module{padding: 0 15px;}
@@ -56,7 +56,31 @@ ul, li{margin: 0; padding: 0; list-style: none;}
 .form-download .download-con span{color: #AEABA9; padding-left: 10px;}
 
 
-
+/*sortable*/
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+.module-list li.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+ .module-list li.placeholder {
+  position: relative;
+  padding: 0;
+}
+ .module-list li.placeholder:before {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  margin-top: -5px;
+  left: -5px;
+  top: -4px;
+  border: 5px solid transparent;
+  border-left-color: red;
+  border-right: none;
+}
 
 
 

@@ -84,6 +84,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|admin'), function () {
         #上传 - 图片|文件
         $route->post('uploadPic')->uses('postUploadPic');
         $route->post('uploadFile')->uses('postUploadFile');
+        #排序
+        $route->post('sortModule')->uses('postSortModule');
 
     })/*->dd()*/;
     
