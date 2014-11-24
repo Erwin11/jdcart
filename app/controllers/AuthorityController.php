@@ -34,7 +34,7 @@ class AuthorityController extends BaseController
             // 已激活，手动登录，跳回之前被拦截的页面
             Auth::login($user, $remember);
             $backURL = '/account';
-            if($user->id_admin){
+            if($user->is_admin){
                 $backURL = '/admin';
             }
             return Redirect::intended($backURL);
