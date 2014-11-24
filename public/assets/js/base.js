@@ -43,7 +43,7 @@ var base = {
       var sw = blogShow.width();
       var offsetW = parseInt((mainW - sw)/2) + $('#sidebar').outerWidth();
       blogShow.find('.left-bg').css('width',offsetW);
-      blogShow.find('.list-group').css('height', winH);
+      blogShow.find('.list-group').css('max-height', winH);
       //sidebar-sw
       if(me.isInit){
         return;

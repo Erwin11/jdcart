@@ -54,8 +54,9 @@ class BlogController extends BaseController
         //firstArticle
         $cateItem = Category::find($category_id);
         $cateSubs = Category::where('parent_id', $cateItem->id)->orderBy('sort_order')->first();
-        if($cateSubs){
-            $firstArticle = Article::where('category_id', $cateSubs->id)->orderBy('created_at','asc')->first();
+        $cateArticles = Article::where('category_id', $cateSubs->id)->orderBy('created_at','asc');
+        if($cateSubs && $cateArticles->first()){
+            $firstArticle = $cateArticles->first();
             return Redirect::route('blog.show', array('id' => $firstArticle->id));
         }
         return View::make('blog.categoryArticles')->with(compact('articles', 'categories', 'category_id'));

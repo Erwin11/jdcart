@@ -1,5 +1,5 @@
 /*reset*/
-ul, li{margin: 0; padding: 0; list-style: none;}
+ul, li{margin: 0; padding: 0;}
 
 
 /*bootstrap*/
@@ -7,12 +7,14 @@ ul, li{margin: 0; padding: 0; list-style: none;}
 
 /*module*/
 .module-list{margin-right: -15px;}
-.module-list li{float: left; width: 150px; height: 150px; background-color: #FFF; border: 1px solid #ccc; margin: 0 15px 15px 0; position: relative;}
+.module-list li{float: left; width: 150px; height: 150px; background-color: #FFF; border: 1px solid #ccc; margin: 0 15px 15px 0; position: relative; list-style: none;}
 .module-list li h4{font-size: 14px; text-align: center; line-height: 18px; padding: 0 10px; margin-top: 50px;}
 .module-list li .opt{position: absolute; bottom: 8px; left: 0; padding: 0 10px; width: 150px;}
 .module-list li .opt a{text-decoration: none; cursor: pointer;}
 .module-list li .opt .glyphicon-edit{float: left;}
 .module-list li .opt .glyphicon-trash{float: right;}
+.module-list li .icon-move{position: absolute; left: 5px; top: 5px; display: none;}
+.module-list li:hover .icon-move{display: block;}
 .module-list .module-add{font-size: 40px; text-align: center; line-height: 150px; color: #666; cursor: pointer;}
 .module-list .module-add:after{content: '添加模块'; position: absolute; bottom: 10px; left: 0; font-size: 12px; line-height: 12px; text-align: center; width: 100%;}
 .module-list .module-add:hover, .module-list .module-add:hover:after{color: #2a6496;}

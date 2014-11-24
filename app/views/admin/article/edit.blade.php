@@ -96,6 +96,7 @@
           @foreach($data->modules as $module)
           <li data-id="{{$module->id}}">
             <h4>{{$module->title}}</h4>
+            <i class="icon-move glyphicon glyphicon-move"></i>
             <div class="opt">
               <a class="glyphicon glyphicon-edit" title="编辑" data-toggle="modal" data-target="#J_moduleContentModal">edit</a>
               <a class="glyphicon glyphicon glyphicon-trash" title="删除">delete</a>

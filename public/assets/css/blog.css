@@ -1,7 +1,6 @@
 /*reset*/
 body {font-family:"Microsoft YaHei","SimSun",arial,helvetica,clean,sans-serif; background-color: #F2F0EC;}
-body,dl,dt,dd,ul,ol,li,pre,code,form,fieldset,legend,input,textarea,blockquote,th,td,img{margin:0;}
-ul,li {padding:0; list-style:none;}
+body,dl,dt,dd,ul,ol,li,code,form,fieldset,legend,input,textarea,th,td,img{margin:0;}
 table{border-collapse:collapse;border-spacing:0;}
 select,input,button,textarea {font-family:"Microsoft YaHei","SimSun",arial,helvetica,clean,sans-serif; font-size:12px;}
 a:hover{color:#CA1622; text-decoration: none;}
@@ -14,6 +13,9 @@ input[type=button]::-moz-focus-inner{border:none;}
 * {outline: none;}
 :focus {outline: 0;}
 img{vertical-align: top;}
+/*bootstrap*/
+hr, blockquote{border-color: #ddd;}
+
 
 /*main*/
 textarea{color:#5f5f5f;}
@@ -49,7 +51,7 @@ textarea{color:#5f5f5f;}
 /*subnav*/
 .subnav{height: 215px; background-color: #FAF6F3; padding-top: 30px; text-align: center;}
 .subnav ul{margin: 0 auto; display: inline-block; *display:inline; *zoom:1;}
-.subnav li{float: left; width: 190px; text-align: center; margin: 0 25px;}
+.subnav li{float: left; width: 190px; text-align: center; margin: 0 25px; list-style: none;}
 .subnav li a{color: #686261; display: block;}
 .subnav li a:hover, .subnav li.active a{color: #E63736;}
 .subnav li .icon_con{margin-bottom: 10px; height: 135px; overflow: hidden; display: block; position: relative;}
@@ -76,6 +78,7 @@ textarea{color:#5f5f5f;}
 .main-content{background-color: #F2F0EC;}
 .sidebar-offcanvas span.list-group-item:hover{color: #FFF;}
 .sidebar-offcanvas .list-group-item h4{font-size: 24px; color: #FFF;}
+.module-list, .module-list li{margin: 0; padding: 0; list-style: none;}
 .module-list{margin-left: 30px; line-height: 30px; display: none; font-size: 16px;}
 .module-list a{color: #BDBDBD;}
 .module-list a:hover, .module-list .active{color: #ff4548;}

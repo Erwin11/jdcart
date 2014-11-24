@@ -24,12 +24,15 @@ $(function(){
                 me.formNode.find('.form-group').removeClass('has-error');
                 $('#J_files').html('');
                 $('#J_uploadDownload .download-con').remove();
+                me.cleanEditorStatus();
                 //show
                 me.formNode.attr('data-action','add');
                 $('#J_moduleContentModal .modal-title').text('添加模块');
             });
             //edit
-            $('#tab-module .module-list .glyphicon-edit').on('click', function(e){
+            $('#tab-module .module-list').on('click', '.glyphicon-edit', function(e){
+                var item = $(this);
+                console.log(item.html());
                 //data
                 var id = $(this).parents('li').attr('data-id');
                 var url = me.baseurl+'editModule';
@@ -38,6 +41,7 @@ $(function(){
                     data: {id:id},
                     success: function(data){
                         if(data.status == 'success'){
+                            me.cleanEditorStatus();
                             me.renderForm(data.data);
                             //show
                             me.formNode.attr('data-action','edit');
@@ -47,7 +51,7 @@ $(function(){
                 });
             });
             //del
-            $('#tab-module .module-list .glyphicon-trash').on('click', function(e){
+            $('#tab-module .module-list').on('click', '.glyphicon-trash', function(e){
                 //data
                 var itemNode = $(this).parents('li');
                 var id = itemNode.attr('data-id');
@@ -214,14 +218,14 @@ $(function(){
             });
             //sortable
             $("ul.module-sortable").sortable({
-                group: 'module-list',
+                group: 'module-listsort',
+                handle: 'i.icon-move',
                 nested: false,
                 vertical: false,
                 exclude: '.module-add'
-
             });
             $('ul.module-nodrop').sortable({
-                group: 'module-list',
+                group: 'module-listsort',
                 drop: false,
                 drag: false
             });
@@ -267,12 +271,13 @@ $(function(){
             var me = this;
             var node = $('<li data-id="'+data.id+'">'+
                             '<h4>'+data.title+'</h4>'+
+                            '<i class="icon-move glyphicon glyphicon-move"></i>'+
                             '<div class="opt">'+
                               '<a class="glyphicon glyphicon-edit" title="编辑" data-toggle="modal" data-target="#J_moduleContentModal">edit</a>'+
                               '<a class="glyphicon glyphicon glyphicon-trash" title="删除">delete</a>'+
                             '</div>'+
                         '</li>');
-            node.insertBefore('.module-add');
+            $('.module-sortable').append(node);
             return node;
         },
         renderForm: function(data){
@@ -336,6 +341,12 @@ $(function(){
             var info = data.size+'MB'+'（.'+ data.ext +'）';
             linkNode.find('.download-link').attr('href', me.hosturl+data.url);
             linkNode.find('span').text(info);
+        },
+        cleanEditorStatus: function(){
+            var previewBtn = $('#J_formModule .md-editor button[data-handler="bootstrap-markdown-cmdPreview"]');
+            if(previewBtn.hasClass('active')){
+                previewBtn.click();
+            }
         }
     };
     //init
