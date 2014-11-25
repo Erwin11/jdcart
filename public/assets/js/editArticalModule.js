@@ -11,8 +11,8 @@ $(function(){
             var me = this;
             me.bindHandler();
             //init test
-            // $('.nav-tabs li').eq(1).find('a').click();
-            // $('.module-list li').eq(0).find('.glyphicon-edit').click();
+            $('.nav-tabs li').eq(1).find('a').click();
+            $('.module-list li').eq(0).find('.glyphicon-edit').click();
         },
         bindHandler: function(){
             var me = this;
@@ -32,7 +32,6 @@ $(function(){
             //edit
             $('#tab-module .module-list').on('click', '.glyphicon-edit', function(e){
                 var item = $(this);
-                console.log(item.html());
                 //data
                 var id = $(this).parents('li').attr('data-id');
                 var url = me.baseurl+'editModule';
@@ -75,6 +74,10 @@ $(function(){
                 cls = cls.replace(/ type-\w*/g,'');
                 cls += ' type-'+type
                 $('#J_formModule').attr('class',cls);
+            });
+            $('#J_files').on('click', '.image-del', function(e){
+                $('#module_image').val('');
+                $(this).parents('.file-item').remove();
             });
             $('#J_uploadDownload').on('click', '.download-del', function(e){
                 $('#module_download').val('');
@@ -153,6 +156,9 @@ $(function(){
                             .addClass('active')
                             .removeClass('loading')
                             .attr('href', me.hosturl+url);
+                        $('#J_files').find('.file-item')
+                            .append('<a href="javascript:void(0);" class="btn btn-xs btn-danger image-del">删除</a>')
+                            .find('br').remove();
                     }else{
                         alert(result.msg);
                     }
@@ -322,6 +328,7 @@ $(function(){
             var me = this;
             var node = $('<div class="file-item">'+
                             '<a href="'+url+'" target="_blank" title="查看大图"><img src="'+url+'" ></a>'+
+                            '<a href="javascript:void(0);" class="btn btn-xs btn-danger image-del">删除</a>'+
                         '</div>');
             $('#J_files').html(node);
         },

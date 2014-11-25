@@ -42,9 +42,12 @@ ul, li{margin: 0; padding: 0;}
 .form-img .add-files{float: left;}
 .form-img .add-files .fileinput-button{display: block; margin-top: 10px;}
 .form-img .files-list{display: inline-block; margin-left: 30px;}
-.form-img .files-list .file-item{float: left; text-align: center;}
-.form-img .files-list .file-item img{width: 100px; height: 100px;}
+.form-img .files-list .file-item{float: left; text-align: center; position: relative;}
+.form-img .files-list .file-item .image-del{position: absolute; bottom: -25px; left: 50%; margin-left: -18px;}
+.form-img .files-list .file-item img{width: 100px; height: 100px; border: 1px solid #ddd;}
+.form-img .files-list .file-item p{margin: 0;}
 .form-img .files-list .file-pic{cursor: default; position: relative; display: block;}
+.form-img .files-list .file-pic canvas{border: 1px solid #ddd;}
 .form-img .files-list .file-pic:after{content: ''; position: absolute; left: 0; top: 0; background: url(../../img/admin/loading.gif) no-repeat center center; width: 100px; height: 100px; background-color: rgba(255,255,255,.6); display: none;}
 .form-img .files-list .file-pic.loading:after{display: block;}
 .form-img .files-list .file-pic.active{cursor: pointer;}
