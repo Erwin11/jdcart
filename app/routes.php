@@ -36,11 +36,6 @@ RouteGroup::make('auth')->before('guest')->controller('AuthorityController')->go
 */
 Route::group(array('prefix' => 'admin', 'before' => 'auth|admin'), function () {
 
-    # 后台首页
-    RouteGroup::make()->controller('AdminController')->go(function ($route) {
-        $route->get('/')->as('admin')->uses('getIndex');
-    });
-
     # 用户管理
     RouteGroup::make('users')->as('users')->controller('Admin_UserResource')->go(function ($route) {
         $route->index( )
@@ -49,6 +44,16 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|admin'), function () {
               ->edit(  )->before('not.self')
               ->update()->before('not.self');
         $route->delete('{id}')->as('destroy')->uses('destroy')->before('not.self');
+    });
+    
+});
+
+
+Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
+
+    # 后台首页
+    RouteGroup::make()->controller('AdminController')->go(function ($route) {
+        $route->get('/')->as('admin')->uses('getIndex');
     });
 
     # 文章分类管理

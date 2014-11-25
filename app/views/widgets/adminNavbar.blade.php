@@ -23,7 +23,9 @@ $is_active = function ($name = '') use ($active) {
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li{{ $is_active('admin') }}><a href="{{ route('admin') }}">后台首页</a></li>
-                <li{{ $is_active('users') }}><a href="{{ route('users.index') }}">用户管理</a></li>
+                @if(Auth::user()->is_admin == 1)
+                    <li{{ $is_active('users') }}><a href="{{ route('users.index') }}">用户管理</a></li>
+                @endif
                 <li{{ $is_active('categories') }}><a href="{{ route('categories.index') }}">分类管理</a></li>
                 <li{{ $is_active('articles') }}><a href="{{ route('articles.index') }}">文章管理</a></li>
             </ul>

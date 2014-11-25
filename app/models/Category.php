@@ -110,7 +110,7 @@ class Category extends BaseModel
             return array();
         }
         foreach ($arr as $item) {
-            $subsArr = $this->where('parent_id', $item->id)->get();
+            $subsArr = $this->where('parent_id', $item->id)->orderBy('sort_order')->get();
             if(count($subsArr)){
                 if(($depth != null && $item->depth<$depth)){
                     $item->subs = $this->getSubCates($subsArr, $depth);

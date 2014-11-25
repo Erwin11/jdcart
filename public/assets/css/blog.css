@@ -56,7 +56,7 @@ textarea{color:#5f5f5f;}
 .subnav li a:hover, .subnav li.active a{color: #E63736;}
 .subnav li .icon_con{margin-bottom: 10px; height: 135px; overflow: hidden; display: block; position: relative;}
 .subnav li .icon_con:after{content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 12px; background: url(../img/cateShadow.png) no-repeat; background-size: 100%; opacity: 0.7;}
-.subnav li .icon{position: absolute; bottom: -20px; left: 0; right: 0; -webkit-transition:all .3s; opacity: 0.7;}
+.subnav li .icon{position: absolute; bottom: -20px; left: 0; right: 0; -webkit-transition:all .3s; opacity: 0.7; -webkit-transform: translateZ(0); -webkit-transform: translate3d(0px,0px,0px); -webkit-backface-visibility: hidden;}
 .subnav li.active .icon_con:after, .subnav li a:hover .icon_con:after{opacity: 1;}
 .subnav li.active .icon, .subnav li a:hover .icon{bottom: 0;}
 .subnav li.active .icon, .subnav li a:hover .icon{opacity: 1;}
@@ -67,6 +67,14 @@ textarea{color:#5f5f5f;}
 .icon_ipad{ width: 188px; height: 87px; background-position: -125px 0;}
 .icon_android{ width: 107px; height: 90px; background-position: -325px 0;}
 .icon_designfiles{ width: 102px; height: 95px; background-position: -445px 0;}
+.icon_jhcate1{width: 105px; height: 120px; background-position: 0 -240px;}
+.icon_jhcate2{width: 113px; height: 110px; background-position: -125px -240px;}
+.icon_jhcate3{width: 102px; height: 120px; background-position: -255px -240px;}
+.icon_code{width: 132px; height: 90px; background-position: 0 -410px;}
+.icon_process{width: 108px; height: 110px; background-position: -145px -400px;}
+.icon_fdother{width: 104px; height: 110px; background-position: -275px -400px;}
+
+/*side-icon*/
 .sideicon{background: url(../img/sprite.png) no-repeat; position: absolute;}
 .sideicon_iphone{width: 14px; height: 24px; left: -10px;}
 
