@@ -28,19 +28,33 @@
                             @if (isset($module->download_array))
                                 <div class="download-con">
                                     <a class="download-link" href="{{$module->download_url}}"><i></i>下载文件</a>
-                                    <span>{{$module->download_array->size}}MB（.{{$module->download_array->ext}}）</span>                                    
+                                    <span>{{$module->download_array->size}}MB（.{{$module->download_array->ext}}）</span>
                                 </div>
                             @endif
                         </div>
                         @if ($module->type == 'txtimg')
                             <!-- 左文右图 -->
                             <div class="module-txt">{{ $module->content_html }}</div>
-                            <div class="module-pic"><img src="{{$module->image_url}}" alt=""></div>
+                            <div class="module-pic">
+                                @if (isset($module->image_array))
+                                    @foreach ($module->image_array as $image) 
+                                        <img src="{{asset($image->url)}}" alt="">
+                                    @endforeach
+                                @elseif($module->image)
+                                    <img src="{{asset($module->image)}}" alt="">
+                                @endif
+                            </div>
                         @elseif ($module->type == 'img')
                             <!-- 整图 -->
-                            @if (isset($module->image))
-                                <div class="module-pic"><img src="{{$module->image_url}}" alt=""></div>
+                            <div class="module-pic">
+                            @if (isset($module->image_array))
+                                @foreach ($module->image_array as $image) 
+                                    <img src="{{asset($image->url)}}" alt="">
+                                @endforeach
+                            @elseif($module->image)
+                                <img src="{{asset($module->image)}}" alt="">
                             @endif
+                            </div>
                         @else
                             <!-- 整文   -->
                             <div class="module-txt">{{ $module->content_html }}</div>

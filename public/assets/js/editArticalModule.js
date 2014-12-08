@@ -12,19 +12,14 @@ $(function(){
             me.bindHandler();
             //init test
             // $('.nav-tabs li').eq(1).find('a').click();
-            // $('.module-list li').eq(0).find('.glyphicon-edit').click();
+            // $('.module-list li').eq(1).find('.glyphicon-edit').click();
         },
         bindHandler: function(){
             var me = this;
             //add
             $('#tab-module .module-add').on('click',function(e){
                 //clean
-                me.formNode.find('form')[0].reset(); //重置form
-                $('#module_type').change();
-                me.formNode.find('.form-group').removeClass('has-error');
-                $('#J_files').html('');
-                $('#J_uploadDownload .download-con').remove();
-                me.cleanEditorStatus();
+               me.cleanForm();
                 //show
                 me.formNode.attr('data-action','add');
                 $('#J_moduleContentModal .modal-title').text('添加模块');
@@ -87,6 +82,8 @@ $(function(){
             $('#J_submit').on('click', function(e){
                 //show
                 e.preventDefault();
+                //picData
+                me.setPicData();
                 var data = $('#J_formModule form').serialize();
                 //action
                 var action = me.formNode.attr('data-action');
@@ -109,14 +106,14 @@ $(function(){
                         }
                         
                     }
-                })
+                });
             });
             $('#J_articleForm').on('submit', function(e){
                 me.sendSortData();
             });
             //upload - image
             var uploadButton = $('<button/>')
-                .addClass('btn btn-primary')
+                .addClass('btn btn-xs btn-uploadpic')
                 .prop('disabled', true)
                 .text('Processing...')
                 .on('click', function () {
@@ -146,33 +143,15 @@ $(function(){
                 previewMaxWidth: 100,
                 previewMaxHeight: 100,
                 previewCrop: true,
-                done: function(e, data){
-                    var result = data.result;
-                    if(result.status == 'success'){
-                        var url = result.data.url;
-                        $('#module_image').val(url);
-                        //
-                       $('#J_files').find('.file-item .file-pic')
-                            .addClass('active')
-                            .removeClass('loading')
-                            .attr('href', me.hosturl+url);
-                        $('#J_files').find('.file-item')
-                            .append('<a href="javascript:void(0);" class="btn btn-xs btn-danger image-del">删除</a>')
-                            .find('br').remove();
-                    }else{
-                        alert(result.msg);
-                    }
-                }
+                // singleFileUploads: false,
             }).on('fileuploadadd', function (e, data) {
-                data.context = $('<div/>');
-                $('#J_files').html(data.context);
-                data.context.attr('class','file-item');
+                data.context = $('<div/>').appendTo('#J_files');
+                data.context.addClass('file-additems');
                 $.each(data.files, function (index, file) {
-                    var node = $('<p/>');
-                            // .append($('<span/>').text(file.name));
+                    var node = $('<div/>')
+                                .addClass('file-item');
                     if (!index) {
                         node
-                            // .append('<br>')
                             .append(uploadButton.clone(true).data(data));
                     }
                     node.appendTo(data.context);
@@ -183,11 +162,11 @@ $(function(){
                     node = $(data.context.children()[index]);
                 if (file.preview) {
                     node
-                        .prepend('<br>')
                         .prepend('<a class="file-pic" href="javascript:void(0);" target="_blank"></a>');
-                        // .prepend('<a href="javascript":void(0);>'+file.preview+'</a>');
                     node.find('.file-pic').append(file.preview);
                 }
+                //del btn
+                node.append('<a href="javascript:void(0);" class="btn btn-xs btn-danger image-del">删除</a>');
                 if (file.error) {
                     node
                         .append('<br>')
@@ -198,6 +177,35 @@ $(function(){
                         .text('Upload')
                         .prop('disabled', !!data.files.error);
                 }
+            }).on('fileuploaddone', function (e, data) {
+                var item = null;
+                var result = data.result;
+                $.each(result.files, function (index, file) {
+                    item = $(data.context.children()[index]);
+                    if(file.status == 'success'){
+                        item.find('.file-pic')
+                            .addClass('active')
+                            .removeClass('loading')
+                            .attr('href', me.hosturl+file.url);
+                        delete file.status;
+                        item.data('file', file);
+                    }else{
+                        var error = $('<span class="text-danger"/>').text(file.msg);
+                        item.append(error);
+                        item.find('.file-pic')
+                            .removeClass('loading');
+                    }
+                });
+            }).on('fileuploadfail', function (e, data) {
+                var item = null;
+                $.each(data.files, function (index) {
+                    item = $(data.context.children()[index]);
+                    var error = $('<span class="text-danger"/>').text('File upload failed.');
+                    item.append(error);
+                });
+            });
+            $('#J_uploadAllPic').on('click', function(e){
+                $('#J_files .btn-uploadpic').click();
             });
             //upload-download files
             $('#upload_donwload').fileupload({
@@ -296,12 +304,23 @@ $(function(){
             $('#module_type').change();
             //image
             if(data.image){
-                me.renderUploadImage(me.hosturl+data.image);
+                var obj = null;
+                //merge oldData
+                try{
+                    obj = $.parseJSON(data.image);
+                }catch(e){
+                    obj = [{url: data.image}];
+                }
+                me.renderUploadImage(obj);
+            }else{
+                me.cleanUploadImage();
             }
             //download
             if(data.download){
                 var obj = $.parseJSON(data.download);
                 me.renderUploadDownload(obj);
+            }else{
+                me.cleanUploadDownload();
             }
         },
         addErrorMsg: function(msgObj){
@@ -324,13 +343,62 @@ $(function(){
             errNode.text(msg);
             parent.addClass('has-error');
         },
-        renderUploadImage: function(url){
+        setPicData: function(){
             var me = this;
+            var newData = [];
+            var addPicArr = $('#J_files .file-item');
+            var addItem = null;
+            for(var i=0, len=addPicArr.length; i<len; i++){
+                item = $(addPicArr[i]);
+                if(item.data('file')){
+                    newData.push(item.data('file'));
+                }
+            }
+            //mergeData
+            var oldData = [];
+            // var oldStr = $('#module_image').val();
+            // debugger;
+            // if(oldStr){
+            //     try{
+            //        $.parseJSON(oldStr);
+            //     }catch(e){
+            //         oldData = [{url: oldStr}];
+            //     }    
+            // }
+            var data = oldData.concat(newData);
+            $('#module_image').val(JSON.stringify(data));
+        },
+        renderUploadImage: function(dataArr){
+            var me = this;
+            me.cleanUploadImage();
             var node = $('<div class="file-item">'+
-                            '<a href="'+url+'" target="_blank" title="查看大图"><img src="'+url+'" ></a>'+
+                            '<a class="file-pic" href="#" target="_blank" title="查看大图"></a>'+
                             '<a href="javascript:void(0);" class="btn btn-xs btn-danger image-del">删除</a>'+
                         '</div>');
-            $('#J_files').html(node);
+            var item, itemNode, url, itemSize = '';
+            for(var i=0, len=dataArr.length; i<len; i++){
+                item = dataArr[i];
+                itemNode = node.clone();
+                url = me.hosturl + item.url;
+                //size
+                if(item.width){
+                    itemSize = item.width>item.heigth ? '100px auto' : 'auto 100px';
+                    itemSize = 'background-size:'+itemSize;
+                }
+                //render
+                var style = 'background-image:url('+url+');'+itemSize;
+                itemNode.find('.file-pic')
+                        .attr({
+                            'style': style,
+                            'href' : url,
+                        });
+                itemNode.data('file', item);
+                //append
+                $('#J_files').append(itemNode);
+            }
+        },
+        cleanUploadImage: function(){
+            $('#J_files').html('');
         },
         renderUploadDownload: function(data){
             var me = this;
@@ -349,11 +417,24 @@ $(function(){
             linkNode.find('.download-link').attr('href', me.hosturl+data.url);
             linkNode.find('span').text(info);
         },
+        cleanUploadDownload: function(){
+            var me = this;
+            $('#J_uploadDownload .download-con').remove();
+        },
         cleanEditorStatus: function(){
             var previewBtn = $('#J_formModule .md-editor button[data-handler="bootstrap-markdown-cmdPreview"]');
             if(previewBtn.hasClass('active')){
                 previewBtn.click();
             }
+        },
+        cleanForm: function(){
+            var me = this;
+            me.formNode.find('form')[0].reset(); //重置form
+            $('#module_type').change();
+            me.formNode.find('.form-group').removeClass('has-error');
+            me.cleanUploadImage();
+            me.cleanUploadDownload();
+            me.cleanEditorStatus();
         }
     };
     //init

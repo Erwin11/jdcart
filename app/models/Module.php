@@ -59,12 +59,12 @@ class Module extends BaseModel
 */
     /**
      * 模块内容 - 上传图片
-     * @return string 图片的URI
+     * @return json 图片数组
      */
-    public function getImageUrlAttribute()
+    public function getImageArrayAttribute()
     {
         if ($this->image)
-            return asset($this->image);
+            return json_decode($this->image);
     }
 
     /**

@@ -41,17 +41,21 @@ ul, li{margin: 0; padding: 0;}
 .form-img, .form-download{margin-left:-15px; margin-right: -15px;}
 .form-img .add-files{float: left;}
 .form-img .add-files .fileinput-button{display: block; margin-top: 10px;}
+.form-img .add-files .upload-all{margin-top: 20px; margin-left: 12px;}
+.form-img .add-files .upload-all i{margin-right: 5px; position: relative; top: 2px;}
 .form-img .files-list{display: inline-block; margin-left: 30px;}
-.form-img .files-list .file-item{float: left; text-align: center; position: relative;}
-.form-img .files-list .file-item .image-del{position: absolute; bottom: -25px; left: 50%; margin-left: -18px;}
-.form-img .files-list .file-item img{width: 100px; height: 100px; border: 1px solid #ddd;}
+.form-img .files-list .file-additems{float: left;}
+.form-img .files-list .file-item{float: left; text-align: center; position: relative; margin-right: 15px;}
+.form-img .files-list .file-item .btn{margin-top: 3px;}
+.form-img .files-list .file-item button{margin-right: 12px;}
+.form-img .files-list .file-item img{width: 100px; height: 100px; border: 1px solid #ddd; display: none;}
 .form-img .files-list .file-item p{margin: 0;}
-.form-img .files-list .file-pic{cursor: default; position: relative; display: block;}
-.form-img .files-list .file-pic canvas{border: 1px solid #ddd;}
+.form-img .files-list .file-pic{cursor: default; position: relative; display: block; width: 102px; height: 102px; background-repeat: no-repeat; background-position: center center; border: 1px solid #ddd;  cursor: pointer; background-size: auto 100px;}
 .form-img .files-list .file-pic:after{content: ''; position: absolute; left: 0; top: 0; background: url(../../img/admin/loading.gif) no-repeat center center; width: 100px; height: 100px; background-color: rgba(255,255,255,.6); display: none;}
 .form-img .files-list .file-pic.loading:after{display: block;}
 .form-img .files-list .file-pic.active{cursor: pointer;}
-
+.form-img .files-list .file-item .text-danger{font-weight: bold; display: inline-block; padding-top: 5px; float: left; margin-right: 15px;}
+.form-img .files-list .file-item .text-danger:before{content: ''; position: absolute; left: 0; top: 0; width: 102px; height: 102px; background-color: rgba(255,255,255,.6); display: block;}
 /*upload-files*/
 .upload-download{position: relative;}
 .upload-download:after{content: ''; position: absolute; left: 110px; top: 8px; width: 16px; height: 16px; background: url(../../img/admin/loading.gif) no-repeat; opacity: 0; -webkit-transition:all .3s;}

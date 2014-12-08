@@ -21,7 +21,7 @@ class CreateArticleModulesTable extends Migration {
       $table->string('type'				)->nullable()->comment('类型');
       $table->string('title'				)->nullable()->comment('标题');
       $table->text('content'			)->nullable()->comment('内容');
-      $table->string('image'				)->nullable()->comment('图片');
+      $table->text('image'				)->nullable()->comment('图片');
       $table->string('download'			)->nullable()->comment('下载内容');
       $table->integer('sort_order')->unsigned()->default(0)->comment('排序');
 

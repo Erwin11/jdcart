@@ -214,13 +214,16 @@ class Admin_ArticleModuleResource extends BaseResource
             $imagePath = $path.'/'.$hashname;
             $imageOriginal = Image::make($image->getRealPath());
             $imageOriginal->save($imagePath, 95);
+            $width = $imageOriginal->width();
+            $height = $imageOriginal->height();
             // 返回成功信息
             $dataUrl = $pathStr.'/'.$hashname;
-            $data = array('url' => $dataUrl);
-            $responseObj = array('status' => 'success', 'data' => $data);
+            $file = array('url' => $dataUrl, 'width' => $width, 'height' => $height, 'status' => 'success');
+            $responseObj = array('files' => array($file));
         } else {
             // 验证失败
-            $responseObj = array('status' => 'error', 'msg' => $validator->messages()->first());
+            $file = array('status'=> 'error', 'msg' => $validator->messages()->first());
+            $responseObj = array('files' => array($file));
         }
         return Response::json($responseObj);
     }
@@ -238,9 +241,9 @@ class Admin_ArticleModuleResource extends BaseResource
         );
         // 自定义验证消息
         $messages = array(
-            'upload_donwload.required' => '请选择需要上传的图片。',
-            'upload_donwload.mimes'    => '请上传 :values 格式的图片。',
-            'upload_donwload.max'      => '图片的大小请控制在 5M 以内。',
+            'upload_donwload.required' => '请选择需要上传的文件。',
+            'upload_donwload.mimes'    => '请上传 :values 格式的文件。',
+            'upload_donwload.max'      => '文件的大小请控制在 50M 以内。',
         );
         // 开始验证
         $validator = Validator::make($data, $rules, $messages);

@@ -203,8 +203,9 @@
               <span class="btn btn-default fileinput-button">
                 <i class="glyphicon glyphicon-plus"></i>
                 <span>上传图片</span>
-                {{ Form::file('upload_image', array('class' => 'file_image file', 'id' => 'upload_image')) }}
-              </span>  
+                {{ Form::file('upload_image', array('class' => 'file_image file', 'id' => 'upload_image', 'multiple' => true)) }}
+              </span>
+              <span id="J_uploadAllPic" class="btn btn-xs btn-primary upload-all"><i class="glyphicon glyphicon-upload"></i>全部上传</span>
             </div>
             <div id="J_files" class="files-list"></div>
           </div>

@@ -92,7 +92,9 @@
                     {{ Form::radio('module_extend', 0, true, array('class' => 'module_extend')) }}否
                   </label>
                 </div>
-                <ul class="module-list clearfix">
+                <ul class="module-list module-sortable">
+                </ul>
+                <ul class="module-list module-nodrop clearfix">
                   <li class="module-add" data-toggle="modal" data-target="#J_moduleContentModal">
                     <div class="glyphicon glyphicon-plus"></div>
                   </li>
@@ -175,8 +177,9 @@
               <span class="btn btn-default fileinput-button">
                 <i class="glyphicon glyphicon-plus"></i>
                 <span>上传图片</span>
-                {{ Form::file('upload_image', array('class' => 'file_image file', 'id' => 'upload_image')) }}
-              </span>  
+                {{ Form::file('upload_image', array('class' => 'file_image file', 'id' => 'upload_image', 'multiple' => true)) }}
+              </span>
+              <span id="J_uploadAllPic" class="btn btn-xs btn-primary upload-all"><i class="glyphicon glyphicon-upload"></i>全部上传</span>
             </div>
             <div id="J_files" class="files-list"></div>
           </div>
@@ -205,6 +208,7 @@
     @parent
     {{ script('markdown', 'to-markdown', 'bootstrap-markdown') }}
     {{ HTML::script('assets/plugin/jQueryFileUpload/dist/fileUpload.js') }}
+    {{ HTML::script('assets/plugin/jQuerySortable/jquery-sortable-min.js') }}
 
   {{ HTML::script('assets/js/base.js') }}
   {{ HTML::script('assets/js/editArticalModule.js') }}
