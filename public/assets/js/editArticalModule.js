@@ -16,6 +16,20 @@ $(function(){
         },
         bindHandler: function(){
             var me = this;
+            //created-time
+            $('#J_createdData').datetimepicker({
+                language: 'zh-CN',
+                format: "yyyy-mm-dd hh:ii:ss",
+                weekStart: 1,
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                minView: 1,
+                forceParse: 0,
+                endDate: new Date()
+                // pickerPosition: "b-right"
+            });
             //add
             $('#tab-module .module-add').on('click',function(e){
                 //clean

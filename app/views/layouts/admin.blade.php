@@ -9,6 +9,7 @@
 @section('style')
 body
 {
+    padding-top:5em;
     padding-bottom: 0;
     background-color: #f3f3ff;
 }
@@ -18,7 +19,7 @@ body
 
     @include('widgets.adminNavbar')
 
-    <div class="container panel" style="margin-top:5em; padding-bottom:1em;">
+    <div class="container panel" style="padding-bottom:1em;">
         @yield('container')
     </div>
 

@@ -203,6 +203,7 @@ class Admin_ArticleResource extends BaseResource
             $model = $this->model->find($id);
             $model->category_id      = $data['category'];
             $model->title            = e($data['title']);
+            $model->created_at       = e($data['created_time']);
             $model->slug             = e($data['slug']);
             $model->content          = e($data['content']);
             $model->module_extend    = e($data['module_extend']);

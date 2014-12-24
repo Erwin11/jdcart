@@ -6,6 +6,7 @@
   @parent
   {{ style('bootstrap-markdown') }}
   {{ HTML::style('assets/plugin/jQueryFileUpload/css/jquery.fileupload.css') }}
+  {{ HTML::style('assets/plugin/datetimepicker/bootstrap-datetimepicker.min.css') }}
   {{ HTML::style('assets/css/admin/edit-article.css') }}
 @stop
 
@@ -45,7 +46,7 @@
     <div class="tab-content">
 
       <!-- General tab -->
-      <div class="tab-pane active" id="tab-general" style="margin:0 1em;">
+      <div class="tab-pane active" id="tab-general" style="padding:0 1em;">
         <div class="form-group">
           <label for="category">分类</label>
           {{ $errors->first('category', '
@@ -61,6 +62,14 @@
           <span style="color:#c7254e;margin:0 1em;">:message</span>
           ') }}
           <input class="form-control" type="text" name="title" id="title" value="{{ Input::old('title', $data->title) }}" /></div>
+        <div class="form-group">
+          <label for="created_time">发布时间</label>
+          <div id="J_createdData" class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="created_time" data-link-format="yyyy-mm-dd hh:ii:ss">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            <input class="form-control" size="16" type="text" value="{{ $data->created_at }}" readonly>
+          </div>
+          <input type="hidden" name="created_time" id="created_time" value="{{ $data->created_at }}" />
+        </div>
 
         <div class="form-group" style="display:none;">
           <label for="slug">Slug</label>
@@ -235,6 +244,8 @@
   {{ script('markdown', 'to-markdown', 'bootstrap-markdown') }}
   {{ HTML::script('assets/plugin/jQueryFileUpload/dist/fileUpload.js') }}
   {{ HTML::script('assets/plugin/jQuerySortable/jquery-sortable-min.js') }}
+  {{ HTML::script('assets/plugin/datetimepicker/bootstrap-datetimepicker.min.js') }}
+  {{ HTML::script('assets/plugin/datetimepicker/bootstrap-datetimepicker.zh-CN.js') }}
 
   {{ HTML::script('assets/js/base.js') }}
   {{ HTML::script('assets/js/editArticalModule.js') }}
